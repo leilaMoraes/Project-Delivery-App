@@ -69,8 +69,22 @@ const getSellerSales = async (id) => {
   return sales;
 };
 
+const updateStatus = async (id, status) => {
+  const sale = await Sale.findByPk(id);
+  if (!sale) return { status: 404, message: 'Sale not found' };
+  if (sale.status === 'Entregue') return { status: 422, message: 'Sale already delivered' };
+  if (!['Em Trânsito', 'Preparando', 'Entregue'].includes(status)) {
+    return {
+      status: 400,
+      message: 'Invalid status, status should be "Em Trânsito", "Preparando" or "Entregue"',
+    };
+  }
+  await Sale.update({ status }, { where: { id } });
+};
+
 module.exports = {
   create,
   getCustomerSales,
   getSellerSales,
+  updateStatus,
 };
