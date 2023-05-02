@@ -53,7 +53,24 @@ const getCustomerSales = async (id) => {
   return sales;
 };
 
+const getSellerSales = async (id) => {
+  const sales = await Sale.findAll({
+    where: { sellerId: id },
+    include: {
+      model: Product,
+      as: 'products',
+      through: {
+        attributes: [],
+      },
+      attributes: ['id', 'name', 'price', 'urlImage',
+        [literal('`products->SalesProduct`.`quantity`'), 'quantity']],
+    },
+  });
+  return sales;
+};
+
 module.exports = {
   create,
   getCustomerSales,
+  getSellerSales,
 };
