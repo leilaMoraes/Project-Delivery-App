@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false
+      allowNull: false,
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -32,15 +32,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     totalPrice: {
       type: DataTypes.DECIMAL(9, 2),
-      allowNull: false
+      allowNull: false,
     },
     deliveryAddress: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     deliveryNumber: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     saleDate: {
       type: DataTypes.DATE,
@@ -48,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'Pendente',
     },
   }, {
-    timestamps: false,
     tableName: 'sales',
     underscored: true,
     createdAt: 'saleDate',

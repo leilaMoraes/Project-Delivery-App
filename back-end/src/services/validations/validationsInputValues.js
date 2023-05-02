@@ -1,4 +1,4 @@
-const { loginSchema, newUserSchema } = require('./schemas');
+const { loginSchema, newUserSchema, newSaleSchema } = require('./schemas');
 
 const validateLogin = (login) => {
   const { error } = loginSchema.validate(login);
@@ -10,7 +10,13 @@ const validateNewUser = (user) => {
   if (error) return { status: 400, message: error.message };
 };
 
+const validateNewSale = (sale) => {
+  const { error } = newSaleSchema.validate(sale);
+  if (error) return { status: 400, message: error.message };
+};
+
 module.exports = {
   validateLogin,
   validateNewUser,
+  validateNewSale,
 };
