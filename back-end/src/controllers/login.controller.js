@@ -2,7 +2,6 @@ const { loginService } = require('../services');
 
 const login = async (req, res, next) => {
   try {
-    console.log(req.body);
     const user = await loginService.login(req.body);
     if (user.message) return next(user);
     const { token, status } = user;
