@@ -1,7 +1,10 @@
 const express = require('express');
 const { adminController } = require('../controllers');
+const auth = require('../middlewares/auth');
 
 const adminRouter = express.Router();
+
+adminRouter.use(auth);
 
 adminRouter.post('/', adminController.createUser);
 

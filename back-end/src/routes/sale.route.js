@@ -1,7 +1,10 @@
 const express = require('express');
 const { saleController } = require('../controllers');
+const auth = require('../middlewares/auth');
 
 const saleRouter = express.Router();
+
+saleRouter.use(auth);
 
 saleRouter.post('/', saleController.create);
 
