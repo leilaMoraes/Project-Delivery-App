@@ -21,7 +21,14 @@ const getUsers = async () => {
   return users;
 };
 
+const deleteUser = async (id) => {
+  const userExists = await User.findByPk(id, { raw: true });
+  if (!userExists) return { status: 404, message: 'User not found!' };
+  await User.destroy({ where: { id } });
+};
+
 module.exports = {
   createUser,
   getUsers,
+  deleteUser,
 };

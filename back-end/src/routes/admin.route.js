@@ -7,4 +7,6 @@ adminRouter.post('/', adminController.createUser);
 
 adminRouter.get('/', adminController.getUsers);
 
+adminRouter.delete('/:id', adminController.deleteUser);
+
 module.exports = adminRouter;

@@ -11,7 +11,15 @@ const getUsers = async (_req, res) => {
   return res.status(200).json(users);
 };
 
+const deleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  const error = await adminService.deleteUser(id);
+  if (error) return next(error);
+  return res.sendStatus(204);
+};
+
 module.exports = {
   createUser,
   getUsers,
+  deleteUser,
 };
