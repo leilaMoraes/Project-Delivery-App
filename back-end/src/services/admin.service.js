@@ -16,6 +16,12 @@ const createUser = async (user) => {
   return rest;
 };
 
+const getUsers = async () => {
+  const users = await User.findAll({ attributes: { exclude: ['password'] }, raw: true });
+  return users;
+};
+
 module.exports = {
   createUser,
+  getUsers,
 };
