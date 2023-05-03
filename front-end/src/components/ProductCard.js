@@ -2,27 +2,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function ProductCard(props) {
-  const { price, imageSrc, altText, title, quantity } = props;
+  const { price, imageSrc, altText, title, productId } = props;
+  const { cart, addOneToCart, removeOneFromCart } = useContext(AppContext);
+
+  const quantity = cart[productId] || 0;
+
+  const handleAddToCart = () => {
+    addOneToCart(productId);
+  };
+
+  const handleRemoveFromCart = () => {
+    removeOneFromCart(productId);
+  };
+
   const ROUTE = 'customer_products';
-  const PRICE = 'element-card-price-<id>';
-  const IMAGE = 'img-card-bg-image-<id>';
-  const TITLE = 'element-card-title-<id>';
-  const REMOVE = 'button-card-rm-item-<id>';
-  const QUANTITY = 'input-card-quantity-<id>';
-  const ADD = 'button-card-add-item-<id>';
-  // add id to the end of each data-testid
+  const PRICE = 'element-card-price-';
+  const IMAGE = 'img-card-bg-image-';
+  const TITLE = 'element-card-title-';
+  const REMOVE = 'button-card-rm-item-';
+  const QUANTITY = 'input-card-quantity-';
+  const ADD = 'button-card-add-item-';
+  const ID = productId;
 
   return (
     <div>
-      <span data-testid={ `${ROUTE}__${PRICE}${ID}` }>{price}</span>
-      <img data-testid={ `${ROUTE}__${IMAGE}${ID}` } src={ imageSrc } alt={ altText } />
+      <span data-testid={ `${ROUTE}__${PRICE}<${ID}>` }>{price}</span>
+      <img data-testid={ `${ROUTE}__${IMAGE}<${ID}>` } src={ imageSrc } alt={ altText } />
 
       <div>
-        <h2 data-testid={ `${ROUTE}__${TITLE}${ID}` }>{title}</h2>
+        <h2 data-testid={ `${ROUTE}__${TITLE}<${ID}>` }>{title}</h2>
         <div>
-          <button data-testid={ `${ROUTE}__${REMOVE}${ID}` } type="button">-</button>
-          <span data-testid={ `${ROUTE}__${QUANTITY}${ID}` }>{quantity}</span>
-          <button data-testid={ `${ROUTE}__${ADD}${ID}` } type="button">+</button>
+          <button
+            data-testid={ `${ROUTE}__${REMOVE}<${ID}>` }
+            type="button"
+            onClick={ handleRemoveFromCart }
+          >
+            -
+          </button>
+          <span data-testid={ `${ROUTE}__${QUANTITY}<${ID}>` }>{quantity}</span>
+          <button
+            data-testid={ `${ROUTE}__${ADD}<${ID}>` }
+            type="button"
+            onClick={ handleAddToCart }
+          >
+            +
+          </button>
         </div>
       </div>
     </div>
@@ -34,5 +58,5 @@ ProductCard.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   altText: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  quantity: PropTypes.number.isRequired,
+  productId: PropTypes.number.isRequired,
 };
