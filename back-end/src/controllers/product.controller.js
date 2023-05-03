@@ -5,4 +5,11 @@ const getAll = async (_req, res) => {
   return res.status(200).json(products);
 };
 
-module.exports = { getAll };
+const create = async (req, res) => {
+  const urlImage = `http://localhost:3001/images/${req.file.filename}`;
+  const { name, price } = req.body;
+  const product = await productService.create({ name, price, urlImage });
+  return res.status(201).json(product);
+};
+
+module.exports = { getAll, create };
