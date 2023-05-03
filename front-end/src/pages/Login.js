@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [inputEmail, setInputEmail] = useState('');
   const [inputPassword, setPassWord] = useState('');
+  const history = useHistory();
   const magicNumber = 6;
 
   const onClickLogin = () => {
@@ -10,7 +12,7 @@ function Login() {
   };
 
   const onClickRegister = () => {
-    console.log('registrar');
+    history.push('/register');
   };
 
   return (
