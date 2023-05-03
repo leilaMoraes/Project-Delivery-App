@@ -7,13 +7,15 @@ export default function AppProvider({ children }) {
 
   // CART CONTEXT
   const [cart, setCart] = useState({});
-  const addOneToCart = (productId) => {
+  const [totalValue, setTotalValue] = useState(0);
+  const addOneToCart = (productId, price) => {
     setCart((prevCart) => {
       const quantity = prevCart[productId] ? (prevCart[productId] + 1) : 1;
       return { ...prevCart, [productId]: quantity };
     });
+    setTotalValue(totalValue + price);
   };
-  const removeOneFromCart = (productId) => {
+  const removeOneFromCart = (productId, price) => {
     setCart((prevCart) => {
       const quantity = prevCart[productId] ? (prevCart[productId] - 1) : 0;
       const newCart = { ...prevCart };
@@ -24,9 +26,12 @@ export default function AppProvider({ children }) {
       }
       return newCart;
     });
+    setTotalValue(totalValue - price);
   };
 
-  const values = useMemo(() => ({ cart, addOneToCart, removeOneFromCart }), [cart]);
+  const values = useMemo(() => ({
+    cart, setCart, addOneToCart, removeOneFromCart, totalValue,
+  }), [cart, totalValue]);
 
   return (
     <AppContext.Provider value={ values }>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// ADD PROPS FOR HEADER ELEMENTS
 export default function Header(props) {
   const { username } = props;
   const ROUTE = 'customer_products';

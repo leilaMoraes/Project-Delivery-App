@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AppContext from '../context/AppContext';
 
 export default function ProductCard(props) {
   const { price, imageSrc, altText, title, productId } = props;
@@ -8,11 +9,11 @@ export default function ProductCard(props) {
   const quantity = cart[productId] || 0;
 
   const handleAddToCart = () => {
-    addOneToCart(productId);
+    addOneToCart(productId, price);
   };
 
   const handleRemoveFromCart = () => {
-    removeOneFromCart(productId);
+    removeOneFromCart(productId, price);
   };
 
   const ROUTE = 'customer_products';
