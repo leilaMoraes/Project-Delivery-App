@@ -1,5 +1,5 @@
 const { Product } = require('../database/models');
-const { io } = require('../api/app');
+// const { io } = require('../api/app');
 
 const getAll = async () => {
   const products = await Product.findAll({ raw: true });
