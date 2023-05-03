@@ -1,26 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Header() {
-  const { button1Title, button2Title, username } = props;
+export default function Header(props) {
+  const { username } = props;
+  const ROUTE = 'customer_products';
+  const PRODUCTS = 'element-navbar-link-products';
+  const ORDERS = 'element-navbar-link-orders';
+  const USER = 'element-navbar-user-full-name';
+  const LOGOUT = 'element-navbar-link-logout';
+  const USERTYPE = 'CUSTOMER';
+
   return (
     <header>
+      {/*
+        botao de produtos só renderiza se o usuario for customer
+        talvez passar os testids por props?
+        duas divs left, uma para cada user type
+      */}
       <div>
-        <button type="button">{button1Title}</button>
-        {button2Title
-        && <button type="button">{button2Title}</button>}
+        {USERTYPE === 'CUSTOMER' && (
+          <button
+            data-testid={ `${ROUTE}__${PRODUCTS}` }
+            type="button"
+          >
+            PRODUCTS
+          </button>
+        )}
+
+        <button
+          data-testid={ `${ROUTE}__${ORDERS}` }
+          type="button"
+        >
+          {USERTYPE === 'CUSTOMER' ? 'MY ORDERS' : 'ORDERS'}
+        </button>
       </div>
 
       <div>
-        <button type="button">{username}</button>
-        <button type="button">Logout</button>
+        <button
+          data-testid={ `${ROUTE}__${USER}` }
+          type="button"
+        >
+          {username}
+        </button>
+        <button
+          data-testid={ `${ROUTE}__${LOGOUT}` }
+          type="button"
+        >
+          Logout
+        </button>
       </div>
     </header>
   );
 }
 
 Header.propTypes = {
-  button1Title: PropTypes.string.isRequired,
-  button2Title: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 };
