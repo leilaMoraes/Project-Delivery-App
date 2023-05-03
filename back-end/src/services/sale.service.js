@@ -2,6 +2,8 @@ const { literal } = require('sequelize');
 const { validateNewSale } = require('./validations/validationsInputValues');
 const { Sale, Product, SalesProduct, sequelize } = require('../database/models');
 
+const query = '`products->SalesProduct`.`quantity`';
+
 const getSaleById = async (id, t) => {
   const sale = await Sale.findByPk(
     id,
@@ -11,7 +13,7 @@ const getSaleById = async (id, t) => {
         as: 'products',
         through: { attributes: [] },
         attributes: ['id', 'name', 'price', 'urlImage',
-          [literal('`products->SalesProduct`.`quantity`'), 'quantity']],
+          [literal(query), 'quantity']],
       },
       transaction: t,
     },
@@ -47,7 +49,7 @@ const getCustomerSales = async (id) => {
         attributes: [],
       },
       attributes: ['id', 'name', 'price', 'urlImage',
-        [literal('`products->SalesProduct`.`quantity`'), 'quantity']],
+        [literal(query), 'quantity']],
     },
   });
   return sales;
@@ -63,7 +65,7 @@ const getSellerSales = async (id) => {
         attributes: [],
       },
       attributes: ['id', 'name', 'price', 'urlImage',
-        [literal('`products->SalesProduct`.`quantity`'), 'quantity']],
+        [literal(query), 'quantity']],
     },
   });
   return sales;
