@@ -3,34 +3,28 @@ import { useEffect, useMemo, useState } from 'react';
 import AppContext from './AppContext';
 
 export default function AppProvider({ children }) {
-  useEffect(() => {}, []);
-
   // CART CONTEXT
   const [cart, setCart] = useState({});
   const [totalValue, setTotalValue] = useState(0);
-  const addOneToCart = (productId, price) => {
-    setCart((prevCart) => {
-      const quantity = prevCart[productId] ? (prevCart[productId] + 1) : 1;
-      return { ...prevCart, [productId]: quantity };
-    });
-    setTotalValue(totalValue + price);
-  };
-  const removeOneFromCart = (productId, price) => {
-    setCart((prevCart) => {
-      const quantity = prevCart[productId] ? (prevCart[productId] - 1) : 0;
-      const newCart = { ...prevCart };
-      if (quantity === 0) {
-        delete newCart[productId];
-      } else {
-        newCart[productId] = quantity;
-      }
-      return newCart;
-    });
-    setTotalValue(totalValue - price);
+  useEffect(() => {
+    // Compute the new total value based on the current contents of the cart
+    const newTotalValue = Object.values(cart)
+      .reduce((acc, { price, quantity }) => acc + price * quantity, 0);
+
+    setTotalValue(newTotalValue);
+  }, [cart]);
+  const addToCart = (id, price, quantity) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [id]: {
+        price,
+        quantity,
+      },
+    }));
   };
 
   const values = useMemo(() => ({
-    cart, setCart, addOneToCart, removeOneFromCart, totalValue,
+    cart, setCart, addToCart, totalValue,
   }), [cart, totalValue]);
 
   return (

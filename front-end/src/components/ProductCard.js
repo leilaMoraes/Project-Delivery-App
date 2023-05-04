@@ -1,19 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
 export default function ProductCard(props) {
   const { price, urlImage, name, id } = props;
-  const { cart, addOneToCart, removeOneFromCart } = useContext(AppContext);
+  const { cart, addToCart } = useContext(AppContext);
 
-  const quantity = cart[id] || 0;
+  const [quantity, setQuantity] = useState(cart[id] || 0);
 
-  const handleAddToCart = () => {
-    addOneToCart(id, price);
+  const handleQuantityChange = (event) => {
+    const newQuantity = parseInt(event.target.value, 10);
+    if (!Number.isNaN(newQuantity) && newQuantity >= 0) {
+      setQuantity(newQuantity);
+      addToCart(id, price, newQuantity);
+    }
   };
 
-  const handleRemoveFromCart = () => {
-    removeOneFromCart(id, price);
+  const handleAddOne = () => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    addToCart(id, price, newQuantity);
+  };
+
+  const handleRemoveOne = () => {
+    if (quantity > 0) {
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      addToCart(id, price, newQuantity);
+    }
   };
 
   const ROUTE = 'customer_products';
@@ -36,15 +50,21 @@ export default function ProductCard(props) {
           <button
             data-testid={ `${ROUTE}__${REMOVE}<${ID}>` }
             type="button"
-            onClick={ handleRemoveFromCart }
+            onClick={ handleRemoveOne }
           >
             -
           </button>
-          <span data-testid={ `${ROUTE}__${QUANTITY}<${ID}>` }>{quantity}</span>
+          <input
+            data-testid={ `${ROUTE}__${QUANTITY}<${ID}>` }
+            type="number"
+            min="0"
+            value={ quantity }
+            onChange={ handleQuantityChange }
+          />
           <button
             data-testid={ `${ROUTE}__${ADD}<${ID}>` }
             type="button"
-            onClick={ handleAddToCart }
+            onClick={ handleAddOne }
           >
             +
           </button>
