@@ -5,6 +5,7 @@ const auth = async (req, _res, next) => {
   if (!token) return next({ message: 'Token not found', status: 401 });
   try {
     const user = await authToken(token);
+    console.log(token, user);
     req.user = user;
     return next();
   } catch (error) {

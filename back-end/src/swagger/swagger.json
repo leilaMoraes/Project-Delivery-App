@@ -1,0 +1,907 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API - App de delivery",
+    "description": "API para fornecer dados para um ecommerce de delivery de bebidas",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "User information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "zebirita@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "$#zebirita#$"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User logged in successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjgzMTM3MzI5LCJleHAiOjE2ODMxNDgxMjl9.cjmLcBN-rIxae64Uoi0xrJOnLHZwLf9B8ngZf_-k-cM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid email or password",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Invalid email or password"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "New user information",
+            "schema": {
+              "required": [
+                "email",
+                "password",
+                "name",
+                "role"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com",
+                  "description": "User email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "email1234",
+                  "minLength": 6,
+                  "description": "User password"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Rafael Silva",
+                  "minLength": 12,
+                  "description": "User name"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "customer",
+                  "description": "User role"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "New user created successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjgzMTM3MzI5LCJleHAiOjE2ODMxNDgxMjl9.cjmLcBN-rIxae64Uoi0xrJOnLHZwLf9B8ngZf_-k-cM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid entries",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "\"missing field\" is required"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists!",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User already exists!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Token.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Skol Lata 250ml"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 2.2
+                  },
+                  "urlImage": {
+                    "type": "string",
+                    "example": "http://localhost:3001/images/skol_lata_350ml.jpg"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/register": {
+      "post": {
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          
+          {
+            "name": "singleFile",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Image of the item, must be a .jpeg. .jpg, .webb, .png file"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Name of the item",
+            "example": "Skol Lata 250ml"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "type": "number",
+            "required": true,
+            "description": "Price of the item",
+            "example": 2.2
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "New products.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Skol Lata 250ml"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 2.2
+                },
+                "urlImage": {
+                  "type": "string",
+                  "example": "http://localhost:3001/images/skol_lata_350ml.jpg"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sales": {
+      "post": {
+        "description": "",
+        "parameters": [
+          
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "New sale information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "number",
+                  "example": 3
+                },
+                "sellerId": {
+                  "type": "number",
+                  "example": 2
+                },
+                "totalPrice": {
+                  "type": "number",
+                  "example": 10
+                },
+                "deliveryAddress": {
+                  "type": "string",
+                  "example": "Rua 1"
+                },
+                "deliveryNumber": {
+                  "type": "number",
+                  "example": 10
+                },
+                "cart": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "productId": {
+                        "type": "number",
+                        "example": 3
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Sale   successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "userId": {
+                  "type": "number",
+                  "example": 3
+                },
+                "sellerId": {
+                  "type": "number",
+                  "example": 2
+                },
+                "totalPrice": {
+                  "type": "number",
+                  "example": 10
+                },
+                "deliveryAddress": {
+                  "type": "string",
+                  "example": "Rua 1"
+                },
+                "deliveryNumber": {
+                  "type": "string",
+                  "example": "10"
+                },
+                "saleDate": {
+                  "type": "string",
+                  "example": "2023-05-04T12:37:55.000Z"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Pendente"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 3
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Antarctica Pilsen 300ml"
+                      },
+                      "price": {
+                        "type": "number",
+                        "example": 2.49
+                      },
+                      "urlImage": {
+                        "type": "string",
+                        "example": "http://localhost:3001/images/antarctica_pilsen_300ml.jpg"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid entries",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "\"missing field\" is required"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sales/customer/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Customer ID."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Token.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of sales.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "userId": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "sellerId": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "totalPrice": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "deliveryAddress": {
+                    "type": "string",
+                    "example": "Rua 1"
+                  },
+                  "deliveryNumber": {
+                    "type": "string",
+                    "example": "10"
+                  },
+                  "saleDate": {
+                    "type": "string",
+                    "example": "2023-05-04T12:37:55.000Z"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Pendente"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Antarctica Pilsen 300ml"
+                        },
+                        "price": {
+                          "type": "number",
+                          "example": 2.49
+                        },
+                        "urlImage": {
+                          "type": "string",
+                          "example": "http://localhost:3001/images/antarctica_pilsen_300ml.jpg"
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "example": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Customer not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sales/seller/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Seller ID."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Token.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of sales.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "userId": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "sellerId": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "totalPrice": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "deliveryAddress": {
+                    "type": "string",
+                    "example": "Rua 1"
+                  },
+                  "deliveryNumber": {
+                    "type": "string",
+                    "example": "10"
+                  },
+                  "saleDate": {
+                    "type": "string",
+                    "example": "2023-05-04T12:37:55.000Z"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Pendente"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Antarctica Pilsen 300ml"
+                        },
+                        "price": {
+                          "type": "number",
+                          "example": 2.49
+                        },
+                        "urlImage": {
+                          "type": "string",
+                          "example": "http://localhost:3001/images/antarctica_pilsen_300ml.jpg"
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "example": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Seller not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Seller not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sales/status/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Sale ID."
+          },
+          
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Sale status.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Entregue"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status updated.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Status updated"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "\"status\" must be one of [Pendente, Preparando, Entregue]"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Sale not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Sale not found"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Sale already delivered.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Sale already delivered"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "New user information",
+            "schema": {
+              "required": [
+                "email",
+                "password",
+                "name",
+                "role"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com",
+                  "description": "User email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "email1234",
+                  "minLength": 6,
+                  "description": "User password"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Rafael Silva",
+                  "minLength": 12,
+                  "description": "User name"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "customer",
+                  "description": "User role"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "New user created successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjgzMTM3MzI5LCJleHAiOjE2ODMxNDgxMjl9.cjmLcBN-rIxae64Uoi0xrJOnLHZwLf9B8ngZf_-k-cM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid entries",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "\"missing field\" is required"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists!",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User already exists!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Token.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of users.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Cliente Zé Birita"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "zebirita@email.com"
+                  },
+                  "role": {
+                    "type": "string",
+                    "example": "customer"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "User ID."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Token.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully."
+          },
+          "404": {
+            "description": "User not found!.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User not found!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
