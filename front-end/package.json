@@ -10,7 +10,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:build": "PORT=3000 ./node_modules/.bin/serve -s build",
-    "build": "react-scripts build",
+    "build": "postcss src/index.css -o src/App.css && react-scripts build",
     "test": "react-scripts test --runInBand --detectOpenHandles --verbose",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "test:coverage:json": "react-scripts test --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
@@ -22,12 +22,15 @@
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.4",
     "@testing-library/user-event": "13.5.0",
+    "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
+    "postcss": "^8.4.23",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-router-dom": "5.3.4",
     "react-scripts": "5.0.0",
     "serve": "13.0.2",
+    "tailwindcss": "^3.3.2",
     "web-vitals": "2.1.4"
   },
   "devDependencies": {
