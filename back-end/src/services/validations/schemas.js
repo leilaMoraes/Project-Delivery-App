@@ -12,7 +12,7 @@ const newUserSchema = joi.object({
   email: joi.string().email().required(),
   name: joi.string().min(12).required(),
   password: joi.string().min(6).required(),
-  role: joi.string().valid('admin', 'customer', 'seller'),
+  role: joi.string().valid('customer', 'seller'),
 });
 
 const sale = joi.object({

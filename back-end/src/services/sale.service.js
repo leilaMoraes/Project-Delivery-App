@@ -1,6 +1,6 @@
 const { literal } = require('sequelize');
 const { validateNewSale } = require('./validations/validationsInputValues');
-const { Sale, Product, SalesProduct, sequelize } = require('../database/models');
+const { Sale, Product, SalesProduct, sequelize, User } = require('../database/models');
 
 const query = '`products->SalesProduct`.`quantity`';
 
@@ -40,6 +40,10 @@ const create = async (sale) => {
 };
 
 const getCustomerSales = async (id) => {
+  const userExists = await User.findByPk(id, { raw: true });
+  if (!userExists || userExists.role !== 'customer') {
+    return { status: 404, message: 'Customer not found!' };
+  }
   const sales = await Sale.findAll({
     where: { userId: id },
     include: {
@@ -56,6 +60,10 @@ const getCustomerSales = async (id) => {
 };
 
 const getSellerSales = async (id) => {
+  const userExists = await User.findByPk(id, { raw: true });
+  if (!userExists || userExists.role !== 'seller') {
+    return { status: 404, message: 'Seller not found!' };
+  }
   const sales = await Sale.findAll({
     where: { sellerId: id },
     include: {

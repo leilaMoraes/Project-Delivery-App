@@ -1,6 +1,6 @@
 const validateAdmin = async (req, _res, next) => {
   const { role } = req.user;
-  if (role !== 'admin') {
+  if (role !== 'administrator') {
     return next({
       message: 'Only admins can access this page',
       status: 403,
