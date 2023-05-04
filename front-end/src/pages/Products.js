@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
+import requests from '../services/requests';
+import AppContext from '../context/AppContext';
 
 export default function Products() {
   const { totalValue } = useContext(AppContext);
-  const products = fetch('http://localhost:3001/products');
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await requests.getProducts();
+      setProducts(response.data);
+      console.log(response);
+    };
+    fetchProducts();
+  }, []);
 
   const ROUTE = 'customer_products';
   const CART = 'button-cart';

@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
 export default function ProductCard(props) {
-  const { price, imageSrc, altText, title, productId } = props;
+  const { price, urlImage, name, id } = props;
   const { cart, addOneToCart, removeOneFromCart } = useContext(AppContext);
 
-  const quantity = cart[productId] || 0;
+  const quantity = cart[id] || 0;
 
   const handleAddToCart = () => {
-    addOneToCart(productId, price);
+    addOneToCart(id, price);
   };
 
   const handleRemoveFromCart = () => {
-    removeOneFromCart(productId, price);
+    removeOneFromCart(id, price);
   };
 
   const ROUTE = 'customer_products';
@@ -23,15 +23,15 @@ export default function ProductCard(props) {
   const REMOVE = 'button-card-rm-item-';
   const QUANTITY = 'input-card-quantity-';
   const ADD = 'button-card-add-item-';
-  const ID = productId;
+  const ID = id;
 
   return (
     <div>
       <span data-testid={ `${ROUTE}__${PRICE}<${ID}>` }>{price}</span>
-      <img data-testid={ `${ROUTE}__${IMAGE}<${ID}>` } src={ imageSrc } alt={ altText } />
+      <img data-testid={ `${ROUTE}__${IMAGE}<${ID}>` } src={ urlImage } alt={ name } />
 
       <div>
-        <h2 data-testid={ `${ROUTE}__${TITLE}<${ID}>` }>{title}</h2>
+        <h2 data-testid={ `${ROUTE}__${TITLE}<${ID}>` }>{name}</h2>
         <div>
           <button
             data-testid={ `${ROUTE}__${REMOVE}<${ID}>` }
@@ -56,8 +56,7 @@ export default function ProductCard(props) {
 
 ProductCard.propTypes = {
   price: PropTypes.string.isRequired,
-  imageSrc: PropTypes.string.isRequired,
-  altText: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  productId: PropTypes.number.isRequired,
+  urlImage: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
