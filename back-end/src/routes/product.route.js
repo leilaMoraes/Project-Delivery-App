@@ -5,7 +5,7 @@ const upload = require('../utils/upload');
 
 const productRouter = express.Router();
 
-productRouter.use(auth);
+// productRouter.use(auth);
 
 productRouter.get('/', productController.getAll);
 

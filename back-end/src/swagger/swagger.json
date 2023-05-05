@@ -44,6 +44,15 @@
                 "token": {
                   "type": "string",
                   "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjgzMTM3MzI5LCJleHAiOjE2ODMxNDgxMjl9.cjmLcBN-rIxae64Uoi0xrJOnLHZwLf9B8ngZf_-k-cM"
+                },
+                "user": {
+                  "type": "object",
+                  "example": {
+                    "id": 3,
+                    "name": "Cliente Zé Birita",
+                    "email": "zebirita@email.com",
+                    "role": "customer"
+                  }
                 }
               },
               "xml": {
@@ -120,6 +129,15 @@
                 "token": {
                   "type": "string",
                   "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjgzMTM3MzI5LCJleHAiOjE2ODMxNDgxMjl9.cjmLcBN-rIxae64Uoi0xrJOnLHZwLf9B8ngZf_-k-cM"
+                },
+                "user": {
+                  "type": "object",
+                  "example": {
+                    "id": 4,
+                    "name": "Rafael Silva",
+                    "email": "email@email.com",
+                    "role": "customer"
+                  }
                 }
               },
               "xml": {
