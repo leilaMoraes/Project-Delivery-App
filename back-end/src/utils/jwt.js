@@ -3,7 +3,7 @@ const fs = require('fs/promises');
 
 const generateToken = async (payload) => {
   const secret = await fs.readFile('./jwt.evaluation.key', 'utf-8');
-  const token = jwt.sign(payload, secret, { expiresIn: '3h', algorithm: 'HS256' });
+  const token = jwt.sign(payload, secret, { expiresIn: '30d', algorithm: 'HS256' });
   return token;
 };
 
