@@ -14,16 +14,16 @@ export default function Header() {
   const LOGOUT = 'element-navbar-link-logout';
 
   return (
-    <header className="header">
-      {/*
-        botao de produtos só renderiza se o usuario for customer
-        talvez passar os testids por props?
-        duas divs left, uma para cada user type
-      */}
+    <header
+      // className="header"
+      className="fixed top-0 left-0 w-full bg-green-dark
+      z-50 shadow-md flex justify-between items-center"
+    >
       <div>
         {role === 'customer' && (
           <button
             data-testid={ `${ROUTE}__${PRODUCTS}` }
+            className="text-white bg-green-light px-4 py-2 h-full"
             type="button"
           >
             PRODUCTS
@@ -31,6 +31,7 @@ export default function Header() {
         )}
         <button
           data-testid={ `${ROUTE}__${ORDERS}` }
+          className="text-white px-4 py-2 h-full"
           type="button"
           onClick={ () => history.push('/admin/manage') }
         >
@@ -41,15 +42,16 @@ export default function Header() {
 
       <div>
         <p
-          style={ { backgroundColor: 'green', display: 'inline' } }
+          className="text-white bg-blue-dark px-4 py-2 h-full inline-block"
+          // style={ { backgroundColor: 'green', display: 'inline' } }
           data-testid={ `${ROUTE}__${USER}` }
         >
           {name}
-
         </p>
 
         <button
           data-testid={ `${ROUTE}__${LOGOUT}` }
+          className="text-white bg-blue-light px-4 py-2 h-full"
           type="button"
         >
           Logout

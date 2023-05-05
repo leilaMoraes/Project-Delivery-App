@@ -27,10 +27,11 @@ export default function Products() {
     email: 'zebirita@email.com',
     role: 'customer',
   }));
+
   return (
     <div>
       <Header />
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap mt-12 place-content-center gap-4">
         {products.map((product) => (
           <ProductCard
             key={ product.id }
@@ -38,10 +39,21 @@ export default function Products() {
           />
         ))}
       </div>
-      <button type="button" data-testid={ `${ROUTE}__${CART}` }>
+      <button
+        type="button"
+        data-testid={ `${ROUTE}__${CART}` }
+        className="bg-green-dark rounded-md fixed bottom-0 right-0 m-4 px-4 py-2
+        text-white"
+      >
         View Cart: R$
         {' '}
-        <span data-testid={ `${ROUTE}__${VALUE}` }>{totalValue.toFixed(2)}</span>
+        <span
+          data-testid={ `${ROUTE}__${VALUE}` }
+          className="text-bold text-white font-bold"
+        >
+          {totalValue.toFixed(2)}
+
+        </span>
       </button>
     </div>
   );

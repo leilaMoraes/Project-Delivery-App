@@ -11,10 +11,10 @@ export default function Routes() {
       <Route exact path="/">
         <Redirect to="/login" />
       </Route>
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/products" component={Products} />
-      <Route path="/admin/manage" component={Admin} />
+      <Route path="/login" component={ Login } />
+      <Route path="/register" component={ Register } />
+      <Route path="/products" component={ Products } />
+      <Route path="/admin/manage" component={ Admin } />
     </Switch>
   );
 }
