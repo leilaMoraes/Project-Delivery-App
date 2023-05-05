@@ -12,7 +12,6 @@ export default function Products() {
     const fetchProducts = async () => {
       const response = await requests.getProducts();
       setProducts(response.data);
-      console.log(response);
     };
     fetchProducts();
   }, []);
@@ -20,22 +19,27 @@ export default function Products() {
   const ROUTE = 'customer_products';
   const CART = 'button-cart';
   const VALUE = 'checkout-bottom-value';
-
+  // localStorage.setItem('user', JSON.stringify({
+  //   id: 3,
+  //   name: 'Cliente Zé Birita',
+  //   email: 'zebirita@email.com',
+  //   role: 'customer',
+  // }));
   return (
     <div>
       <Header />
       <div>
         {products.map((product) => (
           <ProductCard
-            key={ product.id }
-            { ...product }
+            key={product.id}
+            {...product}
           />
         ))}
       </div>
-      <button type="button" data-testid={ `${ROUTE}__${CART}` }>
+      <button type="button" data-testid={`${ROUTE}__${CART}`}>
         View Cart: R$
         {' '}
-        <span data-testid={ `${ROUTE}__${VALUE}` }>{totalValue}</span>
+        <span data-testid={`${ROUTE}__${VALUE}`}>{totalValue}</span>
       </button>
     </div>
   );

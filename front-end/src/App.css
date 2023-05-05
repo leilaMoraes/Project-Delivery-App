@@ -23,6 +23,16 @@
   max-height: 80vh;
 }
 
+.header {
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
 @keyframes shake {
 
   0% {

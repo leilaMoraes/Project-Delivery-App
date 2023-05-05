@@ -13,7 +13,7 @@ const login = async (loginObj) => {
   }
   const { password: _, ...rest } = user;
   const token = await generateToken({ ...rest });
-  return { status: 200, token };
+  return { status: 200, token, user: rest };
 };
 
 module.exports = {

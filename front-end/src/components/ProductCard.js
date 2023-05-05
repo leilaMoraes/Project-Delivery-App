@@ -41,30 +41,35 @@ export default function ProductCard(props) {
 
   return (
     <div>
-      <span data-testid={ `${ROUTE}__${PRICE}<${ID}>` }>{price}</span>
-      <img data-testid={ `${ROUTE}__${IMAGE}<${ID}>` } src={ urlImage } alt={ name } />
+      <span data-testid={`${ROUTE}__${PRICE}<${ID}>`}>{price}</span>
+      <img
+        data-testid={`${ROUTE}__${IMAGE}<${ID}>`}
+        src={urlImage}
+        alt={name}
+        width={100}
+      />
 
       <div>
-        <h2 data-testid={ `${ROUTE}__${TITLE}<${ID}>` }>{name}</h2>
+        <h2 data-testid={`${ROUTE}__${TITLE}<${ID}>`}>{name}</h2>
         <div>
           <button
-            data-testid={ `${ROUTE}__${REMOVE}<${ID}>` }
+            data-testid={`${ROUTE}__${REMOVE}<${ID}>`}
             type="button"
-            onClick={ handleRemoveOne }
+            onClick={handleRemoveOne}
           >
             -
           </button>
           <input
-            data-testid={ `${ROUTE}__${QUANTITY}<${ID}>` }
+            data-testid={`${ROUTE}__${QUANTITY}<${ID}>`}
             type="number"
             min="0"
-            value={ quantity }
-            onChange={ handleQuantityChange }
+            value={quantity}
+            onChange={handleQuantityChange}
           />
           <button
-            data-testid={ `${ROUTE}__${ADD}<${ID}>` }
+            data-testid={`${ROUTE}__${ADD}<${ID}>`}
             type="button"
-            onClick={ handleAddOne }
+            onClick={handleAddOne}
           >
             +
           </button>

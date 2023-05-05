@@ -1,50 +1,55 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 
 // ADD PROPS FOR HEADER ELEMENTS
-export default function Header(props) {
-  const { username } = props;
+export default function Header() {
+  const { user } = useContext(AppContext);
+  const { name, role } = user;
+  const history = useHistory();
   const ROUTE = 'customer_products';
   const PRODUCTS = 'element-navbar-link-products';
   const ORDERS = 'element-navbar-link-orders';
   const USER = 'element-navbar-user-full-name';
   const LOGOUT = 'element-navbar-link-logout';
-  const USERTYPE = 'CUSTOMER';
 
   return (
-    <header>
+    <header className="header">
       {/*
         botao de produtos só renderiza se o usuario for customer
         talvez passar os testids por props?
         duas divs left, uma para cada user type
       */}
       <div>
-        {USERTYPE === 'CUSTOMER' && (
+        {role === 'customer' && (
           <button
-            data-testid={ `${ROUTE}__${PRODUCTS}` }
+            data-testid={`${ROUTE}__${PRODUCTS}`}
             type="button"
           >
             PRODUCTS
           </button>
         )}
-
         <button
-          data-testid={ `${ROUTE}__${ORDERS}` }
+          data-testid={`${ROUTE}__${ORDERS}`}
           type="button"
+          onClick={() => history.push('/admin/manage')}
         >
-          {USERTYPE === 'CUSTOMER' ? 'MY ORDERS' : 'ORDERS'}
+          {role === 'administrator' ? 'USER MANAGEMENT' : 'ORDERS'}
         </button>
+
       </div>
 
       <div>
-        <button
-          data-testid={ `${ROUTE}__${USER}` }
-          type="button"
+        <p
+          style={{ backgroundColor: 'green', display: 'inline' }}
+          data-testid={`${ROUTE}__${USER}`}
         >
-          {username}
-        </button>
+          {name}
+
+        </p>
+
         <button
-          data-testid={ `${ROUTE}__${LOGOUT}` }
+          data-testid={`${ROUTE}__${LOGOUT}`}
           type="button"
         >
           Logout
@@ -53,7 +58,3 @@ export default function Header(props) {
     </header>
   );
 }
-
-Header.propTypes = {
-  username: PropTypes.string.isRequired,
-};

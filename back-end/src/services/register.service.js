@@ -14,7 +14,7 @@ const register = async (user) => {
     .get({ plain: true });
   const { password: _, ...rest } = newUser;
   const token = await generateToken({ ...rest });
-  return { status: 201, token };
+  return { status: 201, token, user: rest };
 };
 
 module.exports = {

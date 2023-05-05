@@ -16,7 +16,13 @@
  - Se o login foi feito com sucesso o resultado retornado deverá ser conforme exibido abaixo, com um status http
 	```json
 	{ 
-	  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjgzMTM3MzI5LCJleHAiOjE2ODMxNDgxMjl9.cjmLcBN-rIxae64Uoi0xrJOnLHZwLf9B8ngZf_-k-cM"
+	  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkRlbGl2ZXJ5IEFwcCBBZG1pbiIsImVtYWlsIjoiYWRtQGRlbGl2ZXJ5YXBwLmNvbSIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjgzMTM3MzI5LCJleHAiOjE2ODMxNDgxMjl9.cjmLcBN-rIxae64Uoi0xrJOnLHZwLf9B8ngZf_-k-cM",
+	  "user": {
+	    "id": 3,
+	    "name": "Cliente Zé Birita",
+	    "email": "zebirita@email.com",
+	    "role": "customer"
+	  }
 	}
 	```
 
@@ -82,6 +88,12 @@ Realizar o cadastro de um novo usuário.
     ```json
       {
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
+		"user": {
+		    "id": 3,
+		    "name": "Cliente Zé Birita",
+		    "email": "zebirita@email.com",
+		    "role": "customer"
+		  }
       }
       ```
 
