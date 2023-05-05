@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 // Set default headers, such as the Authorization header for authenticated requests
 // instance.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
