@@ -11,11 +11,12 @@ function Login() {
   const [password, setPassword] = useState('');
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
+
   const history = useHistory();
   const magicNumber = 6;
 
   const onClickLogin = () => {
-    const fetchProducts = async () => {
+    const fetchLogin = async () => {
       try {
         const response = await loginRequest
           .login({ email, password });
@@ -31,7 +32,7 @@ function Login() {
       setEmail('');
       setPassword('');
     };
-    fetchProducts();
+    fetchLogin();
   };
 
   const onClickRegister = () => {
