@@ -30,32 +30,26 @@ export default function ProductCard(props) {
     }
   };
 
-  const ROUTE = 'customer_products';
-  const PRICE = 'element-card-price-';
-  const IMAGE = 'img-card-bg-image-';
-  const TITLE = 'element-card-title-';
-  const REMOVE = 'button-card-rm-item-';
-  const QUANTITY = 'input-card-quantity-';
-  const ADD = 'button-card-add-item-';
-  const ID = id;
-
   return (
     <div
       className="border border-border0 shadow-md overflow-hidden
     w-[359px] h-[479px] flex flex-col justify-end"
     >
       <div className="relative h-full">
-        <span
-          data-testid={ `${ROUTE}__${PRICE}<${ID}>` }
+        <div
           className="absolute top-0 left-0 bg-bg0
           text-black font-bold px-3 py-1 z-10 m-2"
         >
           R$
           {' '}
-          {price.toFixed(2)}
-        </span>
+          <span
+            data-testid={ `customer_products__element-card-price-${id}` }
+          >
+            {price.toFixed(2).replace('.', ',')}
+          </span>
+        </div>
         <img
-          data-testid={ `${ROUTE}__${IMAGE}<${ID}>` }
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
           src={ urlImage }
           alt={ name }
           className="absolute h-full object-cover inset-0 mx-auto"
@@ -65,14 +59,14 @@ export default function ProductCard(props) {
       <div className="p-4 bg-bg0">
         <div className="flex flex-col justify-center">
           <h2
-            data-testid={ `${ROUTE}__${TITLE}<${ID}>` }
+            data-testid={ `customer_products__element-card-title-${id}` }
             className="font-bold mb-2 text-center"
           >
             {name}
           </h2>
           <div className="flex justify-center">
             <button
-              data-testid={ `${ROUTE}__${REMOVE}<${ID}>` }
+              data-testid={ `customer_products__button-card-rm-item-${id}` }
               className="rounded-l-lg bg-green-dark w-7 h-7
               font-extrabold text-white"
               type="button"
@@ -81,7 +75,7 @@ export default function ProductCard(props) {
               -
             </button>
             <input
-              data-testid={ `${ROUTE}__${QUANTITY}<${ID}>` }
+              data-testid={ `customer_products__input-card-quantity-${id}` }
               className="w-12 text-center border-2 border-green-dark "
               type="number"
               min="0"
@@ -90,7 +84,7 @@ export default function ProductCard(props) {
             />
             <button
               // NEEED TO ALIGNT BUTTON TEXT
-              data-testid={ `${ROUTE}__${ADD}<${ID}>` }
+              data-testid={ `customer_products__button-card-add-item-${id}` }
               className="rounded-r-lg bg-green-dark w-7 h-7
               font-extrabold text-white "
               type="button"

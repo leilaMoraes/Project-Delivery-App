@@ -17,11 +17,8 @@ export default function Products() {
       setProducts(response.data);
     };
     fetchProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const ROUTE = 'customer_products';
-  const CART = 'button-cart';
-  const VALUE = 'checkout-bottom-value';
 
   localStorage.setItem('user', JSON.stringify({
     id: 3,
@@ -43,20 +40,19 @@ export default function Products() {
       </div>
       <button
         type="button"
-        data-testid={ `${ROUTE}__${CART}` }
+        data-testid="customer_products__button-cart"
         className="bg-green-dark rounded-md fixed bottom-0 right-0 m-4 px-4 py-2
         text-white"
         onClick={ () => history.push('/customer/checkout') }
+        disabled={ totalValue === 0 }
       >
-        View Cart:
+        View Cart: R$
         {' '}
         <span
-          data-testid={ `${ROUTE}__${VALUE}` }
+          data-testid="customer_products__checkout-bottom-value"
           className="text-bold text-white font-bold"
         >
-          R$
-          {' '}
-          {totalValue.toFixed(2)}
+          {totalValue.toFixed(2).replace('.', ',')}
         </span>
       </button>
     </div>
