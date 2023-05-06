@@ -52,7 +52,6 @@ export default function Products() {
           className="text-bold text-white font-bold"
         >
           {totalValue.toFixed(2)}
-
         </span>
       </button>
     </div>

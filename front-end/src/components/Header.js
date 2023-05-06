@@ -7,6 +7,11 @@ export default function Header() {
   const { user } = useContext(AppContext);
   const { name, role } = user;
   const history = useHistory();
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   const ROUTE = 'customer_products';
   const PRODUCTS = 'element-navbar-link-products';
   const ORDERS = 'element-navbar-link-orders';
@@ -52,6 +57,7 @@ export default function Header() {
         <button
           data-testid={ `${ROUTE}__${LOGOUT}` }
           className="text-white bg-blue-light px-4 py-2 h-full"
+          onClick={ handleLogout }
           type="button"
         >
           Logout
