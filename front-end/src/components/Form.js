@@ -12,7 +12,8 @@ function Form() {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    const regex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    // const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     const isEmailValid = regex.test(email);
     const FIVE = 5;
     const ELEVEN = 11;
