@@ -22,8 +22,9 @@ function Login() {
         const response = await requests.login({ email, password });
         setToken(response.data.token);
         setUser(response.data.user);
+        const user = { ...response.data.user, token: response.data.token };
         localStorage.setItem('token', JSON.stringify(response.data.token));
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('user', JSON.stringify(user));
         const route = getRoute(response.data.user.role);
         history.push(route);
       } catch (error) {
@@ -48,28 +49,28 @@ function Login() {
         type="text"
         inputName="inputEmail"
         id="inputEmail"
-        value={ email }
+        value={email}
         dataName="common_login__input-email"
-        onChange={ ({ target }) => setEmail(target.value) }
+        onChange={({ target }) => setEmail(target.value)}
       />
       <Input
         label="Senha"
         type="password"
         inputName="inputPassword"
         id="inputPassword"
-        value={ password }
+        value={password}
         dataName="common_login__input-password"
-        onChange={ ({ target }) => setPassword(target.value) }
+        onChange={({ target }) => setPassword(target.value)}
       />
       <Button
         dataName="common_login__button-login"
-        disabled={ !(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicNumber) }
-        onClick={ onClickLogin }
+        disabled={!(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicNumber)}
+        onClick={onClickLogin}
         btnName="LOGIN"
       />
       <Button
         dataName="common_login__button-register"
-        onClick={ onClickRegister }
+        onClick={onClickRegister}
         btnName="Ainda não tenho conta"
       />
       {showMessage

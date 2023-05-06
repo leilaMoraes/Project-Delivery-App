@@ -18,7 +18,12 @@ function Form() {
     const ELEVEN = 11;
     setDisabled(!(isEmailValid && password.length > FIVE && name.length > ELEVEN));
   }, [email, name, password, role]);
-
+  const clearInputs = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setRole('seller');
+  };
   const createNewUser = async (e) => {
     e.preventDefault();
     try {
@@ -28,21 +33,23 @@ function Form() {
       setUsers((prev) => prev.concat(response.data));
       toast.success('New user successfully registered!');
       // setMessage('New user successfully registered!');
+      clearInputs();
     } catch (error) {
       setMessage(error.response.data.message);
       toast.error(error.response.data.message);
+      clearInputs();
     }
   };
   return (
-    <form onSubmit={ createNewUser }>
+    <form onSubmit={createNewUser}>
       <label htmlFor="name">
         Name
         <input
           type="text"
           id="name"
           data-testid="admin_manage__input-name"
-          value={ name }
-          onChange={ ({ target }) => setName(target.value) }
+          value={name}
+          onChange={({ target }) => setName(target.value)}
         />
       </label>
       <label htmlFor="email">
@@ -51,8 +58,8 @@ function Form() {
           type="email"
           id="email"
           data-testid="admin_manage__input-email"
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
+          value={email}
+          onChange={({ target }) => setEmail(target.value)}
         />
       </label>
       <label htmlFor="password">
@@ -61,16 +68,16 @@ function Form() {
           type="password"
           id="password"
           data-testid="admin_manage__input-password"
-          value={ password }
-          onChange={ ({ target }) => setPassword(target.value) }
+          value={password}
+          onChange={({ target }) => setPassword(target.value)}
         />
       </label>
       <label htmlFor="role">
         Type
         <select
           id="role"
-          value={ role }
-          onChange={ ({ target }) => setRole(target.value) }
+          value={role}
+          onChange={({ target }) => setRole(target.value)}
           data-testid="admin_manage__select-role"
         >
           <option value="seller">Seller</option>
@@ -80,7 +87,7 @@ function Form() {
       </label>
       <button
         type="submit"
-        disabled={ disabled }
+        disabled={disabled}
         data-testid="admin_manage__button-register"
       >
         Register

@@ -24,7 +24,7 @@ function Admin() {
   return (
     <div>
       <Header />
-      <h3>Register New User</h3>
+      <h3 className="mt-12">Register New User</h3>
       {message && (
         <p
           data-testid="admin_manage__element-invalid-register"
