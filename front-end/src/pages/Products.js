@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import requests from '../services/requests';
@@ -7,6 +8,7 @@ import AppContext from '../context/AppContext';
 export default function Products() {
   const { totalValue, token } = useContext(AppContext);
   const [products, setProducts] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -44,13 +46,16 @@ export default function Products() {
         data-testid={ `${ROUTE}__${CART}` }
         className="bg-green-dark rounded-md fixed bottom-0 right-0 m-4 px-4 py-2
         text-white"
+        onClick={ () => history.push('/customer/checkout') }
       >
-        View Cart: R$
+        View Cart:
         {' '}
         <span
           data-testid={ `${ROUTE}__${VALUE}` }
           className="text-bold text-white font-bold"
         >
+          R$
+          {' '}
           {totalValue.toFixed(2)}
         </span>
       </button>
