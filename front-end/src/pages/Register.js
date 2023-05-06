@@ -1,14 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import AppContext from '../context/AppContext';
+import registerRequest from '../services/registerRequest';
 
 function Register() {
+  const { setUser, setToken } = useContext(AppContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState('');
 
+  const history = useHistory();
   const magicPassword = 6;
   const magicName = 12;
+
+  const onChange = ({ target }) => {
+    setShowMessage(false);
+    switch (target.name) {
+    case 'inputName':
+      setName(target.value);
+      break;
+    case 'inputEmail':
+      setEmail(target.value);
+      break;
+    case 'inputPassword':
+      setPassword(target.value);
+      break;
+    default:
+      console.log('algo está errado');
+    }
+  };
+
+  const onClickRegister = () => {
+    const fetchRegister = async () => {
+      try {
+        const response = await registerRequest
+          .register({ name, email, password, role: 'customer' });
+        setToken(response.data.token);
+        setUser({ name, email, role: 'customer' });
+        localStorage.setItem('token', JSON.stringify(response.data.token));
+        localStorage.setItem('user', JSON.stringify({ name, email, role: 'customer' }));
+        history.push('/customer/products');
+      } catch (error) {
+        setMessage(error.response.data.message);
+        setShowMessage(true);
+      }
+      setName('');
+      setEmail('');
+      setPassword('');
+    };
+    fetchRegister();
+  };
 
   return (
     <div>
@@ -20,7 +65,7 @@ function Register() {
         id="inputName"
         value={ name }
         dataName="common_register__input-name"
-        onChange={ ({ target }) => setName(target.value) }
+        onChange={ onChange }
       />
       {name !== ''
       && name.length < magicName && <p>Name must be 12 characters</p>}
@@ -31,7 +76,7 @@ function Register() {
         id="inputEmail"
         value={ email }
         dataName="common_register__input-email"
-        onChange={ ({ target }) => setEmail(target.value) }
+        onChange={ onChange }
       />
       {email !== ''
       && !(email.match(/\S+@\S+\.\S+/i)) && <p>Invalid Email</p>}
@@ -42,18 +87,18 @@ function Register() {
         id="inputPassword"
         value={ password }
         dataName="common_register__input-password"
-        onChange={ ({ target }) => setPassword(target.value) }
+        onChange={ onChange }
       />
       {password !== ''
       && password.length < magicPassword && <p>Password must be 6 characters</p>}
       <Button
         dataName="common_register__button-register"
         disabled={ !(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicPassword) || (name.length < magicName) }
+        onClick={ onClickRegister }
         btnName="CADASTRAR"
       />
-      <p
-        data-testid="common_register__element-invalid_register"
-      />
+      { showMessage
+      && <p data-testid="common_register__element-invalid_register">{message}</p>}
     </div>
   );
 }
