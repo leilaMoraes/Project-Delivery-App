@@ -8,7 +8,7 @@ const login = async (loginObj) => {
   if (error) return error;
   const { email, password } = loginObj;
   const user = await User.findOne({ where: { email }, raw: true });
-  if (!user) return { status: 404, message: 'Not Found' };
+  if (!user) return { status: 404, message: 'User not found' };
   if (!compareHash(password, user.password)) {
     return { status: 400, message: 'Invalid email or password' };
   }
