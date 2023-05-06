@@ -73,7 +73,7 @@ export default function ProductCard(props) {
           <div className="flex justify-center">
             <button
               data-testid={ `${ROUTE}__${REMOVE}<${ID}>` }
-              className="rounded-l-lg bg-green-dark px-2 w-7 py-1
+              className="rounded-l-lg bg-green-dark w-7 h-7
               font-extrabold text-white"
               type="button"
               onClick={ handleRemoveOne }
@@ -82,7 +82,7 @@ export default function ProductCard(props) {
             </button>
             <input
               data-testid={ `${ROUTE}__${QUANTITY}<${ID}>` }
-              className="w-12 text-center border-2 border-green-dark"
+              className="w-12 text-center border-2 border-green-dark "
               type="number"
               min="0"
               value={ quantity }
@@ -91,7 +91,7 @@ export default function ProductCard(props) {
             <button
               // NEEED TO ALIGNT BUTTON TEXT
               data-testid={ `${ROUTE}__${ADD}<${ID}>` }
-              className="rounded-r-lg bg-green-dark px-2 w-7 py-1
+              className="rounded-r-lg bg-green-dark w-7 h-7
               font-extrabold text-white "
               type="button"
               onClick={ handleAddOne }
@@ -106,7 +106,7 @@ export default function ProductCard(props) {
 }
 
 ProductCard.propTypes = {
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   urlImage: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
