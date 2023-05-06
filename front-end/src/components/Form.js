@@ -27,7 +27,7 @@ function Form() {
         .postUser({ name, email, password, role }, headers);
       setUsers((prev) => prev.concat(response.data));
       toast.success('New user successfully registered!');
-      setMessage('New user successfully registered!');
+      // setMessage('New user successfully registered!');
     } catch (error) {
       setMessage(error.response.data.message);
       toast.error(error.response.data.message);

@@ -9,6 +9,7 @@ export default function Header() {
   const history = useHistory();
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     history.push('/login');
   };
 
