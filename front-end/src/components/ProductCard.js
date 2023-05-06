@@ -12,21 +12,21 @@ export default function ProductCard(props) {
     const newQuantity = parseInt(event.target.value, 10);
     if (!Number.isNaN(newQuantity) && newQuantity >= 0) {
       setQuantity(newQuantity);
-      addToCart(id, price, newQuantity);
+      addToCart(id, name, price, newQuantity);
     }
   };
 
   const handleAddOne = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
-    addToCart(id, price, newQuantity);
+    addToCart(id, name, price, newQuantity);
   };
 
   const handleRemoveOne = () => {
     if (quantity > 0) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
-      addToCart(id, price, newQuantity);
+      addToCart(id, name, price, newQuantity);
     }
   };
 

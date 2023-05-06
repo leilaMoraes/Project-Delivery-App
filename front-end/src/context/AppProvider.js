@@ -10,6 +10,10 @@ export default function AppProvider({ children }) {
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
+  // CHECKOUT CONTEXT
+  const [salesperson, setSalesperson] = useState('');
+  const [address, setAddress] = useState('');
+  const [addressNumber, setAddressNumber] = useState('');
   useEffect(() => {
     // Compute the new total value based on the current contents of the cart
     const newTotalValue = Object.values(cart)
@@ -40,6 +44,12 @@ export default function AppProvider({ children }) {
     setToken,
     users,
     setUsers,
+    salesperson,
+    setSalesperson,
+    address,
+    setAddress,
+    addressNumber,
+    setAddressNumber,
   }), [cart, totalValue, user, message, token, users]);
 
   return (
