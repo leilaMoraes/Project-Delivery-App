@@ -1,12 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext,
+  // useEffect, useState
+} from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
-import requests from '../services/requests';
+// import requests from '../services/requests';
 import AppContext from '../context/AppContext';
 import Input from '../components/Input';
+import CheckoutTable from '../components/CheckoutTable';
 
 export default function Checkout() {
-  const { totalValue, token,
+  const history = useHistory();
+  const { totalValue,
+    // token,
     salesperson,
     setSalesperson,
     address,
@@ -14,12 +19,25 @@ export default function Checkout() {
     addressNumber,
     setAddressNumber } = useContext(AppContext);
 
+  const handleFinishOrder = () => {
+    history.push(`/customer/orders/${id}`);
+  };
+
   return (
-    <div>
+    <div className="border-t-[20px]">
       <Header />
       <div>
         <h1>Finish Order</h1>
+        <CheckoutTable />
+        <span
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          Total: R$
+          {' '}
+          { totalValue.toFixed(2).replace('.', ',')}
+        </span>
       </div>
+
       <div>
         <h1>Details and Delivery Address</h1>
         <div>
@@ -55,6 +73,7 @@ export default function Checkout() {
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
+          onClick={ handleFinishOrder }
         >
           FINISH ORDER
         </button>

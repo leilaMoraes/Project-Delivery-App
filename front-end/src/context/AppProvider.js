@@ -21,10 +21,11 @@ export default function AppProvider({ children }) {
 
     setTotalValue(newTotalValue);
   }, [cart]);
-  const addToCart = (id, price, quantity) => {
+  const addToCart = (id, name, price, quantity) => {
     setCart((prevCart) => ({
       ...prevCart,
       [id]: {
+        name,
         price,
         quantity,
       },

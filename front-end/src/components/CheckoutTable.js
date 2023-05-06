@@ -1,56 +1,60 @@
-import { toast } from 'react-toastify';
 import { useContext } from 'react';
-import requests from '../services/requests';
 import AppContext from '../context/AppContext';
 
-function Table() {
-  const { setMessage, token, users, setUsers } = useContext(AppContext);
+export default function CheckoutTable() {
+  const { cart } = useContext(AppContext);
 
   return (
     <table style={ { width: '100%', border: '1px solid black', textAlign: 'center' } }>
       <thead>
         <tr>
           <th>Item</th>
-          <th>Name</th>
-          <th>E-mail</th>
-          <th>Role</th>
-          <th>Delete</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Sub-total</th>
+          <th>Remove Item</th>
         </tr>
       </thead>
       <tbody>
-        {users.map(({ id, name, email, role }, index) => (
+        {Object.entries(cart).map(([id, { name, price, quantity }], i) => (
           <tr key={ id }>
             <td
-              data-testid={ `admin_manage__element-user-table-item-number-${index}` }
+              data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
             >
-              {index + 1}
-
+              {i + 1}
             </td>
             <td
-              data-testid={ `admin_manage__element-user-table-name-${index}` }
+              data-testid={ `customer_checkout__element-order-table-name-${i}` }
             >
               {name}
-
             </td>
             <td
-              data-testid={ `admin_manage__element-user-table-email-${index}` }
+              data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
             >
-              {email}
-
+              {quantity}
             </td>
             <td
-              data-testid={ `admin_manage__element-user-table-role-${index}` }
+              data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
             >
-              {role}
-
+              R$
+              {' '}
+              {price.toFixed(2).replace('.', ',')}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
+            >
+              R$
+              {' '}
+              {(price * quantity).toFixed(2).replace('.', ',')}
             </td>
             <td>
               <button
                 type="button"
-                data-testid={ `admin_manage__element-user-table-remove-${index}` }
+                data-testid={ `customer_checkout__element-order-table-remove-${i}` }
                 onClick={ () => deleteUser(id) }
               >
-                Delete
+                Remove
               </button>
             </td>
           </tr>
@@ -59,5 +63,3 @@ function Table() {
     </table>
   );
 }
-
-export default Table;

@@ -30,6 +30,7 @@ export default function Header() {
             data-testid={ `${ROUTE}__${PRODUCTS}` }
             className="text-white bg-green-light px-4 py-2 h-full"
             type="button"
+            onClick={ () => history.push('/customer/products') }
           >
             PRODUCTS
           </button>
