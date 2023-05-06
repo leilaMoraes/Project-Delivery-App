@@ -41,15 +41,15 @@ function Form() {
     }
   };
   return (
-    <form onSubmit={createNewUser}>
+    <form onSubmit={ createNewUser }>
       <label htmlFor="name">
         Name
         <input
           type="text"
           id="name"
           data-testid="admin_manage__input-name"
-          value={name}
-          onChange={({ target }) => setName(target.value)}
+          value={ name }
+          onChange={ ({ target }) => setName(target.value) }
         />
       </label>
       <label htmlFor="email">
@@ -58,8 +58,8 @@ function Form() {
           type="email"
           id="email"
           data-testid="admin_manage__input-email"
-          value={email}
-          onChange={({ target }) => setEmail(target.value)}
+          value={ email }
+          onChange={ ({ target }) => setEmail(target.value) }
         />
       </label>
       <label htmlFor="password">
@@ -68,16 +68,16 @@ function Form() {
           type="password"
           id="password"
           data-testid="admin_manage__input-password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
+          value={ password }
+          onChange={ ({ target }) => setPassword(target.value) }
         />
       </label>
       <label htmlFor="role">
         Type
         <select
           id="role"
-          value={role}
-          onChange={({ target }) => setRole(target.value)}
+          value={ role }
+          onChange={ ({ target }) => setRole(target.value) }
           data-testid="admin_manage__select-role"
         >
           <option value="seller">Seller</option>
@@ -87,7 +87,7 @@ function Form() {
       </label>
       <button
         type="submit"
-        disabled={disabled}
+        disabled={ disabled }
         data-testid="admin_manage__button-register"
       >
         Register

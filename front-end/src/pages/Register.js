@@ -20,17 +20,17 @@ function Register() {
   const onChange = ({ target }) => {
     setShowMessage(false);
     switch (target.name) {
-      case 'inputName':
-        setName(target.value);
-        break;
-      case 'inputEmail':
-        setEmail(target.value);
-        break;
-      case 'inputPassword':
-        setPassword(target.value);
-        break;
-      default:
-        console.log('algo está errado');
+    case 'inputName':
+      setName(target.value);
+      break;
+    case 'inputEmail':
+      setEmail(target.value);
+      break;
+    case 'inputPassword':
+      setPassword(target.value);
+      break;
+    default:
+      console.log('algo está errado');
     }
   };
 
@@ -65,9 +65,9 @@ function Register() {
         type="text"
         inputName="inputName"
         id="inputName"
-        value={name}
+        value={ name }
         dataName="common_register__input-name"
-        onChange={onChange}
+        onChange={ onChange }
       />
       {name !== ''
         && name.length < magicName && <p>Name must be 12 characters</p>}
@@ -76,9 +76,9 @@ function Register() {
         type="text"
         inputName="inputEmail"
         id="inputEmail"
-        value={email}
+        value={ email }
         dataName="common_register__input-email"
-        onChange={onChange}
+        onChange={ onChange }
       />
       {email !== ''
         && !(email.match(/\S+@\S+\.\S+/i)) && <p>Invalid Email</p>}
@@ -87,16 +87,16 @@ function Register() {
         type="password"
         inputName="inputPassword"
         id="inputPassword"
-        value={password}
+        value={ password }
         dataName="common_register__input-password"
-        onChange={onChange}
+        onChange={ onChange }
       />
       {password !== ''
         && password.length < magicPassword && <p>Password must be 6 characters</p>}
       <Button
         dataName="common_register__button-register"
-        disabled={!(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicPassword) || (name.length < magicName)}
-        onClick={onClickRegister}
+        disabled={ !(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicPassword) || (name.length < magicName) }
+        onClick={ onClickRegister }
         btnName="CADASTRAR"
       />
       {showMessage

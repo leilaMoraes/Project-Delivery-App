@@ -13,25 +13,25 @@ export default function Routes() {
       {role ? (
         <>
           <Route exact path="/">
-            <Redirect to={role} />
+            <Redirect to={ role } />
           </Route>
           <Route path="/login">
-            <Redirect to={role} />
+            <Redirect to={ role } />
           </Route>
-          <Route path="/register"><Redirect to={role} /></Route>
-          <Route path="/customer/products" component={Products} />
-          <Route path="/admin/manage" component={Admin} />
-          <Route path="*"><Redirect to={role} /></Route>
+          <Route path="/register"><Redirect to={ role } /></Route>
+          <Route path="/customer/products" component={ Products } />
+          <Route path="/admin/manage" component={ Admin } />
+          <Route path="*"><Redirect to={ role } /></Route>
         </>
       ) : (
         <>
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/customer/products" component={Products} />
-          <Route path="/admin/manage" component={Admin} />
+          <Route path="/login" component={ Login } />
+          <Route path="/register" component={ Register } />
+          <Route path="/customer/products" component={ Products } />
+          <Route path="/admin/manage" component={ Admin } />
           {/* <Route path="*"><Redirect to="/login" /></Route> */}
         </>
       )}
