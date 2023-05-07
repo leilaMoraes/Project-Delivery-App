@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Admin from './pages/Admin';
+import Seller from './pages/Seller';
 
 export default function Routes() {
   const role = isTokenValid();
@@ -21,6 +22,7 @@ export default function Routes() {
           <Route path="/register"><Redirect to={ role } /></Route>
           <Route path="/customer/products" component={ Products } />
           <Route path="/admin/manage" component={ Admin } />
+          <Route path="/seller/orders" component={ Seller } />
           <Route path="*"><Redirect to={ role } /></Route>
         </>
       ) : (
