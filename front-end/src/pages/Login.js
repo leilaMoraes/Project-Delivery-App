@@ -103,7 +103,7 @@ function Login() {
       {showMessage
         && (
           <p
-            className="mt-1 text-red-600"
+            className="mt-1 text-red-600 text-lg"
             data-testid="common_login__element-invalid-email"
           >
             {message}
