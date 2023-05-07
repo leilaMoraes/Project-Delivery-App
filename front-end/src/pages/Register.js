@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AppContext from '../context/AppContext';
-import registerRequest from '../services/registerRequest';
+import requests from '../services/requests';
 
 function Register() {
   const { setUser, setToken } = useContext(AppContext);
@@ -37,12 +37,14 @@ function Register() {
   const onClickRegister = () => {
     const fetchRegister = async () => {
       try {
-        const response = await registerRequest
+        const response = await requests
           .register({ name, email, password, role: 'customer' });
+        console.log(response);
         setToken(response.data.token);
-        setUser({ name, email, role: 'customer' });
+        setUser(response.data.user);
+        const user = { ...response.data.user, token: response.data.token };
         localStorage.setItem('token', JSON.stringify(response.data.token));
-        localStorage.setItem('user', JSON.stringify({ name, email, role: 'customer' }));
+        localStorage.setItem('user', JSON.stringify(user));
         history.push('/customer/products');
       } catch (error) {
         setMessage(error.response.data.message);
@@ -68,7 +70,7 @@ function Register() {
         onChange={ onChange }
       />
       {name !== ''
-      && name.length < magicName && <p>Name must be 12 characters</p>}
+        && name.length < magicName && <p>Name must be 12 characters</p>}
       <Input
         label="Email"
         type="text"
@@ -79,7 +81,7 @@ function Register() {
         onChange={ onChange }
       />
       {email !== ''
-      && !(email.match(/\S+@\S+\.\S+/i)) && <p>Invalid Email</p>}
+        && !(email.match(/\S+@\S+\.\S+/i)) && <p>Invalid Email</p>}
       <Input
         label="Senha"
         type="password"
@@ -90,15 +92,15 @@ function Register() {
         onChange={ onChange }
       />
       {password !== ''
-      && password.length < magicPassword && <p>Password must be 6 characters</p>}
+        && password.length < magicPassword && <p>Password must be 6 characters</p>}
       <Button
         dataName="common_register__button-register"
         disabled={ !(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicPassword) || (name.length < magicName) }
         onClick={ onClickRegister }
         btnName="CADASTRAR"
       />
-      { showMessage
-      && <p data-testid="common_register__element-invalid_register">{message}</p>}
+      {showMessage
+        && <p data-testid="common_register__element-invalid_register">{message}</p>}
     </div>
   );
 }

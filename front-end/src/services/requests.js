@@ -7,12 +7,15 @@ const instance = axios.create({
 // instance.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
 // const headers = { headers: { Authorization: localStorage.getItem('token') } };
 // Define API endpoints as functions that return the results of axios requests
+
 const requests = {
   getProducts: (headers) => instance.get('/products', headers),
   postProduct: (productData) => instance.post('/products', productData),
+  register: (newUser) => instance.post('/register', newUser),
   getUsers: (headers) => instance.get('/admin', headers),
   postUser: (data, headers) => instance.post('/admin', data, headers),
   deleteUser: (id, headers) => instance.delete(`/admin/${id}`, headers),
+  login: (login) => instance.post('/login', login),
 };
 
 export default requests;

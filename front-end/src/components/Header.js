@@ -7,8 +7,11 @@ export default function Header() {
   const { user } = useContext(AppContext);
   const { name, role } = user;
   const history = useHistory();
+  const currentPath = history.location.pathname;
+
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     history.push('/login');
   };
 
@@ -28,7 +31,10 @@ export default function Header() {
         {role === 'customer' && (
           <button
             data-testid={ `${ROUTE}__${PRODUCTS}` }
-            className="text-white bg-green-light px-4 py-2 h-full"
+            className={ ` px-4 py-2 h-full 
+          ${currentPath === '/customer/products'
+            ? 'text-black bg-green-light' : 'text-white bg-green-dark'}` }
+            // className="text-white bg-green-light px-4 py-2 h-full"
             type="button"
             onClick={ () => history.push('/customer/products') }
           >
@@ -37,7 +43,10 @@ export default function Header() {
         )}
         <button
           data-testid={ `${ROUTE}__${ORDERS}` }
-          className="text-white px-4 py-2 h-full"
+          className={ ` px-4 py-2 h-full 
+          ${currentPath === '/customer/orders' || currentPath === '/admin/manage'
+      ? 'text-black bg-green-light' : 'text-white bg-green-dark'}` }
+          // className="text-white px-4 py-2 h-full"
           type="button"
           onClick={ () => history.push('/admin/manage') }
         >

@@ -17,16 +17,8 @@ export default function Products() {
       setProducts(response.data);
     };
     fetchProducts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  localStorage.setItem('user', JSON.stringify({
-    id: 3,
-    name: 'Cliente Zé Birita',
-    email: 'zebirita@email.com',
-    role: 'customer',
-  }));
-
   return (
     <div>
       <Header />

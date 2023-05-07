@@ -12,13 +12,19 @@ function Form() {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    const regex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    // const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     const isEmailValid = regex.test(email);
     const FIVE = 5;
     const ELEVEN = 11;
     setDisabled(!(isEmailValid && password.length > FIVE && name.length > ELEVEN));
   }, [email, name, password, role]);
-
+  const clearInputs = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setRole('seller');
+  };
   const createNewUser = async (e) => {
     e.preventDefault();
     try {
@@ -27,10 +33,12 @@ function Form() {
         .postUser({ name, email, password, role }, headers);
       setUsers((prev) => prev.concat(response.data));
       toast.success('New user successfully registered!');
-      setMessage('New user successfully registered!');
+      // setMessage('New user successfully registered!');
+      clearInputs();
     } catch (error) {
       setMessage(error.response.data.message);
       toast.error(error.response.data.message);
+      clearInputs();
     }
   };
   return (

@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AppContext from '../context/AppContext';
-import loginRequest from '../services/loginRequest';
+import requests from '../services/requests';
+import { getRoute } from '../utils/tokenValidation';
 
 function Login() {
   const { setUser, setToken } = useContext(AppContext);
@@ -18,14 +19,16 @@ function Login() {
   const onClickLogin = () => {
     const fetchLogin = async () => {
       try {
-        const response = await loginRequest
-          .login({ email, password });
+        const response = await requests.login({ email, password });
         setToken(response.data.token);
         setUser(response.data.user);
+        const user = { ...response.data.user, token: response.data.token };
         localStorage.setItem('token', JSON.stringify(response.data.token));
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        history.push('/customer/products');
+        localStorage.setItem('user', JSON.stringify(user));
+        const route = getRoute(response.data.user.role);
+        history.push(route);
       } catch (error) {
+        console.log(error);
         setMessage(error.response.data.message);
         setShowMessage(true);
       }
@@ -70,8 +73,8 @@ function Login() {
         onClick={ onClickRegister }
         btnName="Ainda não tenho conta"
       />
-      { showMessage
-      && <p data-testid="common_login__element-invalid-email">{message}</p>}
+      {showMessage
+        && <p data-testid="common_login__element-invalid-email">{message}</p>}
     </div>
   );
 }
