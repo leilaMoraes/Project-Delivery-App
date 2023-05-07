@@ -5,7 +5,7 @@ function Button(props) {
   const { btnClass, dataName, id, disabled, onClick, btnName } = props;
   return (
     <button
-      className={ `btn-${btnClass}` }
+      className={ btnClass }
       type="button"
       data-testid={ dataName }
       id={ id }
