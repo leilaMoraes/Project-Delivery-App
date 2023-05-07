@@ -23,7 +23,7 @@ Button.propTypes = {
   id: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  btnName: PropTypes.node,
+  btnName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 Button.defaultProps = {
@@ -32,7 +32,7 @@ Button.defaultProps = {
   id: '',
   disabled: false,
   onClick: () => {},
-  btnName: null,
+  btnName: '',
 };
 
 export default Button;
