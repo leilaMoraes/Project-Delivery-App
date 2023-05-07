@@ -34,6 +34,7 @@ export default function Routes() {
           <Route path="/register" component={ Register } />
           <Route path="/customer/products" component={ Products } />
           <Route path="/admin/manage" component={ Admin } />
+          <Route path="/seller/orders" component={ Seller } />
           {/* <Route path="*"><Redirect to="/login" /></Route> */}
         </>
       )}
