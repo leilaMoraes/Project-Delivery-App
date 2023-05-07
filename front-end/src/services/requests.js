@@ -11,6 +11,7 @@ const instance = axios.create({
 const requests = {
   getProducts: (headers) => instance.get('/products', headers),
   postProduct: (productData) => instance.post('/products', productData),
+  postSale: (saleData, headers) => instance.post('/sales', saleData, headers),
   register: (newUser) => instance.post('/register', newUser),
   getUsers: (headers) => instance.get('/admin', headers),
   postUser: (data, headers) => instance.post('/admin', data, headers),

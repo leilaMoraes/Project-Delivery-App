@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AppContext from '../context/AppContext';
 
 export default function CheckoutTable() {
-  const { cart } = useContext(AppContext);
+  const { cart, removeFromCart } = useContext(AppContext);
+  // IF COMING BACK TO PRODUCTS PAGE THE INPUT NUMBERS ARE NOT UPDATED
+  useEffect(() => {}, [cart]);
 
   return (
     <table style={ { width: '100%', border: '1px solid black', textAlign: 'center' } }>
@@ -52,7 +54,7 @@ export default function CheckoutTable() {
               <button
                 type="button"
                 data-testid={ `customer_checkout__element-order-table-remove-${i}` }
-                onClick={ () => deleteUser(id) }
+                onClick={ () => removeFromCart(id) }
               >
                 Remove
               </button>

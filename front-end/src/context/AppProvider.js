@@ -31,11 +31,19 @@ export default function AppProvider({ children }) {
       },
     }));
   };
+  const removeFromCart = (id) => {
+    setCart((prevCart) => {
+      const newCart = { ...prevCart };
+      delete newCart[id];
+      return newCart;
+    });
+  };
 
   const values = useMemo(() => ({
     cart,
     setCart,
     addToCart,
+    removeFromCart,
     totalValue,
     user,
     setUser,
