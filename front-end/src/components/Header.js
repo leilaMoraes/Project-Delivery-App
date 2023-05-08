@@ -42,8 +42,10 @@ export default function Header() {
         {role === 'customer' && (
           <Button
             btnClass={ currentPath === '/customer/orders'
-              ? 'text-white bg-green-dark px-4 py-2 h-full'
-              : 'text-white bg-green-light px-4 py-2 h-full' }
+              ? `text-white bg-green-dark hover:bg-green-hover1 px-4 py-2 h-full
+              font-bold`
+              : `text-black bg-green-light hover:bg-green-hover2 px-4 py-2 h-full
+              font-bold` }
             dataName="customer_products__element-navbar-link-products"
             btnName="PRODUCTS"
             onClick={ () => history.push('/customer/products') }
@@ -51,8 +53,8 @@ export default function Header() {
         )}
         <Button
           btnClass={ currentPath === '/customer/products'
-            ? 'text-white bg-green-dark px-4 py-2 h-full'
-            : 'text-white bg-green-light px-4 py-2 h-full' }
+            ? 'text-white bg-green-dark hover:bg-green-hover1 px-4 py-2 h-full font-bold'
+            : 'text-white bg-green-light px-4 py-2 h-full font-bold' }
           dataName="customer_products__element-navbar-link-orders"
           onClick={ handleOrders }
           btnName={ handleBtnName() }
@@ -66,7 +68,7 @@ export default function Header() {
           {name}
         </p>
         <Button
-          btnClass="text-white bg-blue-light px-4 py-2 h-full"
+          btnClass="text-white bg-blue-light hover:bg-blue-hoverLgOut px-4 py-2 h-full"
           dataName="customer_products__element-navbar-link-logout"
           onClick={ handleLogout }
           btnName="Logout"
