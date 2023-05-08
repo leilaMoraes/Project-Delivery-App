@@ -9,6 +9,7 @@ export default function Header() {
   const history = useHistory();
   const currentPath = history.location.pathname;
   const actualPage = '/customer/products';
+
   const handleLogout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');

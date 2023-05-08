@@ -9,11 +9,13 @@ module.exports = {
           light: '#2FC18C',
           dark: '#036B52',
           hover1: '#035c47',
+          hover2: '#2aaf81',
           hover3: '#f5f8f7',
         },
         blue: {
           light: '#056CF9',
           dark: '#421981',
+          hoverLgOut: '#0561e0',
         },
         delivered: '#00CC9B',
         preparing: '#66CC00',

@@ -4,7 +4,7 @@ import OrdersCard from '../components/OrdersCard';
 import AppContext from '../context/AppContext';
 import requests from '../services/requests';
 
-function Seller() {
+function Customer() {
   const { token, user } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
   const [sales, setSales] = useState([]);
@@ -13,7 +13,7 @@ function Seller() {
     const getSales = async () => {
       try {
         const headers = { headers: { authorization: token } };
-        await requests.salesSeller(user.id, headers)
+        await requests.salesCustomer(user.id, headers)
           .then(({ data }) => setSales(data))
           .finally(() => setLoading(false));
       } catch (error) {
@@ -40,4 +40,4 @@ function Seller() {
   );
 }
 
-export default Seller;
+export default Customer;
