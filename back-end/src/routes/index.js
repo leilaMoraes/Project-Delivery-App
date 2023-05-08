@@ -4,6 +4,7 @@ const registerRouter = require('./register.route');
 const productRouter = require('./product.route');
 const saleRouter = require('./sale.route');
 const adminRouter = require('./admin.route');
+const sellerRouter = require('./seller.route');
 
 const routes = express.Router();
 
@@ -16,5 +17,7 @@ routes.use('/products', productRouter);
 routes.use('/sales', saleRouter);
 
 routes.use('/admin', adminRouter);
+
+routes.use('/sellers', sellerRouter);
 
 module.exports = routes;
