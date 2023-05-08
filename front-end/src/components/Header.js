@@ -8,6 +8,7 @@ export default function Header() {
   const { name, role } = user;
   const history = useHistory();
   const currentPath = history.location.pathname;
+  const actualPage = '/customer/products';
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -41,20 +42,18 @@ export default function Header() {
       <div>
         {role === 'customer' && (
           <Button
-            btnClass={ currentPath === '/customer/orders'
-              ? `text-white bg-green-dark hover:bg-green-hover1 px-4 py-2 h-full
-              font-bold`
-              : `text-black bg-green-light hover:bg-green-hover2 px-4 py-2 h-full
-              font-bold` }
+            btnClass={ `px-4 py-2 h-full font-bold ${currentPath === actualPage
+              ? 'text-black bg-green-light hover:bg-green-hover2'
+              : 'text-white bg-green-dark hover:bg-green-hover1'}` }
             dataName="customer_products__element-navbar-link-products"
             btnName="PRODUCTS"
-            onClick={ () => history.push('/customer/products') }
+            onClick={ () => history.push(actualPage) }
           />
         )}
         <Button
-          btnClass={ currentPath === '/customer/products'
-            ? 'text-white bg-green-dark hover:bg-green-hover1 px-4 py-2 h-full font-bold'
-            : 'text-white bg-green-light px-4 py-2 h-full font-bold' }
+          btnClass={ `px-4 py-2 h-full font-bold ${currentPath === actualPage
+            ? 'text-white bg-green-dark hover:bg-green-hover1'
+            : 'text-black bg-green-light hover:bg-green-hover2'}` }
           dataName="customer_products__element-navbar-link-orders"
           onClick={ handleOrders }
           btnName={ handleBtnName() }

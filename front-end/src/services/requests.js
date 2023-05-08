@@ -16,7 +16,8 @@ const requests = {
   postUser: (data, headers) => instance.post('/admin', data, headers),
   deleteUser: (id, headers) => instance.delete(`/admin/${id}`, headers),
   login: (login) => instance.post('/login', login),
-  getSales: (id, headers) => instance.get(`/sales/seller/${id}`, headers),
+  salesSeller: (id, headers) => instance.get(`/sales/seller/${id}`, headers),
+  salesCustomer: (id, headers) => instance.get(`/sales/customer/${id}`, headers),
 };
 
 export default requests;

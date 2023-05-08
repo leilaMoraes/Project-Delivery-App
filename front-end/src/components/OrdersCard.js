@@ -32,7 +32,8 @@ export default function OrdersCard(props) {
     <Link
       to={ currentPath === orderSeller
         ? `/seller/orders/${id}` : `/customer/orders/${id}` }
-      className="flex border border-bgLBorder shadow-lg w-[399px] h-36"
+      className={ `flex border border-bgLBorder shadow-lg w-[399px]
+      ${currentPath === orderSeller ? 'h-36' : 'h-24'}` }
     >
       <div className="flex flex-col items-center h-full w-[133px] justify-center">
         <span className="text-sm">Pedido</span>
@@ -49,7 +50,7 @@ export default function OrdersCard(props) {
         <div className="flex flex-wrap justify-evenly h-full">
           <div
             className={ `flex ${getColor()} rounded-lg items-center
-          font-bold text-lg justify-center w-[150px] mt-2` }
+          font-bold text-lg justify-center w-[150px] my-2` }
           >
             <span
               data-testid={ currentPath === orderSeller
@@ -75,7 +76,7 @@ export default function OrdersCard(props) {
                 ? `seller_orders__element-card-price-${id}`
                 : `customer_orders__element-card-price-${id}` }
               className="flex bg-bg1 rounded-lg font-bold h-full items-center
-              justify-center mt-2"
+              justify-center my-2"
             >
               {newValue}
             </span>
