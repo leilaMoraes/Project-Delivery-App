@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
-import SalesCard from '../components/SalesCard';
+import OrdersCard from '../components/OrdersCard';
 import AppContext from '../context/AppContext';
 import requests from '../services/requests';
 
@@ -28,7 +28,7 @@ function Seller() {
       <div className="flex flex-wrap mt-20 gap-4 px-4 mx-4 justify-evenly">
         {loading ? <p>Loading...</p>
           : (sales !== undefined && sales.map((sale) => (
-            <SalesCard
+            <OrdersCard
               key={ sale.id }
               { ...sale }
             />

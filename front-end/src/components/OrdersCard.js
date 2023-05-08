@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-export default function SalesCard(props) {
+export default function OrdersCard(props) {
   const { id, totalPrice, saleDate, status, deliveryAddress, deliveryNumber } = props;
+
+  const history = useHistory();
+  const currentPath = history.location.pathname;
+  const orderSeller = '/seller/orders';
 
   const magicNumber = 4;
   const newId = String(id).padStart(magicNumber, '0');
@@ -26,14 +30,17 @@ export default function SalesCard(props) {
 
   return (
     <Link
-      to={ `/seller/orders/${id}` }
+      to={ currentPath === orderSeller
+        ? `/seller/orders/${id}` : `/customer/orders/${id}` }
       className="flex border border-bgLBorder shadow-lg w-[399px] h-36"
     >
       <div className="flex flex-col items-center h-full w-[133px] justify-center">
         <span className="text-sm">Pedido</span>
         <span
           className="text-lg"
-          data-testid={ `seller_orders__element-order-id-${id}` }
+          data-testid={ currentPath === orderSeller
+            ? `seller_orders__element-order-id-${id}`
+            : `customer_orders__element-order-id-${id}` }
         >
           {newId}
         </span>
@@ -45,7 +52,9 @@ export default function SalesCard(props) {
           font-bold text-lg justify-center w-[150px] mt-2` }
           >
             <span
-              data-testid={ `seller_orders__element-delivery-status-${id}` }
+              data-testid={ currentPath === orderSeller
+                ? `seller_orders__element-delivery-status-${id}`
+                : `customer_orders__element-delivery-status-${id}` }
               className="text-center"
             >
               {status.toUpperCase()}
@@ -53,14 +62,18 @@ export default function SalesCard(props) {
           </div>
           <div className="flex flex-col justify-center text-center w-[95px]">
             <span
-              data-testid={ `seller_orders__element-order-date-${id}` }
+              data-testid={ currentPath === orderSeller
+                ? `seller_orders__element-order-date-${id}`
+                : `customer_orders__element-order-date-${id}` }
               className="flex bg-bg1 rounded-lg font-bold h-full items-center
               justify-center mt-2"
             >
               {newDate}
             </span>
             <span
-              data-testid={ `seller_orders__element-card-price-${id}` }
+              data-testid={ currentPath === orderSeller
+                ? `seller_orders__element-card-price-${id}`
+                : `customer_orders__element-card-price-${id}` }
               className="flex bg-bg1 rounded-lg font-bold h-full items-center
               justify-center mt-2"
             >
@@ -68,20 +81,22 @@ export default function SalesCard(props) {
             </span>
           </div>
         </div>
-        <div className="flex items-center justify-center h-[45px]">
-          <span
-            data-testid={ `seller_orders__element-card-address-${id}` }
-            className="text-xs"
-          >
-            {`${deliveryAddress}, ${deliveryNumber}`}
-          </span>
-        </div>
+        { currentPath === orderSeller
+        && (
+          <div className="flex items-center justify-center h-[45px]">
+            <span
+              data-testid={ `seller_orders__element-card-address-${id}` }
+              className="text-xs"
+            >
+              {`${deliveryAddress}, ${deliveryNumber}`}
+            </span>
+          </div>)}
       </div>
     </Link>
   );
 }
 
-SalesCard.propTypes = {
+OrdersCard.propTypes = {
   id: PropTypes.number.isRequired,
   totalPrice: PropTypes.number.isRequired,
   saleDate: PropTypes.string.isRequired,
