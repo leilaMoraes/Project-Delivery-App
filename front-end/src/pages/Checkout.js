@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
@@ -19,6 +19,17 @@ export default function Checkout() {
     addressNumber,
     setAddressNumber } = useContext(AppContext);
   const [saleId, setSaleId] = useState(null);
+  const [sellers, setSellers] = useState([]);
+
+  useEffect(() => {
+    async function fetchSellers() {
+      const headers = { headers: { authorization: token } };
+      const response = await requests.getSellers(headers);
+      setSellers(response.data);
+    }
+    fetchSellers();
+    console.log(sellers);
+  }, []);
 
   const registerSale = async (saleData) => {
     // IS THIS TRY CATCH NEEDED?
@@ -54,12 +65,6 @@ export default function Checkout() {
       // Handle error here, e.g. show an error message to the user
     }
   };
-  const headers = { headers: { authorization: token } };
-
-  const sellers = async () => {
-    await requests.getSellers(headers);
-  };
-  console.log(sellers);
 
   // const registerSale = async () => {
   //   const headers = { headers: { authorization: token } };
@@ -103,7 +108,7 @@ export default function Checkout() {
       <div>
         <h1>Details and Delivery Address</h1>
         <div>
-          <Input
+          {/* <Input
             label="Responsible Salesperson"
             // Lista de vendedores
             type="text"
@@ -112,7 +117,20 @@ export default function Checkout() {
             value={ salesperson }
             dataName="customer_checkout__select-seller"
             onChange={ ({ target }) => setSalesperson(target.value) }
-          />
+          /> */}
+          <select
+            id="salespersonInput"
+            value={ salesperson }
+            onChange={ ({ target }) => setSalesperson(target.value) }
+            data-testid="customer_checkout__select-seller"
+          >
+            <option value="">Select a seller</option>
+            {sellers.map((seller) => (
+              <option key={ seller.id } value={ seller.id }>
+                {seller.name}
+              </option>
+            ))}
+          </select>
           <Input
             label="Addess"
             type="text"
