@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Input(props) {
-  const { label, type, inputName, id, value, dataName, onChange } = props;
+  const { id, classLabel, label, classInput, type, inputName, value,
+    dataName, onChange } = props;
   return (
-    <label htmlFor={ id }>
+    <label htmlFor={ id } className={ classLabel }>
       { label }
       <input
+        className={ classInput }
         type={ type }
         name={ inputName }
         id={ id }
@@ -19,20 +21,24 @@ function Input(props) {
 }
 
 Input.propTypes = {
+  id: PropTypes.string,
+  classLabel: PropTypes.string,
   label: PropTypes.string,
+  classInput: PropTypes.string,
   type: PropTypes.string,
   inputName: PropTypes.string,
-  id: PropTypes.string,
   value: PropTypes.string,
   dataName: PropTypes.string,
   onChange: PropTypes.func,
 };
 
 Input.defaultProps = {
+  id: '',
+  classLabel: '',
   label: '',
+  classInput: '',
   type: '',
   inputName: '',
-  id: '',
   value: '',
   dataName: '',
   onChange: () => {},

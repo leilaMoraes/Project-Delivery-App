@@ -8,6 +8,8 @@ module.exports = {
         green: {
           light: '#2FC18C',
           dark: '#036B52',
+          hover1: '#035c47',
+          hover3: '#f5f8f7',
         },
         blue: {
           light: '#056CF9',
@@ -19,6 +21,8 @@ module.exports = {
         bg0: '#EAF1EF',
         bg1: '#F2FFFC',
         border0: '#B1C2BE',
+        bgLogin: '#EAF1EF',
+        bgLBorder: '#B1C2BE',
       },
     },
   },
