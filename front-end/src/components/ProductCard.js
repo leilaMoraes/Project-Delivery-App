@@ -6,7 +6,7 @@ export default function ProductCard(props) {
   const { price, urlImage, name, id } = props;
   const { cart, addToCart } = useContext(AppContext);
 
-  const [quantity, setQuantity] = useState(cart[id] || 0);
+  const [quantity, setQuantity] = useState(cart[id] ? cart[id].quantity : 0);
 
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value, 10);
@@ -35,10 +35,14 @@ export default function ProductCard(props) {
       className="border border-border0 shadow-md overflow-hidden
     w-[359px] h-[479px] flex flex-col justify-end"
     >
-      <div className="relative h-full">
+      <div
+        className="relative h-full"
+        id="teste1"
+      >
         <div
           className="absolute top-0 left-0 bg-bg0
           text-black font-bold px-3 py-1 z-10 m-2"
+          id="teste1"
         >
           R$
           {' '}
@@ -56,15 +60,24 @@ export default function ProductCard(props) {
         />
       </div>
 
-      <div className="p-4 bg-bg0">
-        <div className="flex flex-col justify-center">
+      <div
+        className="p-4 bg-bg0"
+        id="teste1"
+      >
+        <div
+          className="flex flex-col justify-center"
+          id="teste1"
+        >
           <h2
             data-testid={ `customer_products__element-card-title-${id}` }
             className="font-bold mb-2 text-center"
           >
             {name}
           </h2>
-          <div className="flex justify-center">
+          <div
+            className="flex justify-center"
+            id="teste1"
+          >
             <button
               data-testid={ `customer_products__button-card-rm-item-${id}` }
               className="rounded-l-lg bg-green-dark w-7 h-7

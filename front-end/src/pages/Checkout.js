@@ -8,18 +8,11 @@ import requests from '../services/requests';
 
 export default function Checkout() {
   const history = useHistory();
-  const { totalValue,
-    token,
-    cart,
-    user,
-    salesperson,
-    setSalesperson,
-    address,
-    setAddress,
-    addressNumber,
-    setAddressNumber } = useContext(AppContext);
-  const [saleId, setSaleId] = useState(null);
+  const { totalValue, token, cart, user } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
+  const [salesperson, setSalesperson] = useState('');
+  const [address, setAddress] = useState('');
+  const [addressNumber, setAddressNumber] = useState('');
 
   useEffect(() => {
     async function fetchSellers() {
@@ -28,20 +21,8 @@ export default function Checkout() {
       setSellers(response.data);
     }
     fetchSellers();
-    console.log(sellers);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const registerSale = async (saleData) => {
-    // IS THIS TRY CATCH NEEDED?
-    try {
-      const headers = { headers: { authorization: token } };
-      const response = await requests.postSale(saleData, headers);
-      setSaleId(response.data.id);
-    } catch (error) {
-      console.log(error);
-      // Handle error here, e.g. show an error message to the user
-    }
-  };
 
   const handleFinishOrder = async () => {
     const cartItems = Object.entries(cart).map(([id, { quantity }]) => ({
@@ -56,39 +37,17 @@ export default function Checkout() {
       deliveryNumber: addressNumber,
       cart: cartItems,
     };
-      // IS THIS TRY CATCH NEEDED?
+
     try {
-      await registerSale(saleData);
+      const headers = { headers: { authorization: token } };
+      const response = await requests.postSale(saleData, headers);
+      const saleId = response.data.id;
       history.push(`/customer/orders/${saleId}`);
     } catch (error) {
       console.log(error);
-      // Handle error here, e.g. show an error message to the user
+      // ADD TOSTIFY ERROR MESSAGE
     }
   };
-
-  // const registerSale = async () => {
-  //   const headers = { headers: { authorization: token } };
-  //   const response = await requests.postSale(saleData, headers);
-  //   const saleId = response.data.id;
-  //   setProducts(response.data);
-  // };
-
-  // const handleFinishOrder = () => {
-  //   const cartItems = Object.entries(cart).map(([id, { quantity }]) => ({
-  //     productId: id,
-  //     quantity,
-  //   }));
-  //   const saleData = {
-  //     userId: 3,
-  //     sellerId: 2,
-  //     totalPrice: totalValue,
-  //     deliveryAddress: address,
-  //     deliveryNumber: addressNumber,
-  //     cart: cartItems,
-  //   };
-
-  //   history.push(`/customer/orders/${saleId}`);
-  // };
 
   return (
     <div className="border-t-[20px]">
@@ -108,16 +67,6 @@ export default function Checkout() {
       <div>
         <h1>Details and Delivery Address</h1>
         <div>
-          {/* <Input
-            label="Responsible Salesperson"
-            // Lista de vendedores
-            type="text"
-            inputName="salespersonInput"
-            id="salespersonInput"
-            value={ salesperson }
-            dataName="customer_checkout__select-seller"
-            onChange={ ({ target }) => setSalesperson(target.value) }
-          /> */}
           <select
             id="salespersonInput"
             value={ salesperson }

@@ -4,22 +4,21 @@ import AppContext from './AppContext';
 
 export default function AppProvider({ children }) {
   // CART CONTEXT
+  const storedCart = localStorage.getItem('cart');
+  const initialCart = storedCart ? JSON.parse(storedCart) : {};
+  const [cart, setCart] = useState(initialCart);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || '');
-  const [cart, setCart] = useState({});
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
-  // CHECKOUT CONTEXT
-  const [salesperson, setSalesperson] = useState('');
-  const [address, setAddress] = useState('');
-  const [addressNumber, setAddressNumber] = useState('');
+
   useEffect(() => {
     // Compute the new total value based on the current contents of the cart
     const newTotalValue = Object.values(cart)
       .reduce((acc, { price, quantity }) => acc + price * quantity, 0);
-
     setTotalValue(newTotalValue);
+    // localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
   const addToCart = (id, name, price, quantity) => {
     setCart((prevCart) => ({
@@ -53,12 +52,6 @@ export default function AppProvider({ children }) {
     setToken,
     users,
     setUsers,
-    salesperson,
-    setSalesperson,
-    address,
-    setAddress,
-    addressNumber,
-    setAddressNumber,
   }), [cart, totalValue, user, message, token, users]);
 
   return (

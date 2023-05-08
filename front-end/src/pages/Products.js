@@ -6,7 +6,7 @@ import requests from '../services/requests';
 import AppContext from '../context/AppContext';
 
 export default function Products() {
-  const { totalValue, token } = useContext(AppContext);
+  const { totalValue, token, cart } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const history = useHistory();
 
@@ -19,6 +19,9 @@ export default function Products() {
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {}, [cart]);
+
   return (
     <div>
       <Header />
