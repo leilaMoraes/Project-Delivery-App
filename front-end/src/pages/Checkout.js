@@ -54,6 +54,12 @@ export default function Checkout() {
       // Handle error here, e.g. show an error message to the user
     }
   };
+  const headers = { headers: { authorization: token } };
+
+  const sellers = async () => {
+    await requests.getSellers(headers);
+  };
+  console.log(sellers);
 
   // const registerSale = async () => {
   //   const headers = { headers: { authorization: token } };

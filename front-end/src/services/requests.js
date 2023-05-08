@@ -9,14 +9,15 @@ const instance = axios.create({
 // Define API endpoints as functions that return the results of axios requests
 
 const requests = {
+  login: (login) => instance.post('/login', login),
+  register: (newUser) => instance.post('/register', newUser),
   getProducts: (headers) => instance.get('/products', headers),
+  getSellers: (headers) => instance.get('/seller', headers),
+  getUsers: (headers) => instance.get('/admin', headers),
   postProduct: (productData) => instance.post('/products', productData),
   postSale: (saleData, headers) => instance.post('/sales', saleData, headers),
-  register: (newUser) => instance.post('/register', newUser),
-  getUsers: (headers) => instance.get('/admin', headers),
   postUser: (data, headers) => instance.post('/admin', data, headers),
   deleteUser: (id, headers) => instance.delete(`/admin/${id}`, headers),
-  login: (login) => instance.post('/login', login),
 };
 
 export default requests;
