@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AppContext from '../context/AppContext';
@@ -13,7 +13,7 @@ function Register() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const magicPassword = 6;
   const magicName = 12;
 
@@ -38,13 +38,12 @@ function Register() {
       try {
         const response = await requests
           .register({ name, email, password, role: 'customer' });
-        console.log(response);
         setToken(response.data.token);
         setUser(response.data.user);
         const user = { ...response.data.user, token: response.data.token };
         localStorage.setItem('token', JSON.stringify(response.data.token));
         localStorage.setItem('user', JSON.stringify(user));
-        history.push('/customer/products');
+        navigate('/customer/products');
       } catch (error) {
         setMessage(error.response.data.message);
         setShowMessage(true);
@@ -75,8 +74,11 @@ function Register() {
           onChange={ onChange }
         />
         {name !== ''
-        && name.length < magicName && (
-          <p className="mt-1 mb-1 text-red-600">Name must be 12 characters</p>)}
+          && name.length < magicName
+          && (
+            <p className="mt-1 mb-1 text-red-600">
+              Name must be 12 characters
+            </p>)}
         <Input
           classLabel="mt-2 text-black"
           label="Email"
@@ -90,8 +92,11 @@ function Register() {
           onChange={ onChange }
         />
         {email !== ''
-        && !(email.match(/\S+@\S+\.\S+/i)) && (
-          <p className="mt-1 mb-1 text-red-600">Invalid Email</p>)}
+          && !(email.match(/\S+@\S+\.\S+/i))
+          && (
+            <p className="mt-1 mb-1 text-red-600">
+              Invalid Email
+            </p>)}
         <Input
           classLabel="mt-2 text-black"
           label="Senha"
@@ -104,8 +109,11 @@ function Register() {
           onChange={ onChange }
         />
         {password !== ''
-        && password.length < magicPassword && (
-          <p className="mt-1 mb-1 text-red-600">Password must be 6 characters</p>)}
+          && password.length < magicPassword
+          && (
+            <p className="mt-1 mb-1 text-red-600">
+              Password must be 6 characters
+            </p>)}
         <Button
           btnClass="mt-6 bg-green-dark hover:bg-green-hover1 text-white py-3 px-4
           rounded-lg disabled:opacity-50 disabled:cursor-not-allowed text-lg"
