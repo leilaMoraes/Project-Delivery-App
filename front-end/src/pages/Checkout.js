@@ -32,7 +32,7 @@ export default function Checkout() {
     }));
     const saleData = {
       userId: user.id,
-      sellerId: 2,
+      sellerId: salesperson,
       totalPrice: totalValue,
       deliveryAddress: address,
       deliveryNumber: addressNumber,

@@ -3,6 +3,7 @@ import axios from 'axios';
 const instance = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
 });
+
 // Set default headers, such as the Authorization header for authenticated requests
 // instance.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
 // const headers = { headers: { Authorization: localStorage.getItem('token') } };
@@ -21,6 +22,7 @@ const requests = {
   deleteUser: (id, headers) => instance.delete(`/admin/${id}`, headers),
   salesSeller: (id, headers) => instance.get(`/sales/seller/${id}`, headers),
   salesCustomer: (id, headers) => instance.get(`/sales/customer/${id}`, headers),
+  getSales: (role, id, headers) => instance.get(`/sales/${role}/${id}`, headers),
 };
 
 export default requests;

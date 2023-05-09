@@ -13,6 +13,8 @@ export default function AppProvider({ children }) {
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
+  // SALES CONTEXT
+  const [sales, setSales] = useState([]);
 
   useEffect(() => {
     // Compute the new total value based on the current contents of the cart
@@ -39,6 +41,18 @@ export default function AppProvider({ children }) {
     });
   };
 
+  // GET SALES
+  const getSales = async () => {
+    try {
+      const headers = { headers: { authorization: token } };
+      await requests.getSales(user.id, headers)
+        .then(({ data }) => setSales(data))
+        .finally(() => setLoading(false));
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
   const values = useMemo(() => ({
     cart,
     setCart,
@@ -55,7 +69,9 @@ export default function AppProvider({ children }) {
     setUsers,
     role,
     setRole,
-  }), [cart, totalValue, user, message, token, users, role]);
+    sales,
+    getSales,
+  }), [cart, totalValue, user, message, token, users, sales]);
 
   return (
     <AppContext.Provider value={ values }>
