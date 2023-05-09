@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import requests from '../services/requests';
@@ -8,7 +8,7 @@ import AppContext from '../context/AppContext';
 export default function Products() {
   const { totalValue, token, cart } = useContext(AppContext);
   const [products, setProducts] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,7 +20,7 @@ export default function Products() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {}, [cart]);
+  useEffect(() => { }, [cart]);
 
   return (
     <div>
@@ -38,7 +38,7 @@ export default function Products() {
         data-testid="customer_products__button-cart"
         className="bg-green-dark rounded-md fixed bottom-0 right-0 m-4 px-4 py-2
         text-white"
-        onClick={ () => history.push('/customer/checkout') }
+        onClick={ () => navigate('/customer/checkout') }
         disabled={ totalValue === 0 }
       >
         View Cart: R$

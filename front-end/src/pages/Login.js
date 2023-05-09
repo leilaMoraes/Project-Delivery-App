@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AppContext from '../context/AppContext';
@@ -13,7 +13,7 @@ function Login() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const magicNumber = 6;
 
   const onChange = ({ target }) => {
@@ -33,13 +33,13 @@ function Login() {
     const fetchLogin = async () => {
       try {
         const response = await requests.login({ email, password });
-        setToken(response.data.token);
-        setUser(response.data.user);
+        await setToken(response.data.token);
+        await setUser(response.data.user);
         const user = { ...response.data.user, token: response.data.token };
         localStorage.setItem('token', JSON.stringify(response.data.token));
         localStorage.setItem('user', JSON.stringify(user));
         const route = getRoute(response.data.user.role);
-        history.push(route);
+        navigate(route);
       } catch (error) {
         console.log(error);
         setMessage(error.response.data.message);
@@ -50,7 +50,7 @@ function Login() {
   };
 
   const onClickRegister = () => {
-    history.push('/register');
+    navigate('/register');
   };
 
   return (
