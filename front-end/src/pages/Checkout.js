@@ -13,7 +13,7 @@ export default function Checkout() {
   const [salesperson, setSalesperson] = useState('');
   const [address, setAddress] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
-  console.log(cart);
+
   useEffect(() => {}, [cart]);
   useEffect(() => {
     async function fetchSellers() {
