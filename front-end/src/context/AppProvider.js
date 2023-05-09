@@ -9,6 +9,7 @@ export default function AppProvider({ children }) {
   const [cart, setCart] = useState(initialCart);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || '');
+  const [role, setRole] = useState('');
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
@@ -52,7 +53,9 @@ export default function AppProvider({ children }) {
     setToken,
     users,
     setUsers,
-  }), [cart, totalValue, user, message, token, users]);
+    role,
+    setRole,
+  }), [cart, totalValue, user, message, token, users, role]);
 
   return (
     <AppContext.Provider value={ values }>

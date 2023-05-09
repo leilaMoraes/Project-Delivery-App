@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import Input from '../components/Input';
@@ -7,7 +7,7 @@ import CheckoutTable from '../components/CheckoutTable';
 import requests from '../services/requests';
 
 export default function Checkout() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { totalValue, token, cart, user } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const [salesperson, setSalesperson] = useState('');
@@ -21,7 +21,7 @@ export default function Checkout() {
       setSellers(response.data);
     }
     fetchSellers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFinishOrder = async () => {
@@ -42,7 +42,7 @@ export default function Checkout() {
       const headers = { headers: { authorization: token } };
       const response = await requests.postSale(saleData, headers);
       const saleId = response.data.id;
-      history.push(`/customer/orders/${saleId}`);
+      navigate(`/customer/orders/${saleId}`);
     } catch (error) {
       console.log(error);
       // ADD TOSTIFY ERROR MESSAGE
@@ -60,7 +60,7 @@ export default function Checkout() {
         >
           Total: R$
           {' '}
-          { totalValue.toFixed(2).replace('.', ',')}
+          {totalValue.toFixed(2).replace('.', ',')}
         </span>
       </div>
 
