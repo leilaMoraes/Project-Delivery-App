@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 
 export default function CheckoutTable({ cartItems, userType }) {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  console.log(currentPath);
   let orderItems = [];
   if (Array.isArray(cartItems)) {
     orderItems = cartItems;
@@ -18,7 +22,9 @@ export default function CheckoutTable({ cartItems, userType }) {
           <th>Quantity</th>
           <th>Unit Price</th>
           <th>Sub-total</th>
-          <th>Remove Item</th>
+          {currentPath.includes('checkout') && (
+            <th>Remove Item</th>
+          )}
         </tr>
       </thead>
       <tbody>
@@ -54,7 +60,7 @@ export default function CheckoutTable({ cartItems, userType }) {
               {' '}
               {(price * quantity).toFixed(2).replace('.', ',')}
             </td>
-            {userType === 'customer'
+            {currentPath.includes('checkout')
               && (
                 <td>
                   <button

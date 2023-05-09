@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import TableHeader from '../components/TableHeader';
 import CheckoutTable from '../components/CheckoutTable';
+import Header from '../components/Header';
 
 export default function OrderDetails() {
   const { role, sales,
@@ -29,9 +30,9 @@ export default function OrderDetails() {
 
   return (
     <div>
-      <h1>OrderDetails</h1>
-      <TableHeader />
-      {/* <CheckoutTable cartItems={ order } userType={ role } /> */}
+      <Header />
+      <TableHeader order={ order } />
+      <CheckoutTable cartItems={ order.products } userType={ role } />
 
     </div>
   );
