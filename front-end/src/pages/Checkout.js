@@ -13,7 +13,8 @@ export default function Checkout() {
   const [salesperson, setSalesperson] = useState('');
   const [address, setAddress] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
-
+  console.log(cart);
+  useEffect(() => {}, [cart]);
   useEffect(() => {
     async function fetchSellers() {
       const headers = { headers: { authorization: token } };
@@ -54,7 +55,7 @@ export default function Checkout() {
       <Header />
       <div>
         <h1>Finish Order</h1>
-        <CheckoutTable />
+        <CheckoutTable cartItems={ cart } userType="customer" />
         <span
           data-testid="customer_checkout__element-order-total-price"
         >

@@ -18,7 +18,7 @@ export default function AppProvider({ children }) {
     const newTotalValue = Object.values(cart)
       .reduce((acc, { price, quantity }) => acc + price * quantity, 0);
     setTotalValue(newTotalValue);
-    // localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
   const addToCart = (id, name, price, quantity) => {
     setCart((prevCart) => ({
