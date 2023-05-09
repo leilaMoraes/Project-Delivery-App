@@ -1,20 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import Input from '../components/Input';
 import CheckoutTable from '../components/CheckoutTable';
 import requests from '../services/requests';
+import TotalPrice from '../components/TotalPrice';
 
 export default function Checkout() {
+  const table = ['Item', 'Description', 'Quantity', 'Unit Price', 'Sub-Total',
+    'Remove Item'];
+
   const history = useHistory();
   const { totalValue, token, cart, user } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const [salesperson, setSalesperson] = useState('');
   const [address, setAddress] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
-  console.log(cart);
+
   useEffect(() => {}, [cart]);
+
   useEffect(() => {
     async function fetchSellers() {
       const headers = { headers: { authorization: token } };
@@ -30,6 +36,7 @@ export default function Checkout() {
       productId: id,
       quantity,
     }));
+
     const saleData = {
       userId: user.id,
       sellerId: 2,
@@ -45,27 +52,28 @@ export default function Checkout() {
       const saleId = response.data.id;
       history.push(`/customer/orders/${saleId}`);
     } catch (error) {
-      console.log(error);
-      // ADD TOSTIFY ERROR MESSAGE
+      toast.error(error.response.data.message);
     }
   };
 
   return (
-    <div className="border-t-[20px]">
+    <div className="flex flex-col items-center h-screen ">
       <Header />
-      <div>
-        <h1>Finish Order</h1>
-        <CheckoutTable cartItems={ cart } userType="customer" />
-        <span
-          data-testid="customer_checkout__element-order-total-price"
+      <div className="mt-20 w-5/6 h-3/4">
+        <h1 className="font-medium mb-3">Finish Orders</h1>
+        <div
+          className="flex flex-col border shadow justify-between w-full h-full
+          overflow-x-auto"
         >
-          Total: R$
-          {' '}
-          { totalValue.toFixed(2).replace('.', ',')}
-        </span>
+          <CheckoutTable
+            table={ table }
+            cartItems={ cart }
+            screen="checkout"
+          />
+          <TotalPrice testid="customer_checkout" />
+        </div>
       </div>
-
-      <div>
+      <div className="mt- 20 w-5/6 h-2/4">
         <h1>Details and Delivery Address</h1>
         <div>
           <select
