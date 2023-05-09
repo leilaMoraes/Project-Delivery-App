@@ -10,6 +10,7 @@ import Seller from './pages/Seller';
 import Customer from './pages/Customer';
 import AppContext from './context/AppContext';
 import { getRoute } from './utils/tokenValidation';
+import Header from './components/Header';
 
 export default function Router() {
   const { token, role, setRole } = useContext(AppContext);
@@ -28,10 +29,10 @@ export default function Router() {
           <Route path="/customer/products" element={ <Products /> } />
           <Route path="/customer/checkout" element={ <Checkout /> } />
           <Route exact path="/customer/orders" element={ <Customer /> } />
-          <Route path="/customer/orders/:id" element />
+          <Route path="/customer/orders/:id" element={ <Header /> } />
           <Route path="/admin/manage" element={ <Admin /> } />
           <Route exact path="/seller/orders" element={ <Seller /> } />
-          <Route path="/seller/orders/:id" element />
+          <Route path="/seller/orders/:id" element={ <Header /> } />
           <Route path="*" element={ <Navigate to={ getRoute(role) } /> } />
         </>
       ) : (
