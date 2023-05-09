@@ -9,7 +9,7 @@ function TotalPrice(props) {
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`;
 
   return (
-    <div className="flex justify-end m-2 mt-5">
+    <div className="flex justify-end m-2">
       <span
         className="bg-green-dark text-white text-3xl text-center font-medium rounded px-4"
         data-testid={ `${testid}__element-order-total-price` }
