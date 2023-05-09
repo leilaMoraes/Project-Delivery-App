@@ -7,7 +7,7 @@ import requests from '../services/requests';
 import { getRoute } from '../utils/tokenValidation';
 
 function Login() {
-  const { setUser, setToken, token } = useContext(AppContext);
+  const { setUser, setToken } = useContext(AppContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showMessage, setShowMessage] = useState(false);
@@ -19,13 +19,13 @@ function Login() {
   const onChange = ({ target }) => {
     setShowMessage(false);
     switch (target.name) {
-      case 'inputEmail':
-        setEmail(target.value);
-        break;
-      case 'inputPassword':
-        setPassword(target.value);
-        break;
-      default:
+    case 'inputEmail':
+      setEmail(target.value);
+      break;
+    case 'inputPassword':
+      setPassword(target.value);
+      break;
+    default:
     }
   };
 
@@ -68,9 +68,9 @@ function Login() {
           type="text"
           inputName="inputEmail"
           id="inputEmail"
-          value={email}
+          value={ email }
           dataName="common_login__input-email"
-          onChange={onChange}
+          onChange={ onChange }
         />
         <Input
           classLabel="mt-2 text-black"
@@ -79,16 +79,16 @@ function Login() {
           type="password"
           inputName="inputPassword"
           id="inputPassword"
-          value={password}
+          value={ password }
           dataName="common_login__input-password"
-          onChange={onChange}
+          onChange={ onChange }
         />
         <Button
           btnClass="mt-6 bg-green-dark hover:bg-green-hover1 text-white py-3 px-4
           rounded-lg disabled:opacity-50 disabled:cursor-not-allowed text-lg"
           dataName="common_login__button-login"
-          disabled={!(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicNumber)}
-          onClick={onClickLogin}
+          disabled={ !(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicNumber) }
+          onClick={ onClickLogin }
           btnName="LOGIN"
         />
         <Button
@@ -96,7 +96,7 @@ function Login() {
           border-green-dark hover:bg-green-hover3 text-green-dark py-3 px-4
           rounded-lg text-lg"
           dataName="common_login__button-register"
-          onClick={onClickRegister}
+          onClick={ onClickRegister }
           btnName="Ainda não tenho conta"
         />
       </div>

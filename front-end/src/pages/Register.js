@@ -20,16 +20,16 @@ function Register() {
   const onChange = ({ target }) => {
     setShowMessage(false);
     switch (target.name) {
-      case 'inputName':
-        setName(target.value);
-        break;
-      case 'inputEmail':
-        setEmail(target.value);
-        break;
-      case 'inputPassword':
-        setPassword(target.value);
-        break;
-      default:
+    case 'inputName':
+      setName(target.value);
+      break;
+    case 'inputEmail':
+      setEmail(target.value);
+      break;
+    case 'inputPassword':
+      setPassword(target.value);
+      break;
+    default:
     }
   };
 
@@ -69,9 +69,9 @@ function Register() {
           type="text"
           inputName="inputName"
           id="inputName"
-          value={name}
+          value={ name }
           dataName="common_register__input-name"
-          onChange={onChange}
+          onChange={ onChange }
         />
         {name !== ''
           && name.length < magicName
@@ -87,9 +87,9 @@ function Register() {
           type="text"
           inputName="inputEmail"
           id="inputEmail"
-          value={email}
+          value={ email }
           dataName="common_register__input-email"
-          onChange={onChange}
+          onChange={ onChange }
         />
         {email !== ''
           && !(email.match(/\S+@\S+\.\S+/i))
@@ -104,9 +104,9 @@ function Register() {
           type="password"
           inputName="inputPassword"
           id="inputPassword"
-          value={password}
+          value={ password }
           dataName="common_register__input-password"
-          onChange={onChange}
+          onChange={ onChange }
         />
         {password !== ''
           && password.length < magicPassword
@@ -118,8 +118,8 @@ function Register() {
           btnClass="mt-6 bg-green-dark hover:bg-green-hover1 text-white py-3 px-4
           rounded-lg disabled:opacity-50 disabled:cursor-not-allowed text-lg"
           dataName="common_register__button-register"
-          disabled={!(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicPassword) || (name.length < magicName)}
-          onClick={onClickRegister}
+          disabled={ !(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicPassword) || (name.length < magicName) }
+          onClick={ onClickRegister }
           btnName="CADASTRAR"
         />
       </div>
