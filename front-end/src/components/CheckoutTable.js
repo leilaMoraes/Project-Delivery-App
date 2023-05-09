@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
 
 export default function CheckoutTable({ cartItems, userType }) {
+  let orderItems = [];
+  if (Array.isArray(cartItems)) {
+    orderItems = cartItems;
+  }
+  if (typeof cartItems === 'object') {
+    orderItems = Object.entries(cartItems);
+  }
+
   return (
     <table style={ { width: '100%', border: '1px solid black', textAlign: 'center' } }>
       <thead>
@@ -14,7 +22,8 @@ export default function CheckoutTable({ cartItems, userType }) {
         </tr>
       </thead>
       <tbody>
-        {Object.entries(cartItems).map(([id, { name, price, quantity }], i) => (
+        {/* {Object.entries(cartItems).map(([id, { name, price, quantity }], i) => ( */}
+        {orderItems.map(([id, { name, price, quantity }], i) => (
           <tr key={ id }>
             <td
               data-testid={ `${userType}_checkout__element-order-table-item-number-${i}` }

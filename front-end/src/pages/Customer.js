@@ -5,9 +5,9 @@ import AppContext from '../context/AppContext';
 import requests from '../services/requests';
 
 function Customer() {
-  const { token, user } = useContext(AppContext);
+  const { token, user, sales, setSales } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
-  const [sales, setSales] = useState([]);
+  // const [sales, setSales] = useState([]);
 
   useEffect(() => {
     const getSales = async () => {
@@ -16,6 +16,7 @@ function Customer() {
         await requests.salesCustomer(user.id, headers)
           .then(({ data }) => setSales(data))
           .finally(() => setLoading(false));
+        console.log(sales);
       } catch (error) {
         console.log(error.response.data.message);
       }

@@ -69,6 +69,7 @@ export default function AppProvider({ children }) {
     role,
     setRole,
     sales,
+    setSales,
     getSales,
   }), [cart, totalValue, user, message, token, users, sales]);
 
