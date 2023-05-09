@@ -24,20 +24,20 @@ export default function Router() {
     <Routes>
       {role ? (
         <>
-          <Route exact path="/" element={ <Navigate to={ getRoute(role) } /> } />
-          <Route path="/customer/products" element={ <Products /> } />
-          <Route path="/customer/checkout" element={ <Checkout /> } />
-          <Route path="/customer/orders" element={ <Customer /> } />
-          <Route path="/admin/manage" element={ <Admin /> } />
-          <Route path="/seller/orders" element={ <Seller /> } />
-          <Route path="*" element={ <Navigate to={ getRoute(role) } /> } />
+          <Route exact path="/" element={<Navigate to={getRoute(role)} />} />
+          <Route path="/customer/products" element={<Products />} />
+          <Route path="/customer/checkout" element={<Checkout />} />
+          <Route path="/customer/orders" element={<Customer />} />
+          <Route path="/admin/manage" element={<Admin />} />
+          <Route path="/seller/orders" element={<Seller />} />
+          <Route path="*" element={<Navigate to={getRoute(role)} />} />
         </>
       ) : (
         <>
-          <Route exact path="/" element={ <Navigate to="login" /> } />
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/register" element={ <Register /> } />
-          <Route path="*" element={ <Navigate to="/login" /> } />
+          <Route exact path="/" element={<Navigate to="login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </>
       )}
 
