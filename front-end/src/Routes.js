@@ -27,9 +27,11 @@ export default function Router() {
           <Route exact path="/" element={ <Navigate to={ getRoute(role) } /> } />
           <Route path="/customer/products" element={ <Products /> } />
           <Route path="/customer/checkout" element={ <Checkout /> } />
-          <Route path="/customer/orders" element={ <Customer /> } />
+          <Route exact path="/customer/orders" element={ <Customer /> } />
+          <Route path="/customer/orders/:id" element />
           <Route path="/admin/manage" element={ <Admin /> } />
-          <Route path="/seller/orders" element={ <Seller /> } />
+          <Route exact path="/seller/orders" element={ <Seller /> } />
+          <Route path="/seller/orders/:id" element />
           <Route path="*" element={ <Navigate to={ getRoute(role) } /> } />
         </>
       ) : (

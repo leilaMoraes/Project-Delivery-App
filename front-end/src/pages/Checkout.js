@@ -42,6 +42,7 @@ export default function Checkout() {
       const headers = { headers: { authorization: token } };
       const response = await requests.postSale(saleData, headers);
       const saleId = response.data.id;
+      console.log(response.data, saleId);
       navigate(`/customer/orders/${saleId}`);
     } catch (error) {
       console.log(error);
