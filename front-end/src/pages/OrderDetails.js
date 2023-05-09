@@ -7,12 +7,14 @@ import CheckoutTable from '../components/CheckoutTable';
 import Header from '../components/Header';
 
 export default function OrderDetails() {
-  const { role, sales,
-    // getSales, setSales, token,
-  } = useContext(AppContext);
+  const { role, sales } = useContext(AppContext);
   const { id } = useParams();
+
+  console.log('sales', sales);
   const order = sales.find((sale) => sale.id === Number(id));
-  console.log(order);
+
+  // useEffect(() => {
+  // }, []);
 
   // IMPLEMENT LOADING
   // useEffect(() => {
@@ -31,9 +33,11 @@ export default function OrderDetails() {
   return (
     <div>
       <Header />
-      <TableHeader order={ order } />
-      <CheckoutTable cartItems={ order.products } userType={ role } />
+      <div className="mt-12">
+        <TableHeader order={ order } />
+        <CheckoutTable cartItems={ order.products } userType={ role } />
 
+      </div>
     </div>
   );
 }

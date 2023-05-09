@@ -8,7 +8,7 @@ import requests from '../services/requests';
 
 export default function Checkout() {
   const navigate = useNavigate();
-  const { totalValue, token, cart, user } = useContext(AppContext);
+  const { totalValue, token, cart, user, getSales } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const [salesperson, setSalesperson] = useState('');
   const [address, setAddress] = useState('');
@@ -43,8 +43,11 @@ export default function Checkout() {
       const headers = { headers: { authorization: token } };
       const response = await requests.postSale(saleData, headers);
       const saleId = response.data.id;
-      console.log(response.data, saleId);
+      await getSales();
+      // console.log(response.data);
+      // console.log(saleId);
       navigate(`/customer/orders/${saleId}`);
+      // navigate('/customer/orders/1');
     } catch (error) {
       console.log(error);
       // ADD TOSTIFY ERROR MESSAGE

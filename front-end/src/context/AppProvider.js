@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 import AppContext from './AppContext';
+import requests from '../services/requests';
 
 export default function AppProvider({ children }) {
   // CART CONTEXT

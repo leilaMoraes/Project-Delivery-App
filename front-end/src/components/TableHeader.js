@@ -2,21 +2,29 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import requests from '../services/requests';
+import Button from './Button';
 
 export default function TableHeader({ order }) {
-  const { role, sales, token } = useContext(AppContext);
+  const { role, token } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
-  const { id, sellerId, saleDate } = order;
+  const { id, sellerId, saleDate, status } = order;
   const seller = sellers.find((sell) => sell.id === sellerId);
   const sellerName = seller?.name;
 
   const newDate = new Date(saleDate);
   const date = new Intl.DateTimeFormat('pt-BR').format(newDate);
 
-  console.log('seller', seller);
-  console.log('sellers', sellers);
-
-  console.log(order);
+  function getColor() {
+    switch (status.toLowerCase()) {
+    case 'pendente':
+      return 'bg-pending';
+    case 'entregue':
+      return 'bg-delivered';
+    case 'preparando':
+      return 'bg-preparing';
+    default:
+    }
+  }
 
   // useEffect(() => {
   //   const getAllSales = async () => {
@@ -54,14 +62,17 @@ export default function TableHeader({ order }) {
       <span>
         {date}
       </span>
-      <span
-        // data-testid={ currentPath === orderSeller
-        // ? `seller_orders__element-delivery-status-${id}`
-        // : `customer_orders__element-delivery-status-${id}` }
-        className="text-center"
+      <div
+        className={ `flex ${getColor()} rounded-lg items-center
+        font-bold text-lg justify-center w-[150px] my-2` }
       >
-        {/* {sales[id].status.toUpperCase()} */}
-      </span>
+        <span
+          className="text-center"
+        >
+          {status.toUpperCase()}
+        </span>
+      </div>
+      <Button />
     </div>
   );
 }
@@ -69,6 +80,9 @@ export default function TableHeader({ order }) {
 // generate proptypes
 TableHeader.propTypes = {
   order: PropTypes.shape({
+    id: PropTypes.number,
     sellerId: PropTypes.number,
+    saleDate: PropTypes.string,
+    status: PropTypes.string,
   }).isRequired,
 };
