@@ -1,60 +1,77 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import AppContext from '../context/AppContext';
+import Button from './Button';
 
-export default function CheckoutTable({ cartItems, userType }) {
+export default function CheckoutTable({ table, cartItems, screen }) {
+  const { removeFromCart, user } = useContext(AppContext);
+  const ELE1 = '__element-order-table-';
+
   return (
-    <table style={ { width: '100%', border: '1px solid black', textAlign: 'center' } }>
+    <table className="mx-2">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Description</th>
-          <th>Quantity</th>
-          <th>Unit Price</th>
-          <th>Sub-total</th>
-          <th>Remove Item</th>
+          {table.map((items, i) => (
+            <th
+              className="p-2 text-sm font-normal"
+              key={ i }
+            >
+              {items}
+            </th>))}
         </tr>
       </thead>
       <tbody>
         {Object.entries(cartItems).map(([id, { name, price, quantity }], i) => (
-          <tr key={ id }>
+          <tr
+            className="border-b border-b-4 border-white"
+            key={ i }
+          >
             <td
-              data-testid={ `${userType}_checkout__element-order-table-item-number-${i}` }
+              className="bg-green-light text-center font-medium p-2"
+              data-testid={ `${user.role}_${screen}${ELE1}item-number-${i}` }
             >
               {i + 1}
             </td>
             <td
-              data-testid={ `${userType}_checkout__element-order-table-name-${i}` }
+              className="bg-bg0 pl-2 w-3/6"
+              data-testid={ `${user.role}_${screen}${ELE1}name-${i}` }
             >
               {name}
             </td>
             <td
-              data-testid={ `${userType}_checkout__element-order-table-quantity-${i}` }
+              className="bg-green-dark text-white text-center font-medium"
+              data-testid={ `${user.role}_${screen}${ELE1}quantity-${i}` }
             >
               {quantity}
             </td>
             <td
-              data-testid={ `${userType}_checkout__element-order-table-unit-price-${i}` }
+              className="bg-blue-dark text-white text-center font-medium"
+              data-testid={ `${user.role}_${screen}${ELE1}unit-price-${i}` }
             >
               R$
               {' '}
               {price.toFixed(2).replace('.', ',')}
             </td>
             <td
-              data-testid={ `${userType}_checkout__element-order-table-sub-total-${i}` }
+              className="bg-blue-light text-white text-center font-medium"
+              data-testid={ `${user.role}_${screen}${ELE1}sub-total-${i}` }
             >
               R$
               {' '}
               {(price * quantity).toFixed(2).replace('.', ',')}
             </td>
-            {userType === 'customer'
+            {screen === 'checkout'
               && (
-                <td>
-                  <button
-                    type="button"
-                    data-testid={ `customer_checkout__element-order-table-remove-${i}` }
+                <td
+                  className="bg-green-light text-white text-center font-medium
+                hover:bg-green-hover2"
+                >
+                  <Button
+                    btnClass="w-full text-xl"
+                    dataName={ `customer_checkout__element-order-table-remove-${i}` }
                     onClick={ () => removeFromCart(id) }
-                  >
-                    Remove
-                  </button>
+                    btnName="Remove"
+                  />
                 </td>)}
           </tr>
         ))}
@@ -64,79 +81,12 @@ export default function CheckoutTable({ cartItems, userType }) {
 }
 
 CheckoutTable.propTypes = {
-  cartItems: PropTypes.shape({}).isRequired,
-  userType: PropTypes.string.isRequired,
-};
-
-// CheckoutTable.defaultProps = {
-//   cartItems: {},
-//   userType: '',
-// };
-
-// import { useContext, useEffect } from 'react';
-// import AppContext from '../context/AppContext';
-
-// export default function CheckoutTable() {
-//   const { cart, removeFromCart } = useContext(AppContext);
-//   // IF COMING BACK TO PRODUCTS PAGE THE INPUT NUMBERS ARE NOT UPDATED
-//   useEffect(() => {}, [cart]);
-
-//   return (
-//     <table style={ { width: '100%', border: '1px solid black', textAlign: 'center' } }>
-//       <thead>
-//         <tr>
-//           <th>Item</th>
-//           <th>Description</th>
-//           <th>Quantity</th>
-//           <th>Unit Price</th>
-//           <th>Sub-total</th>
-//           <th>Remove Item</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//         {Object.entries(cart).map(([id, { name, price, quantity }], i) => (
-//           <tr key={ id }>
-//             <td
-//               data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
-//             >
-//               {i + 1}
-//             </td>
-//             <td
-//               data-testid={ `customer_checkout__element-order-table-name-${i}` }
-//             >
-//               {name}
-//             </td>
-//             <td
-//               data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
-//             >
-//               {quantity}
-//             </td>
-//             <td
-//               data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
-//             >
-//               R$
-//               {' '}
-//               {price.toFixed(2).replace('.', ',')}
-//             </td>
-//             <td
-//               data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
-//             >
-//               R$
-//               {' '}
-//               {(price * quantity).toFixed(2).replace('.', ',')}
-//             </td>
-//             <td>
-//               <button
-//                 type="button"
-//                 data-testid={ `customer_checkout__element-order-table-remove-${i}` }
-//                 onClick={ () => removeFromCart(id) }
-//               >
-//                 Remove
-//               </button>
-//             </td>
-//           </tr>
-//         ))}
-//       </tbody>
-//     </table>
-//   );
-// }
+  table: PropTypes.array,
+  cartItems: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+  }),
+  userType: PropTypes.string,
+  screen: PropTypes.string,
+}.isRequired;
