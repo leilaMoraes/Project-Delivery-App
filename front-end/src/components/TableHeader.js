@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 
 export default function TableHeader() {
@@ -20,12 +20,12 @@ export default function TableHeader() {
       )}
       <span>DATE</span>
       <span
-        data-testid={ currentPath === orderSeller
-          ? `seller_orders__element-delivery-status-${id}`
-          : `customer_orders__element-delivery-status-${id}` }
+        // data-testid={ currentPath === orderSeller
+        // ? `seller_orders__element-delivery-status-${id}`
+        // : `customer_orders__element-delivery-status-${id}` }
         className="text-center"
       >
-        {sales[id].status.toUpperCase()}
+        {/* {sales[id].status.toUpperCase()} */}
       </span>
     </div>
   );

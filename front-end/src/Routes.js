@@ -8,6 +8,7 @@ import Admin from './pages/Admin';
 import Checkout from './pages/Checkout';
 import Seller from './pages/Seller';
 import Customer from './pages/Customer';
+import OrderDetails from './pages/OrderDetails';
 import AppContext from './context/AppContext';
 import { getRoute } from './utils/tokenValidation';
 import Header from './components/Header';
@@ -29,7 +30,7 @@ export default function Router() {
           <Route path="/customer/products" element={ <Products /> } />
           <Route path="/customer/checkout" element={ <Checkout /> } />
           <Route exact path="/customer/orders" element={ <Customer /> } />
-          <Route path="/customer/orders/:id" element={ <Header /> } />
+          <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
           <Route path="/admin/manage" element={ <Admin /> } />
           <Route exact path="/seller/orders" element={ <Seller /> } />
           <Route path="/seller/orders/:id" element={ <Header /> } />

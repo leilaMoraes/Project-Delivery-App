@@ -45,9 +45,8 @@ export default function AppProvider({ children }) {
   const getSales = async () => {
     try {
       const headers = { headers: { authorization: token } };
-      await requests.getSales(user.id, headers)
-        .then(({ data }) => setSales(data))
-        .finally(() => setLoading(false));
+      const response = await requests.getSales(role, user.id, headers);
+      setSales(response.data);
     } catch (error) {
       console.log(error.response.data.message);
     }

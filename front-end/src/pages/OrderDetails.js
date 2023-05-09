@@ -1,19 +1,26 @@
 // Generate a empty OrderDetails component
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import TableHeader from '../components/TableHeader';
 import CheckoutTable from '../components/CheckoutTable';
 
 export default function OrderDetails() {
-  const { role, getSales, sales } = useContext(AppContext);
-
+  const { role, getSales, sales, setSales, token } = useContext(AppContext);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  console.log(currentPath);
   // IMPLEMENT LOADING
   useEffect(() => {
-    const getAllSales = async () => {
-      const salesList = await getSales();
-      setSales(salesList);
-    };
-    getAllSales();
+    // const getAllSales = async () => {
+    //   const headers = { headers: { authorization: token } };
+    //   const salesList = await getSales(role, 1, headers);
+    //   setSales(salesList);
+    //   console.log(salesList);
+    // };
+    // getAllSales();
+    getSales();
+    console.log(sales);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -21,7 +28,7 @@ export default function OrderDetails() {
     <div>
       <h1>OrderDetails</h1>
       <TableHeader />
-      <CheckoutTable cartItems={ sales.id } userType={ role } />
+      {/* <CheckoutTable cartItems={ sales.id } userType={ role } /> */}
 
     </div>
   );
