@@ -5,15 +5,14 @@ import requests from '../services/requests';
 import Button from './Button';
 
 export default function TableHeader({ order }) {
-  const { user } = useContext(AppContext);
-  const { role, token } = useContext(AppContext);
+  const { user, role, token } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const { id, sellerId, saleDate, status } = order;
   const seller = sellers.find((sell) => sell.id === sellerId);
   const sellerName = seller?.name;
 
-  // const magicNumber = 4;
-  // const newId = String(id).padStart(magicNumber, '0');
+  const magicNumber = 4;
+  const newId = String(id).padStart(magicNumber, '0');
   const newDate = new Date(saleDate);
   const date = new Intl.DateTimeFormat('pt-BR').format(newDate);
 
@@ -39,6 +38,7 @@ export default function TableHeader({ order }) {
     fetchSellers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(user.role);
 
   return (
     <div className="flex justify-around">
@@ -47,7 +47,7 @@ export default function TableHeader({ order }) {
           ? 'customer_order_details__element-order-details-label-order-id'
           : 'seller_order_details__element-order-details-label-order-id' }
       >
-        {id}
+        {`ORDER ${newId}`}
       </span>
       {role === 'customer' && (
         <span
