@@ -56,9 +56,9 @@ export default function OrdersCard(props) {
               data-testid={ currentPath === orderSeller
                 ? `seller_orders__element-delivery-status-${id}`
                 : `customer_orders__element-delivery-status-${id}` }
-              className="text-center"
+              className="text-center uppercase"
             >
-              {status.toUpperCase()}
+              {status}
             </span>
           </div>
           <div className="flex flex-col justify-center text-center w-[95px]">
