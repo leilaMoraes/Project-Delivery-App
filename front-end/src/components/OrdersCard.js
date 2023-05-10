@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function OrdersCard(props) {
   const { id, totalPrice, saleDate, status, deliveryAddress, deliveryNumber } = props;
-
-  const history = useHistory();
-  const currentPath = history.location.pathname;
+  const location = useLocation();
+  const currentPath = location.pathname;
   const orderSeller = '/seller/orders';
 
   const magicNumber = 4;
@@ -82,16 +81,16 @@ export default function OrdersCard(props) {
             </span>
           </div>
         </div>
-        { currentPath === orderSeller
-        && (
-          <div className="flex items-center justify-center h-[45px]">
-            <span
-              data-testid={ `seller_orders__element-card-address-${id}` }
-              className="text-xs"
-            >
-              {`${deliveryAddress}, ${deliveryNumber}`}
-            </span>
-          </div>)}
+        {currentPath === orderSeller
+          && (
+            <div className="flex items-center justify-center h-[45px]">
+              <span
+                data-testid={ `seller_orders__element-card-address-${id}` }
+                className="text-xs"
+              >
+                {`${deliveryAddress}, ${deliveryNumber}`}
+              </span>
+            </div>)}
       </div>
     </Link>
   );

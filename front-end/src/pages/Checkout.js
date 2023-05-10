@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import Input from '../components/Input';
@@ -13,8 +13,8 @@ export default function Checkout() {
   const table = ['Item', 'Description', 'Quantity', 'Unit Price', 'Sub-Total',
     'Remove Item'];
 
-  const history = useHistory();
-  const { totalValue, token, cart, user } = useContext(AppContext);
+  const navigate = useNavigate();
+  const { totalValue, token, cart, user, getSales } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const [salesperson, setSalesperson] = useState('');
   const [address, setAddress] = useState('');
@@ -29,7 +29,7 @@ export default function Checkout() {
       setSellers(response.data);
     }
     fetchSellers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFinishOrder = async () => {
@@ -40,7 +40,7 @@ export default function Checkout() {
 
     const saleData = {
       userId: user.id,
-      sellerId: 2,
+      sellerId: salesperson,
       totalPrice: totalValue,
       deliveryAddress: address,
       deliveryNumber: addressNumber,
@@ -51,7 +51,11 @@ export default function Checkout() {
       const headers = { headers: { authorization: token } };
       const response = await requests.postSale(saleData, headers);
       const saleId = response.data.id;
-      history.push(`/customer/orders/${saleId}`);
+      await getSales();
+      // console.log(response.data);
+      // console.log(saleId);
+      navigate(`/customer/orders/${saleId}`);
+      // navigate('/customer/orders/1');
     } catch (error) {
       toast.error(error.response.data.message);
     }

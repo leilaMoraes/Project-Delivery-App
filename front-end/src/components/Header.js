@@ -1,25 +1,29 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import Button from './Button';
 
 export default function Header() {
-  const { user } = useContext(AppContext);
+  const { user, setRole, setToken, setUser } = useContext(AppContext);
   const { name, role } = user;
-  const history = useHistory();
-  const currentPath = history.location.pathname;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
   const actualPage = '/customer/products';
 
   const handleLogout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    history.push('/login');
+    setRole('');
+    setToken('');
+    setUser({});
+    navigate('/login');
   };
   const handleOrders = () => {
     switch (role) {
-    case 'customer': return history.push('/customer/orders');
-    case 'seller': return history.push('/seller/orders');
-    case 'administrator': return history.push('/admin/manage');
+    case 'customer': return navigate('/customer/orders');
+    case 'seller': return navigate('/seller/orders');
+    case 'administrator': return navigate('/admin/manage');
     default:
     }
   };
@@ -44,7 +48,7 @@ export default function Header() {
               : 'text-white bg-green-dark hover:bg-green-hover1'}` }
             dataName="customer_products__element-navbar-link-products"
             btnName="PRODUCTS"
-            onClick={ () => history.push(actualPage) }
+            onClick={ () => navigate(actualPage) }
           />
         )}
         <Button
