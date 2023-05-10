@@ -38,7 +38,6 @@ export default function TableHeader({ order }) {
     fetchSellers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(user.role);
 
   return (
     <div className="flex justify-around">
