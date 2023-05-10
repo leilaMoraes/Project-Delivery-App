@@ -1,28 +1,37 @@
 // Generate a empty OrderDetails component
-import React from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import TableHeader from '../components/TableHeader';
-import CheckoutTable from '../components/CheckoutTable';
+import Header from '../components/Header';
+import Table from '../components/Table';
+import TotalPrice from '../components/TotalPrice';
+import Title from '../components/Title';
 
 export default function OrderDetails() {
-  const { role, getSales, sales } = useContext(AppContext);
+  const table = ['Item', 'Description', 'Quantity', 'Unit Price', 'Sub-Total'];
 
-  // IMPLEMENT LOADING
-  useEffect(() => {
-    const getAllSales = async () => {
-      const salesList = await getSales();
-      setSales(salesList);
-    };
-    getAllSales();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { sales, user } = useContext(AppContext);
+  const { id } = useParams();
+
+  const order = sales.find((sale) => sale.id === Number(id));
 
   return (
     <div>
-      <h1>OrderDetails</h1>
-      <TableHeader />
-      <CheckoutTable cartItems={ sales.id } userType={ role } />
-
+      <Header />
+      <div className="mt-12">
+        <Title name="Order Detail" />
+        <TableHeader order={ order } />
+        <Table
+          tableH={ table }
+          tableB={ order.products }
+          screen="order_details"
+        />
+        <TotalPrice
+          testid={ `${user.role}` === 'customer' ? 'customer_order_details'
+            : 'seller_order_details' }
+        />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 import AppContext from './AppContext';
+import requests from '../services/requests';
 
 export default function AppProvider({ children }) {
   // CART CONTEXT
@@ -33,6 +35,7 @@ export default function AppProvider({ children }) {
       },
     }));
   };
+
   const removeFromCart = (id) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
@@ -41,13 +44,25 @@ export default function AppProvider({ children }) {
     });
   };
 
+  const deleteUser = async (id) => {
+    try {
+      const headers = { headers: { authorization: token } };
+      await requests.deleteUser(id, headers);
+      setUsers(users.filter((u) => u.id !== id));
+      toast.success('User deleted successfully');
+      setMessage('User deleted successfully');
+    } catch (error) {
+      setMessage(error.response.data.message);
+      toast.error(error.response.data.message);
+    }
+  };
+
   // GET SALES
   const getSales = async () => {
     try {
       const headers = { headers: { authorization: token } };
-      await requests.getSales(user.id, headers)
-        .then(({ data }) => setSales(data))
-        .finally(() => setLoading(false));
+      const response = await requests.getSales(role, user.id, headers);
+      setSales(response.data);
     } catch (error) {
       console.log(error.response.data.message);
     }
@@ -70,7 +85,9 @@ export default function AppProvider({ children }) {
     role,
     setRole,
     sales,
+    setSales,
     getSales,
+    deleteUser,
   }), [cart, totalValue, user, message, token, users, sales]);
 
   return (

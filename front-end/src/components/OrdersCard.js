@@ -57,7 +57,7 @@ export default function OrdersCard(props) {
                 : `customer_orders__element-delivery-status-${id}` }
               className="text-center"
             >
-              {status.toUpperCase()}
+              {status}
             </span>
           </div>
           <div className="flex flex-col justify-center text-center w-[95px]">

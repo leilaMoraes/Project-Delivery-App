@@ -1,20 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import Input from '../components/Input';
-import CheckoutTable from '../components/CheckoutTable';
+import Table from '../components/Table';
 import requests from '../services/requests';
+import TotalPrice from '../components/TotalPrice';
+import Title from '../components/Title';
 
 export default function Checkout() {
+  const table = ['Item', 'Description', 'Quantity', 'Unit Price', 'Sub-Total',
+    'Remove Item'];
+
   const navigate = useNavigate();
-  const { totalValue, token, cart, user } = useContext(AppContext);
+  const { totalValue, token, cart, user, getSales } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const [salesperson, setSalesperson] = useState('');
   const [address, setAddress] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
 
   useEffect(() => {}, [cart]);
+
   useEffect(() => {
     async function fetchSellers() {
       const headers = { headers: { authorization: token } };
@@ -30,6 +37,7 @@ export default function Checkout() {
       productId: id,
       quantity,
     }));
+
     const saleData = {
       userId: user.id,
       sellerId: salesperson,
@@ -43,31 +51,34 @@ export default function Checkout() {
       const headers = { headers: { authorization: token } };
       const response = await requests.postSale(saleData, headers);
       const saleId = response.data.id;
-      console.log(response.data, saleId);
+      await getSales();
+      // console.log(response.data);
+      // console.log(saleId);
       navigate(`/customer/orders/${saleId}`);
+      // navigate('/customer/orders/1');
     } catch (error) {
-      console.log(error);
-      // ADD TOSTIFY ERROR MESSAGE
+      toast.error(error.response.data.message);
     }
   };
 
   return (
-    <div className="border-t-[20px]">
+    <div className="mt-12 flex flex-col items-center justify-evenly h-full">
       <Header />
-      <div>
-        <h1>Finish Order</h1>
-        <CheckoutTable cartItems={ cart } userType="customer" />
-        <span
-          data-testid="customer_checkout__element-order-total-price"
+      <div className="w-5/6 h-2/3">
+        <Title name="Finish Orders" />
+        <div
+          className="flex flex-col border shadow w-full h-5/6 overflow-x-auto"
         >
-          Total: R$
-          {' '}
-          {totalValue.toFixed(2).replace('.', ',')}
-        </span>
+          <Table
+            tableH={ table }
+            tableB={ cart }
+            screen="checkout"
+          />
+          <TotalPrice testid="customer_checkout" />
+        </div>
       </div>
-
-      <div>
-        <h1>Details and Delivery Address</h1>
+      <div className="w-5/6 h-1/3">
+        <Title name="Details and Delivery Address" />
         <div>
           <select
             id="salespersonInput"
