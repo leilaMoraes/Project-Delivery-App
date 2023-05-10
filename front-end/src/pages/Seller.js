@@ -13,9 +13,11 @@ function Seller() {
     const getSales = async () => {
       try {
         const headers = { headers: { authorization: token } };
-        await requests.salesSeller(user.id, headers)
-          .then(({ data }) => setSales(data))
-          .finally(() => setLoading(false));
+        const response = await requests.salesSeller(user.id, headers);
+        if (response && response.data) {
+          setSales(response.data);
+        }
+        setLoading(false);
       } catch (error) {
         console.log(error.response.data.message);
       }

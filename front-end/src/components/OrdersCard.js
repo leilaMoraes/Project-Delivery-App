@@ -55,7 +55,7 @@ export default function OrdersCard(props) {
               data-testid={ currentPath === orderSeller
                 ? `seller_orders__element-delivery-status-${id}`
                 : `customer_orders__element-delivery-status-${id}` }
-              className="text-center uppercase"
+              className="text-center"
             >
               {status}
             </span>
