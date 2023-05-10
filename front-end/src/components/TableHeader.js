@@ -5,12 +5,15 @@ import requests from '../services/requests';
 import Button from './Button';
 
 export default function TableHeader({ order }) {
+  const { user } = useContext(AppContext);
   const { role, token } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const { id, sellerId, saleDate, status } = order;
   const seller = sellers.find((sell) => sell.id === sellerId);
   const sellerName = seller?.name;
 
+  // const magicNumber = 4;
+  // const newId = String(id).padStart(magicNumber, '0');
   const newDate = new Date(saleDate);
   const date = new Intl.DateTimeFormat('pt-BR').format(newDate);
 
@@ -26,14 +29,6 @@ export default function TableHeader({ order }) {
     }
   }
 
-  // useEffect(() => {
-  //   const getAllSales = async () => {
-  //     const salesList = await getSales();
-  //     setSales(salesList);
-  //   };
-  //   getAllSales();
-  // }, []);
-
   // REFACTOR FETCHES TO USE CONTEXT
   useEffect(() => {
     async function fetchSellers() {
@@ -46,33 +41,59 @@ export default function TableHeader({ order }) {
   }, []);
 
   return (
-    <div>
-      <span>
-        ORDER
-        {' '}
+    <div className="flex justify-around">
+      <span
+        data-testid={ user.role === 'customer'
+          ? 'customer_order_details__element-order-details-label-order-id'
+          : 'seller_order_details__element-order-details-label-order-id' }
+      >
         {id}
       </span>
       {role === 'customer' && (
-        <span>
-          Seller:
-          {' '}
-          {sellerName}
+        <span
+          data-testid="customer_order_details__element-order-details-label-seller-name"
+        >
+          {`Seller: ${sellerName}`}
         </span>
       )}
-      <span>
+      <span
+        data-testid={ user.role === 'customer'
+          ? 'customer_order_details__element-order-details-label-order-date'
+          : 'seller_order_details__element-order-details-label-order-date' }
+      >
         {date}
       </span>
       <div
         className={ `flex ${getColor()} rounded-lg items-center
-        font-bold text-lg justify-center w-[150px] my-2` }
+        font-bold text-lg justify-center w-[150px] py-2 px-4` }
       >
         <span
+          data-testid={ user.role === 'customer'
+            ? `customer_order_details__element-order-details-label-delivery-status-${id}`
+            : `seller_order_details__element-order-details-label-delivery-status-${id}` }
           className="text-center"
         >
-          {status.toUpperCase()}
+          {status}
         </span>
       </div>
-      <Button />
+      {user.role === 'seller' && (
+        <Button
+          btnClass="bg-green-light hover:bg-green-hover2 text-white py-2 px-4
+          rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          dataName="seller_order_details__button-preparing-check"
+          disabled={ status !== 'Pendente' }
+          btnName="PREPARAR PEDIDO"
+        />
+      )}
+      <Button
+        btnClass="bg-green-dark hover:bg-green-hover1 text-white py-2 px-4
+        rounded-lg text-lg disabled:opacity-80 disabled:cursor-not-allowed"
+        dataName={ user.role === 'seller'
+          ? 'seller_order_details__button-dispatch-check'
+          : 'customer_order_details__button-delivery-check' }
+        disabled={ status !== 'Preparando' }
+        btnName={ user.role === 'seller' ? 'SAIU PARA ENTREGA' : 'MARCAR COMO ENTREGUE' }
+      />
     </div>
   );
 }
