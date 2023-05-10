@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppContext from '../context/AppContext';
 
 function Button(props) {
   const { btnClass, dataName, id, disabled, onClick, btnName } = props;
