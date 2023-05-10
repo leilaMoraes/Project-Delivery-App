@@ -1,74 +1,130 @@
-import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 import { useContext } from 'react';
-import requests from '../services/requests';
 import AppContext from '../context/AppContext';
+import Button from './Button';
 
-function Table() {
-  const { setMessage, token, users, setUsers } = useContext(AppContext);
-  const deleteUser = async (id) => {
-    try {
-      const headers = { headers: { authorization: token } };
-      await requests.deleteUser(id, headers);
-      setUsers(users.filter((user) => user.id !== id));
-      toast.success('User deleted successfully');
-      setMessage('User deleted successfully');
-    } catch (error) {
-      setMessage(error.response.data.message);
-      toast.error(error.response.data.message);
-    }
-  };
+export default function Table({ tableH, tableB, screen }) {
+  const { removeFromCart, user, deleteUser } = useContext(AppContext);
+  const ELE1 = '__element-order-table-';
+
   return (
-    <table style={ { width: '100%', border: '1px solid black', textAlign: 'center' } }>
+    <table className="mx-2">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Name</th>
-          <th>E-mail</th>
-          <th>Role</th>
-          <th>Delete</th>
+          {tableH.map((items, i) => (
+            <th
+              className="p-2 text-sm font-normal"
+              key={ i }
+            >
+              {items}
+            </th>))}
         </tr>
       </thead>
       <tbody>
-        {users.map(({ id, name, email, role }, index) => (
-          <tr key={ id }>
-            <td
-              data-testid={ `admin_manage__element-user-table-item-number-${index}` }
+        { screen === 'admin_manage' ? (
+          tableB.map(({ id, name, email, role }, index) => (
+            <tr
+              className="border-b border-b-4 border-white"
+              key={ id }
             >
-              {index + 1}
-
-            </td>
-            <td
-              data-testid={ `admin_manage__element-user-table-name-${index}` }
-            >
-              {name}
-
-            </td>
-            <td
-              data-testid={ `admin_manage__element-user-table-email-${index}` }
-            >
-              {email}
-
-            </td>
-            <td
-              data-testid={ `admin_manage__element-user-table-role-${index}` }
-            >
-              {role}
-
-            </td>
-            <td>
-              <button
-                type="button"
-                data-testid={ `admin_manage__element-user-table-remove-${index}` }
-                onClick={ () => deleteUser(id) }
+              <td
+                className="bg-green-light text-center font-medium p-2 w-[2px]"
+                data-testid={ `admin_manage__element-user-table-item-number-${index}` }
               >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
+                {index + 1}
+              </td>
+              <td
+                className="bg-bg0 pl-2"
+                data-testid={ `admin_manage__element-user-table-name-${index}` }
+              >
+                {name}
+              </td>
+              <td
+                className="bg-green-dark text-white text-center font-medium w-1/3"
+                data-testid={ `admin_manage__element-user-table-email-${index}` }
+              >
+                {email}
+              </td>
+              <td
+                className="bg-blue-dark text-white text-center font-medium capitalize"
+                data-testid={ `admin_manage__element-user-table-role-${index}` }
+              >
+                {role}
+              </td>
+              <td
+                className="bg-blue-light text-white text-center font-medium
+                hover:bg-blue-hoverLgOut"
+              >
+                <Button
+                  btnClass="w-full text-xl"
+                  dataName={ `admin_manage__element-user-table-remove-${index}` }
+                  onClick={ () => deleteUser(id) }
+                  btnName="Delete"
+                />
+              </td>
+            </tr>
+          ))) : (
+          Object.entries(tableB).map(([id, { name, price, quantity }], i) => (
+            <tr
+              className="border-b border-b-4 border-white"
+              key={ i }
+            >
+              <td
+                className="bg-green-light text-center font-medium p-2"
+                data-testid={ `${user.role}_${screen}${ELE1}item-number-${i}` }
+              >
+                {i + 1}
+              </td>
+              <td
+                className="bg-bg0 pl-2 w-3/6"
+                data-testid={ `${user.role}_${screen}${ELE1}name-${i}` }
+              >
+                {name}
+              </td>
+              <td
+                className="bg-green-dark text-white text-center font-medium"
+                data-testid={ `${user.role}_${screen}${ELE1}quantity-${i}` }
+              >
+                {quantity}
+              </td>
+              <td
+                className="bg-blue-dark text-white text-center font-medium"
+                data-testid={ `${user.role}_${screen}${ELE1}unit-price-${i}` }
+              >
+                R$
+                {' '}
+                {price.toFixed(2).replace('.', ',')}
+              </td>
+              <td
+                className="bg-blue-light text-white text-center font-medium"
+                data-testid={ `${user.role}_${screen}${ELE1}sub-total-${i}` }
+              >
+                R$
+                {' '}
+                {(price * quantity).toFixed(2).replace('.', ',')}
+              </td>
+              {screen === 'checkout'
+              && (
+                <td
+                  className="bg-green-light text-white text-center font-medium
+                hover:bg-green-hover2"
+                >
+                  <Button
+                    btnClass="w-full text-xl"
+                    dataName={ `customer_checkout__element-order-table-remove-${i}` }
+                    onClick={ () => removeFromCart(id) }
+                    btnName="Remove"
+                  />
+                </td>)}
+            </tr>
+          )))}
       </tbody>
     </table>
   );
 }
 
-export default Table;
+Table.propTypes = {
+  tableH: PropTypes.array,
+  tableB: PropTypes.shape({}),
+  screen: PropTypes.string,
+}.isRequired;
