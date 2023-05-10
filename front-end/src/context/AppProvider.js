@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 import AppContext from './AppContext';
+import requests from '../services/requests';
 
 export default function AppProvider({ children }) {
   // CART CONTEXT
@@ -30,12 +32,26 @@ export default function AppProvider({ children }) {
       },
     }));
   };
+
   const removeFromCart = (id) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
       delete newCart[id];
       return newCart;
     });
+  };
+
+  const deleteUser = async (id) => {
+    try {
+      const headers = { headers: { authorization: token } };
+      await requests.deleteUser(id, headers);
+      setUsers(users.filter((u) => u.id !== id));
+      toast.success('User deleted successfully');
+      setMessage('User deleted successfully');
+    } catch (error) {
+      setMessage(error.response.data.message);
+      toast.error(error.response.data.message);
+    }
   };
 
   const values = useMemo(() => ({
@@ -52,6 +68,7 @@ export default function AppProvider({ children }) {
     setToken,
     users,
     setUsers,
+    deleteUser,
   }), [cart, totalValue, user, message, token, users]);
 
   return (

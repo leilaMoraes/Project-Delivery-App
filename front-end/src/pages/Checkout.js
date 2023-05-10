@@ -4,9 +4,10 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import Input from '../components/Input';
-import CheckoutTable from '../components/CheckoutTable';
+import Table from '../components/Table';
 import requests from '../services/requests';
 import TotalPrice from '../components/TotalPrice';
+import Title from '../components/Title';
 
 export default function Checkout() {
   const table = ['Item', 'Description', 'Quantity', 'Unit Price', 'Sub-Total',
@@ -57,24 +58,23 @@ export default function Checkout() {
   };
 
   return (
-    <div className="flex flex-col items-center h-screen ">
+    <div className="mt-12 flex flex-col items-center justify-evenly h-full">
       <Header />
-      <div className="mt-20 w-5/6 h-3/4">
-        <h1 className="font-medium mb-3">Finish Orders</h1>
+      <div className="w-5/6 h-2/3">
+        <Title name="Finish Orders" />
         <div
-          className="flex flex-col border shadow justify-between w-full h-full
-          overflow-x-auto"
+          className="flex flex-col border shadow w-full h-5/6 overflow-x-auto"
         >
-          <CheckoutTable
-            table={ table }
-            cartItems={ cart }
+          <Table
+            tableH={ table }
+            tableB={ cart }
             screen="checkout"
           />
           <TotalPrice testid="customer_checkout" />
         </div>
       </div>
-      <div className="mt- 20 w-5/6 h-2/4">
-        <h1>Details and Delivery Address</h1>
+      <div className="w-5/6 h-1/3">
+        <Title name="Details and Delivery Address" />
         <div>
           <select
             id="salespersonInput"

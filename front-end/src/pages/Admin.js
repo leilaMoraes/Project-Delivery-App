@@ -4,10 +4,14 @@ import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 import requests from '../services/requests';
 import Table from '../components/Table';
+import Title from '../components/Title';
 
 function Admin() {
-  const { message, user, token, setUsers } = useContext(AppContext);
+  const table = ['Item', 'Name', 'E-mail', 'Role', 'Delete'];
+
+  const { message, user, token, setUsers, users } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -23,19 +27,29 @@ function Admin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div>
+    <div className="flex flex-col items-center h-screen">
       <Header />
-      <h3 className="mt-12">Register New User</h3>
+      <div className="w-5/6 mt-12">
+        <Title name="Register New User" />
+        <Form />
+      </div>
       {message && (
         <p
+          className="mt-10 mb-5"
           data-testid="admin_manage__element-invalid-register"
         >
           {message}
         </p>
       )}
-      <Form />
-      <h3>Users List</h3>
-      {loading ? <p>Loading...</p> : (<Table />)}
+      <div className="w-5/6">
+        <Title name="Users List" />
+        <div
+          className="flex flex-col border shadow overflow-x-auto h-72"
+        >
+          {loading ? <p>Loading...</p> : (
+            <Table tableH={ table } tableB={ users } screen="admin_manage" />)}
+        </div>
+      </div>
     </div>
   );
 }
