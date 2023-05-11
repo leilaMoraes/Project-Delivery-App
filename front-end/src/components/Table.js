@@ -69,10 +69,7 @@ export default function Table({ tableH, tableB, screen }) {
             </tr>
           ))) : (
           Object.entries(tableB).map(([id, { name, price, quantity }], i) => (
-            <tr
-              className="w-full"
-              key={ i }
-            >
+            <tr key={ i }>
               <td
                 className="bg-green-light text-center font-medium p-2 rounded-l-lg"
                 data-testid={ `${user.role}_${screen}${ELE1}item-number-${i}` }
