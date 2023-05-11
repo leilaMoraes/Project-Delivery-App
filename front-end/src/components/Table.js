@@ -17,7 +17,7 @@ export default function Table({ tableH, tableB, screen }) {
         <tr>
           {tableH.map((items, i) => (
             <th
-              className="p-2 text-sm font-normal"
+              className="text-sm font-normal"
               key={ i }
             >
               {items}
