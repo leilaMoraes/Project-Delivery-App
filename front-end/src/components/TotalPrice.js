@@ -11,7 +11,8 @@ function TotalPrice(props) {
   return (
     <div className="flex justify-end m-2">
       <span
-        className="bg-green-dark text-white text-3xl text-center font-medium rounded px-4"
+        className="bg-green-dark rounded px-4 py-1
+         text-white text-3xl text-center font-medium"
         data-testid={ `${testid}__element-order-total-price` }
       >
         {newValue}

@@ -40,17 +40,19 @@ export default function TableHeader({ order }) {
   }, []);
 
   return (
-    <div className="flex justify-around">
+    <div className="flex justify-between py-2">
       <span
         data-testid={ user.role === 'customer'
           ? 'customer_order_details__element-order-details-label-order-id'
           : 'seller_order_details__element-order-details-label-order-id' }
+        className="font-bold text-xl"
       >
         {`ORDER ${newId}`}
       </span>
       {role === 'customer' && (
         <span
           data-testid="customer_order_details__element-order-details-label-seller-name"
+          className="font-bold text-xl"
         >
           {`Seller: ${sellerName}`}
         </span>
@@ -59,12 +61,14 @@ export default function TableHeader({ order }) {
         data-testid={ user.role === 'customer'
           ? 'customer_order_details__element-order-details-label-order-date'
           : 'seller_order_details__element-order-details-label-order-date' }
+        className="font-bold text-xl"
+
       >
         {date}
       </span>
       <div
         className={ `flex ${getColor()} rounded-lg items-center
-        font-bold text-lg justify-center w-[150px] py-2 px-4` }
+        font-bold text-xl justify-center w-[150px] px-4` }
       >
         <span
           data-testid={ user.role === 'customer'
@@ -77,7 +81,7 @@ export default function TableHeader({ order }) {
       </div>
       {user.role === 'seller' && (
         <Button
-          btnClass="bg-green-light hover:bg-green-hover2 text-white py-2 px-4
+          btnClass="bg-green-light hover:bg-green-hover2 text-white  px-4
           rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           dataName="seller_order_details__button-preparing-check"
           disabled={ status !== 'Pendente' }
@@ -85,8 +89,9 @@ export default function TableHeader({ order }) {
         />
       )}
       <Button
-        btnClass="bg-green-dark hover:bg-green-hover1 text-white py-2 px-4
-        rounded-lg text-lg disabled:opacity-80 disabled:cursor-not-allowed"
+        btnClass="bg-green-dark px-4 rounded-lg
+        text-lg font-medium text-white
+        disabled:opacity-80 disabled:cursor-not-allowed hover:bg-green-hover1 "
         dataName={ user.role === 'seller'
           ? 'seller_order_details__button-dispatch-check'
           : 'customer_order_details__button-delivery-check' }

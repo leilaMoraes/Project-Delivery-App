@@ -8,8 +8,12 @@ export default function Table({ tableH, tableB, screen }) {
   const ELE1 = '__element-order-table-';
 
   return (
-    <table className="mx-2">
-      <thead>
+    // CHECK WIDTH TABLE
+    <table
+      className="table-auto border-separate border-spacing-y-1.5
+      w-full"
+    >
+      <thead className="mx-2">
         <tr>
           {tableH.map((items, i) => (
             <th
@@ -20,11 +24,11 @@ export default function Table({ tableH, tableB, screen }) {
             </th>))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="m-[100px]">
         { screen === 'admin_manage' ? (
           tableB.map(({ id, name, email, role }, index) => (
             <tr
-              className="border-b border-b-4 border-white"
+              className="border"
               key={ id }
             >
               <td
@@ -66,11 +70,11 @@ export default function Table({ tableH, tableB, screen }) {
           ))) : (
           Object.entries(tableB).map(([id, { name, price, quantity }], i) => (
             <tr
-              className="border-b border-b-4 border-white"
+              className="w-full"
               key={ i }
             >
               <td
-                className="bg-green-light text-center font-medium p-2"
+                className="bg-green-light text-center font-medium p-2 rounded-l-lg"
                 data-testid={ `${user.role}_${screen}${ELE1}item-number-${i}` }
               >
                 {i + 1}
@@ -96,8 +100,10 @@ export default function Table({ tableH, tableB, screen }) {
                 {price.toFixed(2).replace('.', ',')}
               </td>
               <td
-                className="bg-blue-light text-white text-center font-medium"
+                // className="bg-blue-light text-white text-center font-medium"
                 data-testid={ `${user.role}_${screen}${ELE1}sub-total-${i}` }
+                className={ `bg-blue-light text-white text-center font-medium 
+                ${screen === 'order_details' && 'rounded-r-lg'}` }
               >
                 R$
                 {' '}
@@ -107,7 +113,7 @@ export default function Table({ tableH, tableB, screen }) {
               && (
                 <td
                   className="bg-green-light text-white text-center font-medium
-                hover:bg-green-hover2"
+                hover:bg-green-hover2 rounded-r-lg"
                 >
                   <Button
                     btnClass="w-full text-xl"

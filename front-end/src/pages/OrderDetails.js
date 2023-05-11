@@ -19,18 +19,21 @@ export default function OrderDetails() {
   return (
     <div>
       <Header />
-      <div className="mt-12">
-        <Title name="Order Detail" />
-        <TableHeader order={ order } />
-        <Table
-          tableH={ table }
-          tableB={ order.products }
-          screen="order_details"
-        />
-        <TotalPrice
-          testid={ `${user.role}` === 'customer' ? 'customer_order_details'
-            : 'seller_order_details' }
-        />
+      <div className="mt-12 w-[95%] m-auto">
+
+        <Title name="Order Details" />
+        <div className="border-border0 border-[1px] bg-bg0 w-full px-2">
+          <TableHeader order={ order } />
+          <Table
+            tableH={ table }
+            tableB={ order.products }
+            screen="order_details"
+          />
+          <TotalPrice
+            testid={ `${user.role}` === 'customer' ? 'customer_order_details'
+              : 'seller_order_details' }
+          />
+        </div>
       </div>
     </div>
   );
