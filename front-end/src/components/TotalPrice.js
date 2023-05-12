@@ -9,7 +9,7 @@ function TotalPrice(props) {
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`;
 
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end pt-2">
       <span
         className="bg-green-dark rounded px-4 py-1
          text-white text-3xl text-center font-medium"

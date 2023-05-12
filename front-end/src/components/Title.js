@@ -5,7 +5,7 @@ function Title(props) {
   const { name } = props;
 
   return (
-    <h1 className="font-medium my-3">{name}</h1>
+    <h1 className="font-medium mb-1 mt-4 text-left text- w-full">{name}</h1>
   );
 }
 
