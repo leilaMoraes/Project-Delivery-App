@@ -33,11 +33,14 @@ export default function OrdersCard(props) {
     <Link
       to={ currentPath === orderSeller
         ? `/seller/orders/${id}` : `/customer/orders/${id}` }
-      className={ `flex border border-bgLBorder shadow-lg w-[399px]
+      className={ `flex border bg-bg0 border-bgLBorder shadow-lg drop-shadow-md w-[399px]
       ${currentPath === orderSeller ? 'h-36' : 'h-24'}` }
     >
-      <div className="flex flex-col items-center h-full w-[133px] justify-center">
-        <span className="text-sm">Pedido</span>
+      <div
+        className="flex flex-col items-center h-full w-[113px] justify-center
+       bg-white"
+      >
+        <span className="text-sm">Order</span>
         <span
           className="text-lg"
           data-testid={ currentPath === orderSeller
@@ -47,7 +50,7 @@ export default function OrdersCard(props) {
           {newId}
         </span>
       </div>
-      <div className="flex flex-col h-full w-[266px] bg-bg0">
+      <div className="flex flex-col h-full w-[286px] bg-bg0 ">
         <div className="flex flex-wrap justify-evenly h-full">
           <div
             className={ `flex ${getColor()} rounded-lg items-center
@@ -85,10 +88,10 @@ export default function OrdersCard(props) {
         </div>
         {currentPath === orderSeller
           && (
-            <div className="flex items-center justify-center h-[45px]">
+            <div className="flex items-center justify-center h-[45px] ">
               <span
                 data-testid={ `seller_orders__element-card-address-${id}` }
-                className="text-xs"
+                className="pr-3 text-xs w-full text-right"
               >
                 {`${deliveryAddress}, ${deliveryNumber}`}
               </span>

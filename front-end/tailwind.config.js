@@ -17,6 +17,7 @@ module.exports = {
           dark: '#421981',
           hoverLgOut: '#0561e0',
         },
+        white: '#FFFFFF',
         delivered: '#00CC9B',
         inTransit: '#5bb5d9',
         preparing: '#66CC00',
