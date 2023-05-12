@@ -11,10 +11,10 @@ saleRouter.post('/', saleController.create);
 
 saleRouter.get('/customer/:id', validadeCustomer, saleController.getCustomerSales);
 
+saleRouter.patch('/status/:id', saleController.updateStatus);
+
 saleRouter.use(validateSeller);
 
 saleRouter.get('/seller/:id', saleController.getSellerSales);
-
-saleRouter.patch('/status/:id', saleController.updateStatus);
 
 module.exports = saleRouter;

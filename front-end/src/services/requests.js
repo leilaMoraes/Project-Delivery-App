@@ -23,6 +23,9 @@ const requests = {
   salesSeller: (id, headers) => instance.get(`/sales/seller/${id}`, headers),
   salesCustomer: (id, headers) => instance.get(`/sales/customer/${id}`, headers),
   getSales: (role, id, headers) => instance.get(`/sales/${role}/${id}`, headers),
+  patchStatus: (id, status, headers) => {
+    instance.patch(`/sales/status/${id}`, { status }, headers);
+  },
 };
 
 export default requests;

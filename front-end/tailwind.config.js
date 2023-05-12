@@ -18,6 +18,7 @@ module.exports = {
           hoverLgOut: '#0561e0',
         },
         delivered: '#00CC9B',
+        inTransit: '#5bb5d9',
         preparing: '#66CC00',
         pending: '#CCB800',
         bg0: '#EAF1EF',

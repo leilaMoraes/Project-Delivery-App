@@ -71,25 +71,26 @@ export default function Table({ tableH, tableB, screen }) {
           Object.entries(tableB).map(([id, { name, price, quantity }], i) => (
             <tr key={ i }>
               <td
-                className="bg-green-light text-center font-medium p-2 rounded-l-lg"
+                className="bg-green-light text-center font-medium p-2
+                rounded-l-lg w-[60px]"
                 data-testid={ `${user.role}_${screen}${ELE1}item-number-${i}` }
               >
                 {i + 1}
               </td>
               <td
-                className="bg-bg0 pl-2 w-3/6"
+                className="bg-bg0 pl-2 w-auto"
                 data-testid={ `${user.role}_${screen}${ELE1}name-${i}` }
               >
                 {name}
               </td>
               <td
-                className="bg-green-dark text-white text-center font-medium"
+                className="bg-green-dark text-white text-center font-medium w-[80px]"
                 data-testid={ `${user.role}_${screen}${ELE1}quantity-${i}` }
               >
                 {quantity}
               </td>
               <td
-                className="bg-blue-dark text-white text-center font-medium"
+                className="bg-blue-dark text-white text-center font-medium w-[100px]"
                 data-testid={ `${user.role}_${screen}${ELE1}unit-price-${i}` }
               >
                 R$
@@ -99,7 +100,7 @@ export default function Table({ tableH, tableB, screen }) {
               <td
                 // className="bg-blue-light text-white text-center font-medium"
                 data-testid={ `${user.role}_${screen}${ELE1}sub-total-${i}` }
-                className={ `bg-blue-light text-white text-center font-medium 
+                className={ `bg-blue-light text-white text-center font-medium w-[100px]
                 ${screen === 'order_details' && 'rounded-r-lg'}` }
               >
                 R$

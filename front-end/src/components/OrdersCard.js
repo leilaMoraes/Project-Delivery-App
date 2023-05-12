@@ -19,10 +19,12 @@ export default function OrdersCard(props) {
     switch (status.toLowerCase()) {
     case 'pendente':
       return 'bg-pending';
-    case 'entregue':
-      return 'bg-delivered';
     case 'preparando':
       return 'bg-preparing';
+    case 'entregue':
+      return 'bg-delivered';
+    case 'em trânsito':
+      return 'bg-inTransit';
     default:
     }
   }

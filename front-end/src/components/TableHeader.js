@@ -8,6 +8,7 @@ export default function TableHeader({ order }) {
   const { user, role, token } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const { id, sellerId, saleDate, status } = order;
+  const [orderStatus, setOrderStatus] = useState(status);
   const seller = sellers.find((sell) => sell.id === sellerId);
   const sellerName = seller?.name;
 
@@ -15,18 +16,6 @@ export default function TableHeader({ order }) {
   const newId = String(id).padStart(magicNumber, '0');
   const newDate = new Date(saleDate);
   const date = new Intl.DateTimeFormat('pt-BR').format(newDate);
-
-  function getColor() {
-    switch (status.toLowerCase()) {
-    case 'pendente':
-      return 'bg-pending';
-    case 'entregue':
-      return 'bg-delivered';
-    case 'preparando':
-      return 'bg-preparing';
-    default:
-    }
-  }
 
   // REFACTOR FETCHES TO USE CONTEXT
   useEffect(() => {
@@ -39,8 +28,32 @@ export default function TableHeader({ order }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // REFACTOR TO CHECK STATUS ON BACKEND
+  const handleStatus = async (newStatus) => {
+    const headers = { headers: { authorization: token } };
+    const response = await requests.patchStatus(id, newStatus, headers);
+    // const response2 = await requests.getProducts(headers);
+    console.log('status', response);
+    console.log('response');
+    return setOrderStatus(newStatus);
+  };
+
+  function getColor() {
+    switch (orderStatus.toLowerCase()) {
+    case 'pendente':
+      return 'bg-pending';
+    case 'preparando':
+      return 'bg-preparing';
+    case 'entregue':
+      return 'bg-delivered';
+    case 'em trânsito':
+      return 'bg-inTransit';
+    default:
+    }
+  }
+
   return (
-    <div className="flex justify-between py-2">
+    <div className="flex justify-between py-2 gap-3">
       <span
         data-testid={ user.role === 'customer'
           ? 'customer_order_details__element-order-details-label-order-id'
@@ -76,7 +89,7 @@ export default function TableHeader({ order }) {
             : `seller_order_details__element-order-details-label-delivery-status-${id}` }
           className="text-center"
         >
-          {status}
+          {orderStatus}
         </span>
       </div>
       {user.role === 'seller' && (
@@ -84,8 +97,9 @@ export default function TableHeader({ order }) {
           btnClass="bg-green-light hover:bg-green-hover2 text-white  px-4
           rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           dataName="seller_order_details__button-preparing-check"
-          disabled={ status !== 'Pendente' }
+          disabled={ orderStatus !== 'Pendente' }
           btnName="PREPARAR PEDIDO"
+          onClick={ () => handleStatus('Preparando') }
         />
       )}
       <Button
@@ -95,14 +109,16 @@ export default function TableHeader({ order }) {
         dataName={ user.role === 'seller'
           ? 'seller_order_details__button-dispatch-check'
           : 'customer_order_details__button-delivery-check' }
-        disabled={ status !== 'Preparando' }
+        disabled={ user.role === 'seller'
+          ? orderStatus !== 'Preparando' : orderStatus !== 'Em Trânsito' }
         btnName={ user.role === 'seller' ? 'SAIU PARA ENTREGA' : 'MARCAR COMO ENTREGUE' }
+        onClick={ user.role === 'seller'
+          ? () => handleStatus('Em Trânsito') : () => handleStatus('Entregue') }
       />
     </div>
   );
 }
 
-// generate proptypes
 TableHeader.propTypes = {
   order: PropTypes.shape({
     id: PropTypes.number,
