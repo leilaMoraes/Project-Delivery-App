@@ -29,7 +29,7 @@ function Admin() {
   return (
     <div className="flex flex-col items-center h-screen">
       <Header />
-      <div className="w-5/6 mt-12">
+      <div className="w-5/6 mt-12 bg-tableBg">
         <Title name="Register New User" />
         <Form />
       </div>
@@ -44,7 +44,10 @@ function Admin() {
       <div className="w-5/6">
         <Title name="Users List" />
         <div
-          className="flex flex-col border shadow overflow-x-auto h-72"
+          // className="flex flex-col border shadow overflow-x-auto h-72 bg-tableBg"
+          className="flex flex-col  h-5/6 overflow-x-auto
+          border-border0 border-[1px] bg-tableBg w-full px-2 pb-2 pt-1
+          shadow-lg drop-shadow-md"
         >
           {loading ? <p>Loading...</p> : (
             <Table tableH={ table } tableB={ users } screen="admin_manage" />)}

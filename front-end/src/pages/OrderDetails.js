@@ -23,7 +23,7 @@ export default function OrderDetails() {
 
         <Title name="Order Details" />
         <div
-          className="border-border0 border-[1px] bg-bg0 w-full p-2
+          className="border-border0 border-[1px] bg-tableBg w-full p-2
         shadow-lg drop-shadow-md"
         >
           <TableHeader order={ order } />

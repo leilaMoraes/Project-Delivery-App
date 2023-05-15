@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
@@ -40,13 +41,13 @@ export default function TableHeader({ order }) {
 
   function getColor() {
     switch (orderStatus.toLowerCase()) {
-    case 'pendente':
+    case 'pending':
       return 'bg-pending';
-    case 'preparando':
+    case 'preparing':
       return 'bg-preparing';
-    case 'entregue':
+    case 'delivered':
       return 'bg-delivered';
-    case 'em trânsito':
+    case 'in transit':
       return 'bg-inTransit';
     default:
     }
@@ -97,9 +98,9 @@ export default function TableHeader({ order }) {
           btnClass="bg-green-light hover:bg-green-hover2 text-white  px-4
           rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           dataName="seller_order_details__button-preparing-check"
-          disabled={ orderStatus !== 'Pendente' }
+          disabled={ orderStatus !== 'pending' }
           btnName="PREPARAR PEDIDO"
-          onClick={ () => handleStatus('Preparando') }
+          onClick={ () => handleStatus('preparing') }
         />
       )}
       <Button
@@ -110,10 +111,10 @@ export default function TableHeader({ order }) {
           ? 'seller_order_details__button-dispatch-check'
           : 'customer_order_details__button-delivery-check' }
         disabled={ user.role === 'seller'
-          ? orderStatus !== 'Preparando' : orderStatus !== 'Em Trânsito' }
-        btnName={ user.role === 'seller' ? 'SAIU PARA ENTREGA' : 'MARCAR COMO ENTREGUE' }
+          ? orderStatus !== 'preparing' : orderStatus !== 'in transit' }
+        btnName={ user.role === 'seller' ? 'SAIU PARA ENTREGA' : 'MARCAR COMO delivered' }
         onClick={ user.role === 'seller'
-          ? () => handleStatus('Em Trânsito') : () => handleStatus('Entregue') }
+          ? () => handleStatus('in transit') : () => handleStatus('delivered') }
       />
     </div>
   );

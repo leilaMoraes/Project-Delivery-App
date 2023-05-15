@@ -5,6 +5,7 @@ import Input from '../components/Input';
 import AppContext from '../context/AppContext';
 import requests from '../services/requests';
 import { getRoute } from '../utils/tokenValidation';
+import logo from '../images/icons8-sheep-on-bike-480.svg';
 
 function Login() {
   const { setUser, setToken } = useContext(AppContext);
@@ -55,7 +56,13 @@ function Login() {
 
   return (
     <div className="bg-gray-100 h-screen flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4 text-center">Nome do App</h1>
+      <img src={ logo } alt="logo" className="sm:w-3/4 md:w-1/3 lg:w-1/4" />
+      <h1 className="text-3xl font-roboto uppercase font-bold text-gray-900 text-center">
+        Thirsty Sheep
+        <br />
+        Delivery
+      </h1>
+
       <div
         className="flex flex-col bg-bgLogin border border-bgLBorder shadow-lg p-8 m-4
         sm:w-3/4 md:w-1/3 lg:w-1/4"
@@ -74,7 +81,7 @@ function Login() {
         />
         <Input
           classLabel="mt-2 text-black"
-          label="Senha"
+          label="Password"
           classInput="mt-2 border border-gray-400 py-3 px-4 rounded w-full shadow"
           type="password"
           inputName="inputPassword"
@@ -97,7 +104,7 @@ function Login() {
           rounded-lg text-lg"
           dataName="common_login__button-register"
           onClick={ onClickRegister }
-          btnName="Ainda não tenho conta"
+          btnName="Create New Account"
         />
       </div>
       {showMessage

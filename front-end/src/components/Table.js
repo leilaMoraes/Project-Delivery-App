@@ -32,13 +32,14 @@ export default function Table({ tableH, tableB, screen }) {
               key={ id }
             >
               <td
-                className="bg-green-light text-center font-medium p-2 w-[2px]"
+                className="bg-green-light text-center font-medium p-2
+                  rounded-l-lg w-[60px]"
                 data-testid={ `admin_manage__element-user-table-item-number-${index}` }
               >
                 {index + 1}
               </td>
               <td
-                className="bg-bg0 pl-2"
+                className="bg-bg0 pl-2 w-auto"
                 data-testid={ `admin_manage__element-user-table-name-${index}` }
               >
                 {name}
@@ -57,7 +58,7 @@ export default function Table({ tableH, tableB, screen }) {
               </td>
               <td
                 className="bg-blue-light text-white text-center font-medium
-                hover:bg-blue-hoverLgOut"
+                hover:bg-blue-hoverLgOut rounded-r-lg"
               >
                 <Button
                   btnClass="w-full text-xl"

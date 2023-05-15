@@ -70,7 +70,7 @@ export default function Checkout() {
       <div
         // className="flex flex-col border shadow w-full h-5/6 overflow-x-auto"
         className="flex flex-col  h-5/6 overflow-x-auto
-          border-border0 border-[1px] bg-bg0 w-full px-2 pb-2 pt-1
+          border-border0 border-[1px] bg-tableBg w-full px-2 pb-2 pt-1
           shadow-lg drop-shadow-md"
       >
         <Table

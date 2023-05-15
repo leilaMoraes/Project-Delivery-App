@@ -6,7 +6,7 @@ import Router from './Routes';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App font-roboto">
       <ToastContainer />
       <Router />
     </div>

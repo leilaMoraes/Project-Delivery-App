@@ -60,7 +60,7 @@ export default function Header() {
           btnName={ handleBtnName() }
         />
       </div>
-      <div>
+      <div className="bg-blue-dark h-full">
         <p
           className="text-white bg-blue-dark px-4 py-2 h-full inline-block"
           data-testid="customer_products__element-navbar-user-full-name"

@@ -17,13 +17,13 @@ export default function OrdersCard(props) {
 
   function getColor() {
     switch (status.toLowerCase()) {
-    case 'pendente':
+    case 'pending':
       return 'bg-pending';
-    case 'preparando':
+    case 'preparing':
       return 'bg-preparing';
-    case 'entregue':
+    case 'delivered':
       return 'bg-delivered';
-    case 'em trânsito':
+    case 'in transit':
       return 'bg-inTransit';
     default:
     }
