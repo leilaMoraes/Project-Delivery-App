@@ -25,7 +25,11 @@ export default function Products() {
   return (
     <div>
       <Header />
-      <div className="flex flex-wrap mt-12 place-content-center gap-4">
+      <div
+        className="mt-16 mb-4 center gap-4
+        px-9 m-auto justify-items-center
+        grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+      >
         {products.map((product) => (
           <ProductCard
             key={ product.id }
@@ -37,7 +41,7 @@ export default function Products() {
         type="button"
         data-testid="customer_products__button-cart"
         className="bg-green-dark rounded-md fixed bottom-0 right-0 m-4 px-4 py-2
-        text-white"
+        text-white font-semibold"
         onClick={ () => navigate('/customer/checkout') }
         disabled={ totalValue === 0 }
       >
@@ -45,7 +49,7 @@ export default function Products() {
         {' '}
         <span
           data-testid="customer_products__checkout-bottom-value"
-          className="text-bold text-white font-bold"
+          className="font-extrabold text-white"
         >
           {totalValue.toFixed(2).replace('.', ',')}
         </span>

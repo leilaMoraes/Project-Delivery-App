@@ -37,13 +37,14 @@ export default function Header() {
   };
   return (
     <header
-      className="fixed top-0 left-0 w-full bg-green-dark
-      z-50 shadow-md flex justify-between items-center"
+      className="bg-green-dark fixed top-0 left-0 w-full
+      z-50 shadow-md flex justify-between items-center flex-row
+      sm:text-sm md:text-lg sm:h-[40px] md:h-[55px]"
     >
-      <div>
+      <div className="h-full min-w-screen flex flex-row whitespace-nowrap">
         {role === 'customer' && (
           <Button
-            btnClass={ `px-4 py-2 h-full font-bold ${currentPath === actualPage
+            btnClass={ `md:px-8 px-2.5 py-2 h-full font-bold ${currentPath === actualPage
               ? 'text-black bg-green-light hover:bg-green-hover2'
               : 'text-white bg-green-dark hover:bg-green-hover1'}` }
             dataName="customer_products__element-navbar-link-products"
@@ -52,7 +53,7 @@ export default function Header() {
           />
         )}
         <Button
-          btnClass={ `px-4 py-2 h-full font-bold ${currentPath === actualPage
+          btnClass={ `md:px-8 px-2.5 py-2 h-full font-bold ${currentPath === actualPage
             ? 'text-white bg-green-dark hover:bg-green-hover1'
             : 'text-black bg-green-light hover:bg-green-hover2'}` }
           dataName="customer_products__element-navbar-link-orders"
@@ -60,15 +61,17 @@ export default function Header() {
           btnName={ handleBtnName() }
         />
       </div>
-      <div className="bg-blue-dark h-full">
-        <p
-          className="text-white bg-blue-dark px-4 py-2 h-full inline-block"
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-          {name}
-        </p>
+      <div className=" h-full flex whitespace-nowrap text-clip">
+        {}
         <Button
-          btnClass="text-white bg-blue-light hover:bg-blue-hoverLgOut px-4 py-2 h-full"
+          btnClass="md:px-8 px-2.5 text-white bg-blue-dark py-2 h-full flex flex-shrink
+          hidden md:block"
+          dataName="customer_products__element-navbar-link-logout"
+          btnName={ name }
+        />
+        <Button
+          btnClass="md:px-8 px-2.5 py-2 h-full text-white bg-blue-light
+          hover:bg-blue-hoverLgOut "
           dataName="customer_products__element-navbar-link-logout"
           onClick={ handleLogout }
           btnName="Logout"

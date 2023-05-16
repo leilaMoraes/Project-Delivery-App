@@ -99,7 +99,7 @@ export default function TableHeader({ order }) {
           rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           dataName="seller_order_details__button-preparing-check"
           disabled={ orderStatus !== 'pending' }
-          btnName="PREPARAR PEDIDO"
+          btnName="START PREPARING"
           onClick={ () => handleStatus('preparing') }
         />
       )}
@@ -112,7 +112,7 @@ export default function TableHeader({ order }) {
           : 'customer_order_details__button-delivery-check' }
         disabled={ user.role === 'seller'
           ? orderStatus !== 'preparing' : orderStatus !== 'in transit' }
-        btnName={ user.role === 'seller' ? 'SAIU PARA ENTREGA' : 'MARCAR COMO delivered' }
+        btnName={ user.role === 'seller' ? 'OUT FOR DELIVERY' : 'MARK AS RECEIVED' }
         onClick={ user.role === 'seller'
           ? () => handleStatus('in transit') : () => handleStatus('delivered') }
       />

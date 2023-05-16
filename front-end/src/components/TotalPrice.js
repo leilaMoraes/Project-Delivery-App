@@ -23,7 +23,7 @@ export default function TotalPrice(props) {
     <div className="flex justify-end pt-2">
       <span
         className="bg-green-dark rounded px-4 py-1
-         text-white text-3xl text-center font-medium"
+         text-white text-3xl text-center font-bold "
         data-testid={ `${testid}__element-order-total-price` }
       >
         {newValue}

@@ -5,7 +5,7 @@ import Input from '../components/Input';
 import AppContext from '../context/AppContext';
 import requests from '../services/requests';
 import { getRoute } from '../utils/tokenValidation';
-import logo from '../images/icons8-sheep-on-bike-480.svg';
+import logo from '../images/icons8-sheep-on-bike-160.svg';
 
 function Login() {
   const { setUser, setToken } = useContext(AppContext);
@@ -56,7 +56,12 @@ function Login() {
 
   return (
     <div className="bg-gray-100 h-screen flex flex-col items-center justify-center">
-      <img src={ logo } alt="logo" className="sm:w-3/4 md:w-1/3 lg:w-1/4" />
+      <img
+        src={ logo }
+        alt="logo"
+        className="h-full max-h-96 mt-1"
+        // className="w-2/4 md:w-1/3 lg:w-1/4"
+      />
       <h1 className="text-3xl font-roboto uppercase font-bold text-gray-900 text-center">
         Thirsty Sheep
         <br />

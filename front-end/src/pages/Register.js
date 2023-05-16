@@ -112,7 +112,7 @@ function Register() {
           && password.length < magicPassword
           && (
             <p className="mt-1 mb-1 text-red-600">
-              Password must be 6 characters
+              Password must have at least 6 characters
             </p>)}
         <Button
           btnClass="mt-6 bg-green-dark hover:bg-green-hover1 text-white py-3 px-4
@@ -120,7 +120,7 @@ function Register() {
           dataName="common_register__button-register"
           disabled={ !(email.match(/\S+@\S+\.\S+/i)) || (password.length < magicPassword) || (name.length < magicName) }
           onClick={ onClickRegister }
-          btnName="CADASTRAR"
+          btnName="REGISTER"
         />
       </div>
       {showMessage

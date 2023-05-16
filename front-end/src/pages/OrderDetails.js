@@ -21,7 +21,7 @@ export default function OrderDetails() {
   return (
     <div>
       <Header />
-      <div className="mt-12 w-[95%] m-auto">
+      <div className="mt-16 w-[95%] m-auto">
 
         <Title name="Order Details" />
         <div

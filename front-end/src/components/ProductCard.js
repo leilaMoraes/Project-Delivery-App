@@ -33,7 +33,9 @@ export default function ProductCard(props) {
   return (
     <div
       className="border border-border0 shadow-md overflow-hidden
-     w-[359px] h-[479px] flex flex-col justify-end"
+      flex flex-col justify-end min-h-[400px] w-full"
+      // min-h-[330px] max-w-[280px] min-w-[250px]"
+      // w-[359px] h-[479px]
     >
       <div
         className="relative h-full"

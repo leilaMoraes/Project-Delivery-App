@@ -65,7 +65,7 @@ export default function Checkout() {
   return (
     <div
       className="mt-12 flex flex-col items-center justify-evenly
-    h-full w-5/6 m-auto"
+    h-full w-[97%] md:w-5/6 m-auto"
     >
       <Header />
       <Title name="Finish Orders" />
@@ -91,7 +91,7 @@ export default function Checkout() {
         shadow-lg drop-shadow-md"
         // className="w-5/6 h-1/3"
       >
-        <div className="w-full flex flex-row gap-2">
+        <div className="w-full flex flex-col md:flex-row gap-2">
           <label htmlFor="salespersonInput" className="w-fit flex flex-col">
             Seller
             <select
@@ -119,14 +119,14 @@ export default function Checkout() {
             value={ address }
             dataName="customer_checkout__input-address"
             classInput="mt-2 border border-gray-400 bg-white
-            py-3 px-4 rounded shadow"
+            py-3 px-4 rounded shadow w-auto"
             onChange={ ({ target }) => setAddress(target.value) }
           />
           <Input
             label="Number"
             type="text"
             inputName="addressNumberInput"
-            classLabel="mb-2 text-black flex flex-col w-1/6"
+            classLabel="mb-2 text-black flex flex-col w-[180px]"
             id="addressNumberInput"
             value={ addressNumber }
             dataName="customer_checkout__input-address-number"
@@ -138,7 +138,7 @@ export default function Checkout() {
 
         <Button
           btnClass="bg-green-dark rounded-lg self-center
-          w-fit m-2 mt-4 px-20 py-4
+          w-fit m-2 mt-4 w:px-20 px-10 py-4
           text-2xl font-bold text-white
           disabled:opacity-80 disabled:cursor-not-allowed hover:bg-green-hover1 "
           dataName="customer_checkout__button-submit-order"
