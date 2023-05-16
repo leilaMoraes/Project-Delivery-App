@@ -34,16 +34,13 @@ export default function ProductCard(props) {
     <div
       className="border border-border0 shadow-md overflow-hidden
      w-[359px] h-[479px] flex flex-col justify-end"
-      id="teste1"
     >
       <div
         className="relative h-full"
-        id="teste1"
       >
         <div
           className="absolute top-0 left-0 bg-bg0
-           text-black font-bold px-3 py-1 z-10 m-2"
-          id="teste1"
+           text-black font-bold px-3 py-1 z-10 m-2 rounded-lg"
         >
           R$
           {' '}
@@ -57,18 +54,15 @@ export default function ProductCard(props) {
           data-testid={ `customer_products__img-card-bg-image-${id}` }
           src={ urlImage }
           alt={ name }
-          // className="w-[120px] h-[120px]"
           className="absolute h-full object-cover inset-0 mx-auto"
         />
       </div>
 
       <div
         className="p-4 bg-bg0"
-        id="teste1"
       >
         <div
           className="flex flex-col justify-center"
-          id="teste1"
         >
           <h2
             data-testid={ `customer_products__element-card-title-${id}` }
@@ -78,12 +72,11 @@ export default function ProductCard(props) {
           </h2>
           <div
             className="flex justify-center"
-            id="teste1"
           >
             <button
               data-testid={ `customer_products__button-card-rm-item-${id}` }
               className="rounded-l-lg bg-green-dark w-7 h-7
-               font-extrabold text-white"
+               font-extrabold text-2xl text-white leading-3"
               type="button"
               onClick={ handleRemoveOne }
             >
@@ -105,7 +98,7 @@ export default function ProductCard(props) {
               TEXT
               data-testid={ `customer_products__button-card-add-item-${id}` }
               className="rounded-r-lg bg-green-dark w-7 h-7
-               font-extrabold text-white "
+               font-extrabold text-xl text-white leading-3"
               type="button"
               onClick={ handleAddOne }
             >

@@ -17,7 +17,7 @@ export default function Checkout() {
     'Remove Item'];
 
   const navigate = useNavigate();
-  const { totalValue, token, cart, user, getSales } = useContext(AppContext);
+  const { totalValue, token, cart, user, getSales, setCart } = useContext(AppContext);
   const [sellers, setSellers] = useState([]);
   const [salesperson, setSalesperson] = useState('');
   const [address, setAddress] = useState('');
@@ -56,6 +56,7 @@ export default function Checkout() {
       const saleId = response.data.id;
       await getSales();
       navigate(`/customer/orders/${saleId}`);
+      setCart({});
     } catch (error) {
       toast.error(error.response.data.message);
     }
