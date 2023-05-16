@@ -1,12 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import AppContext from '../context/AppContext';
+// import AppContext from '../context/AppContext';
 
-function TotalPrice(props) {
-  const { totalValue } = useContext(AppContext);
-  const { testid } = props;
-  const newValue = `Total: ${totalValue
+export default function TotalPrice(props) {
+  // const { totalValue } = useContext(AppContext);
+  const { testid, total } = props;
+  const newValue = `Total: ${total
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`;
+
+  // function getTotalValue(items) {
+  //   let totalValue = 0;
+
+  //   for (const item of items) {
+  //     const itemTotal = item.price * item.quantity;
+  //     totalValue += itemTotal;
+  //   }
+
+  //   return totalValue;
+  // }
 
   return (
     <div className="flex justify-end pt-2">
@@ -23,6 +34,5 @@ function TotalPrice(props) {
 
 TotalPrice.propTypes = {
   testid: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
 };
-
-export default TotalPrice;

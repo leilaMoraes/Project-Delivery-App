@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Table from '../components/Table';
 import TotalPrice from '../components/TotalPrice';
 import Title from '../components/Title';
+// import TableTotalPrice from '../components/TotalPrice';
 
 export default function OrderDetails() {
   const table = ['Item', 'Description', 'Quantity', 'Unit Price', 'Sub-Total'];
@@ -16,6 +17,7 @@ export default function OrderDetails() {
 
   const order = sales.find((sale) => sale.id === Number(id));
 
+  console.log(order);
   return (
     <div>
       <Header />
@@ -35,6 +37,7 @@ export default function OrderDetails() {
           <TotalPrice
             testid={ `${user.role}` === 'customer' ? 'customer_order_details'
               : 'seller_order_details' }
+            total={ order.totalPrice }
           />
         </div>
       </div>

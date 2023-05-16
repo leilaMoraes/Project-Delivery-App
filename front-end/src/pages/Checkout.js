@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +8,7 @@ import Input from '../components/Input';
 import Table from '../components/Table';
 import requests from '../services/requests';
 import TotalPrice from '../components/TotalPrice';
+// import TableTotalPrice from '../components/TotalPrice';
 import Title from '../components/Title';
 import Button from '../components/Button';
 
@@ -78,7 +80,7 @@ export default function Checkout() {
           tableB={ cart }
           screen="checkout"
         />
-        <TotalPrice testid="customer_checkout" />
+        <TotalPrice testid="customer_checkout" total={ totalValue } />
       </div>
 
       <Title name="Details and Delivery Address" />

@@ -6,6 +6,8 @@ import AppContext from '../context/AppContext';
 function Customer() {
   const { sales, getSales } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
+
+  console.log(sales);
   // const [sales, setSales] = useState([]);
 
   // useEffect(() => {
