@@ -45,10 +45,10 @@ function Form() {
     <form
       onSubmit={ createNewUser }
       className="flex flex-wrap md:flex-row overflow-x-auto
-        border-border0 border-[1px] bg-tableBg w-full px-2 pb-2 pt-1
+        border-border0 border-[1px] bg-tableBg w-full px-2 pb-4 pt-1
         shadow-lg drop-shadow-md gap-2"
     >
-      <div className="flex flex-wrap gap-3 p-2">
+      <div className="flex flex-wrap gap-3 p-2 ">
         <label htmlFor="name" className="w-fit flex flex-col">
           Name
           <input

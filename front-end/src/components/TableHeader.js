@@ -55,14 +55,14 @@ export default function TableHeader({ order }) {
 
   return (
     <div
-      className="flex justify-around md:justify-between py-2 gap-3 flex-wrap md:flex-row
-    font-bold text-lg md:text-xl "
+      className="flex justify-around py-1 gap-3 flex-wrap
+    font-bold text-lg md:text-xl items-center "
     >
       <span
         data-testid={ user.role === 'customer'
           ? 'customer_order_details__element-order-details-label-order-id'
           : 'seller_order_details__element-order-details-label-order-id' }
-        // className="font-bold text-xl"
+        // className="my-auto"
       >
         {`ORDER ${newId}`}
       </span>
@@ -85,21 +85,21 @@ export default function TableHeader({ order }) {
       </span>
       <div
         className={ `flex ${getColor()} rounded-lg items-center
-        justify-center w-[150px] px-4` }
+        justify-center w-[150px] px-4 py-0.5` }
       >
         <span
           data-testid={ user.role === 'customer'
             ? `customer_order_details__element-order-details-label-delivery-status-${id}`
             : `seller_order_details__element-order-details-label-delivery-status-${id}` }
-          className="text-center"
+          className="text-center uppercase"
         >
           {orderStatus}
         </span>
       </div>
       {user.role === 'seller' && (
         <Button
-          btnClass="bg-green-light hover:bg-green-hover2 text-white  px-4
-          rounded-lg text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          btnClass="bg-green-light  text-white px-4 rounded-lg text-lg
+            hover:bg-green-hover2 disabled:opacity-50 disabled:cursor-not-allowed"
           dataName="seller_order_details__button-preparing-check"
           disabled={ orderStatus !== 'pending' }
           btnName="START PREPARING"
@@ -108,7 +108,7 @@ export default function TableHeader({ order }) {
       )}
       <Button
         btnClass="bg-green-dark px-4 rounded-lg
-        text-lg font-medium text-white m-auto md:m-0
+        text-lg font-medium text-white py-0.5
         disabled:opacity-80 disabled:cursor-not-allowed hover:bg-green-hover1 "
         dataName={ user.role === 'seller'
           ? 'seller_order_details__button-dispatch-check'

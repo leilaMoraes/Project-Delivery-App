@@ -12,7 +12,6 @@ export default function Header() {
   const currentPath = location.pathname;
   const actualPage = '/customer/products';
   const adminProducts = '/admin/products';
-  const adminPage = '/admin/manage';
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -57,7 +56,7 @@ export default function Header() {
         )}
         <Button
           btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath
-            === actualPage || currentPath !== adminPage
+            === actualPage || currentPath === adminProducts
             ? 'text-white bg-green-dark hover:bg-green-hover1'
             : 'text-black bg-green-light hover:bg-green-hover2'}` }
           dataName="customer_products__element-navbar-link-orders"
