@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import React, { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
@@ -10,6 +11,7 @@ export default function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
   const actualPage = '/customer/products';
+  const adminProducts = '/admin/products';
   const adminPage = '/admin/manage';
 
   const handleLogout = () => {
@@ -32,7 +34,7 @@ export default function Header() {
     switch (role) {
     case 'customer': return 'MY ORDERS';
     case 'seller': return 'ORDERS';
-    case 'administrator': return 'USER MANAGEMENT';
+    case 'administrator': return 'USERS';
     default:
     }
   };
@@ -54,7 +56,8 @@ export default function Header() {
           />
         )}
         <Button
-          btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath === actualPage
+          btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath
+            === actualPage || currentPath !== adminPage
             ? 'text-white bg-green-dark hover:bg-green-hover1'
             : 'text-black bg-green-light hover:bg-green-hover2'}` }
           dataName="customer_products__element-navbar-link-orders"
@@ -63,11 +66,12 @@ export default function Header() {
         />
         {role === 'administrator' && (
           <Button
-            btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath === adminPage
+            btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath
+              !== adminProducts
               ? 'text-white bg-green-dark hover:bg-green-hover1'
               : 'text-black bg-green-light hover:bg-green-hover2'}` }
             onClick={ () => navigate('/admin/products') }
-            btnName="PRODUCT MANAGEMENT"
+            btnName="PRODUCTS"
           />
           // <button type="button" onClick={ () => navigate('/admin/products') }>
           //   PRODUCT MANAGEMENT
@@ -90,7 +94,8 @@ export default function Header() {
           {name}
         </div> */}
         <p
-          className="text-white bg-blue-dark px-6 py-3.5 h-full hidden sm:block"
+          className="text-white bg-blue-dark px-6 py-3.5 h-full hidden sm:block
+          break-normal "
           data-testid="customer_products__element-navbar-user-full-name"
         >
           {name}
