@@ -33,12 +33,11 @@ export default function OrdersCard(props) {
     <Link
       to={ currentPath === orderSeller
         ? `/seller/orders/${id}` : `/customer/orders/${id}` }
-      className={ `flex flex-row border bg-bg0 border-bgLBorder w-full max-w-[400px] 
-      shadow-lg drop-shadow-md      
-      ${currentPath === orderSeller ? 'h-32' : 'h-24'}` }
+      className={ `flex border bg-bg0 border-bgLBorder shadow-lg drop-shadow-md w-[399px]
+      ${currentPath === orderSeller ? 'h-36' : 'h-24'}` }
     >
       <div
-        className="flex flex-col items-center h-full w-1/3 justify-center
+        className="flex flex-col items-center h-full w-[113px] justify-center
        bg-white"
       >
         <span className="text-sm">Order</span>
@@ -51,11 +50,11 @@ export default function OrdersCard(props) {
           {newId}
         </span>
       </div>
-      <div className="flex flex-col h-full w-full bg-bg0 ">
-        <div className="flex flex-row h-full w-full">
+      <div className="flex flex-col h-full w-[286px] bg-bg0 ">
+        <div className="flex flex-wrap justify-evenly h-full">
           <div
-            className={ `flex w-full ${getColor()} rounded-lg items-center
-          font-bold text-lg my-2 w-1/2 justify-center` }
+            className={ `flex ${getColor()} rounded-lg items-center
+          font-bold text-lg justify-center w-[150px] my-2` }
           >
             <span
               data-testid={ currentPath === orderSeller
@@ -66,7 +65,7 @@ export default function OrdersCard(props) {
               {status}
             </span>
           </div>
-          <div className="flex flex-col text-center w-1/2 px-1.5">
+          <div className="flex flex-col justify-center text-center w-[95px]">
             <span
               data-testid={ currentPath === orderSeller
                 ? `seller_orders__element-order-date-${id}`
