@@ -26,7 +26,7 @@ export default function Products() {
     <div>
       <Header />
       <div
-        className="mt-[52px] sm:mt-[68px] mx-3 md:px-9 mb-3 center gap-4
+        className="mt-[52px] sm:mt-[68px] mx-3 md:px-9 mb-10 center gap-4
         justify-items-center
         grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
       >
@@ -41,7 +41,7 @@ export default function Products() {
         type="button"
         data-testid="customer_products__button-cart"
         className="bg-green-dark rounded-md fixed bottom-0 right-0 m-4 px-4 py-2
-        text-white font-semibold"
+        text-white font-medium text-lg"
         onClick={ () => navigate('/customer/checkout') }
         disabled={ totalValue === 0 }
       >

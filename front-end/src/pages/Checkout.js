@@ -65,7 +65,7 @@ export default function Checkout() {
   return (
     <div
       className="mt-8 md:mt-16 flex flex-col items-center justify-evenly
-    h-full w-[97%] md:w-5/6 m-auto max-w-[1100px]"
+    h-full w-[97%] md:w-5/6 m-auto max-w-[1100px] mb-4"
     >
       <Header />
       <Title name="Finish Orders" />

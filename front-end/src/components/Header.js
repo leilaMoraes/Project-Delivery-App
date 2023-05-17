@@ -76,7 +76,7 @@ export default function Header() {
           {name}
         </div> */}
         <p
-          className="text-white bg-blue-dark px-4 py-3.5 h-full hidden sm:block"
+          className="text-white bg-blue-dark px-6 py-3.5 h-full hidden sm:block"
           data-testid="customer_products__element-navbar-user-full-name"
         >
           {name}
