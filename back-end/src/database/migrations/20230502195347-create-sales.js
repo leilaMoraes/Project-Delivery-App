@@ -51,7 +51,7 @@ module.exports = {
     status: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: 'Pendente',
+      defaultValue: 'Pending',
     },
   }),
   down: (queryInterface, _Sequelize) => queryInterface.dropTable('sales'),

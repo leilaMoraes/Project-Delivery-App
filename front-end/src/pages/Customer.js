@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import OrdersCard from '../components/OrdersCard';
 import AppContext from '../context/AppContext';
+import LoadAnimation from '../components/LoadAnimation';
 
 function Customer() {
   const { sales, getSales } = useContext(AppContext);
@@ -41,8 +42,8 @@ function Customer() {
   return (
     <div>
       <Header />
-      <div className="flex flex-wrap mt-14 mb-4 sm:mt-20 gap-4 mx-4 justify-evenly">
-        {loading ? <p>Loading...</p>
+      <div className="flex flex-wrap mt-14 sm:mt-[70px] gap-4 mx-4 justify-evenly">
+        {loading ? <LoadAnimation />
           : (sales !== undefined && sales.map((sale) => (
             <OrdersCard
               key={ sale.id }

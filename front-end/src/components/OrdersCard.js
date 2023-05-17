@@ -55,7 +55,7 @@ export default function OrdersCard(props) {
         <div className="flex flex-row h-full w-full">
           <div
             className={ `flex w-full ${getColor()} rounded-lg items-center
-          font-bold text-lg my-2 w-1/2 justify-center` }
+          font-bold text-lg my-2 ml-2.5 w-1/2 justify-center` }
           >
             <span
               data-testid={ currentPath === orderSeller
@@ -66,13 +66,13 @@ export default function OrdersCard(props) {
               {status}
             </span>
           </div>
-          <div className="flex flex-col text-center w-1/2 px-1.5">
+          <div className="flex flex-col text-center w-full px-2 pl-2.5">
             <span
               data-testid={ currentPath === orderSeller
                 ? `seller_orders__element-order-date-${id}`
                 : `customer_orders__element-order-date-${id}` }
-              className="flex bg-bg1 rounded-lg font-bold h-full items-center
-              justify-center mt-2 px-2 sm:px-4"
+              className="flex bg-bg1 rounded-lg font-bold h-full w-full items-center
+              justify-center mt-2 px-2 "
             >
               {newDate}
             </span>

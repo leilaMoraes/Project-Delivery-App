@@ -82,11 +82,11 @@ const getSellerSales = async (id) => {
 const updateStatus = async (id, status) => {
   const sale = await Sale.findByPk(id);
   if (!sale) return { status: 404, message: 'Sale not found' };
-  if (sale.status === 'Entregue') return { status: 422, message: 'Sale already delivered' };
-  if (!['Em Trânsito', 'Preparando', 'Entregue'].includes(status)) {
+  if (sale.status === 'Delivered') return { status: 422, message: 'Sale already delivered' };
+  if (!['In Transit', 'Preparing', 'Delivered'].includes(status)) {
     return {
       status: 400,
-      message: 'Invalid status, status should be "Em Trânsito", "Preparando" or "Entregue"',
+      message: 'Invalid status, status should be "In Transit", "Preparing" or "Delivered"',
     };
   }
   await Sale.update({ status }, { where: { id } });

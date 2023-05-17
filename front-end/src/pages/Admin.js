@@ -5,6 +5,7 @@ import AppContext from '../context/AppContext';
 import requests from '../services/requests';
 import Table from '../components/Table';
 import Title from '../components/Title';
+import LoadAnimation from '../components/LoadAnimation';
 
 function Admin() {
   const table = ['Item', 'Name', 'E-mail', 'Role', 'Delete'];
@@ -24,7 +25,6 @@ function Admin() {
       }
     };
     getUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="flex flex-col items-center h-screen">
@@ -49,7 +49,7 @@ function Admin() {
           border-border0 border-[1px] bg-tableBg w-full px-2 pb-2 pt-1
           shadow-lg drop-shadow-md"
         >
-          {loading ? <p>Loading...</p> : (
+          {loading ? <LoadAnimation /> : (
             <Table tableH={ table } tableB={ users } screen="admin_manage" />)}
         </div>
       </div>

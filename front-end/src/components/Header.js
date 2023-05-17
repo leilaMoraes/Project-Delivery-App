@@ -10,6 +10,7 @@ export default function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
   const actualPage = '/customer/products';
+  const adminPage = '/admin/manage';
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -60,6 +61,19 @@ export default function Header() {
           onClick={ handleOrders }
           btnName={ handleBtnName() }
         />
+        {role === 'administrator' && (
+          <Button
+            btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath === adminPage
+              ? 'text-white bg-green-dark hover:bg-green-hover1'
+              : 'text-black bg-green-light hover:bg-green-hover2'}` }
+            onClick={ () => navigate('/admin/products') }
+            btnName="PRODUCT MANAGEMENT"
+          />
+          // <button type="button" onClick={ () => navigate('/admin/products') }>
+          //   PRODUCT MANAGEMENT
+          // </button>
+        )}
+
       </div>
       <div className=" h-full flex flex-row">
 
