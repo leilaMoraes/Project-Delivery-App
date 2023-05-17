@@ -86,8 +86,8 @@ export default function Checkout() {
 
       <Title name="Details and Delivery Address" />
       <div
-        className="flex flex-col overflow-x-auto
-        border-border0 border-[1px] bg-bg0 w-full px-2 pb-2 pt-1
+        className="bg-tableBg flex flex-col overflow-x-auto
+        border-border0 border-[1px]  w-full px-2 pb-2 pt-1
         shadow-lg drop-shadow-md"
         // className="w-5/6 h-1/3"
       >

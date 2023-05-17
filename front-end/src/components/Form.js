@@ -42,56 +42,74 @@ function Form() {
     }
   };
   return (
-    <form onSubmit={ createNewUser }>
-      <label htmlFor="name">
-        Name
-        <input
-          type="text"
-          id="name"
-          data-testid="admin_manage__input-name"
-          value={ name }
-          onChange={ ({ target }) => setName(target.value) }
-        />
-      </label>
-      <label htmlFor="email">
-        Email
-        <input
-          type="email"
-          id="email"
-          data-testid="admin_manage__input-email"
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
-        />
-      </label>
-      <label htmlFor="password">
-        Password
-        <input
-          type="password"
-          id="password"
-          data-testid="admin_manage__input-password"
-          value={ password }
-          onChange={ ({ target }) => setPassword(target.value) }
-        />
-      </label>
-      <label htmlFor="role">
-        Type
-        <select
-          id="role"
-          value={ role }
-          onChange={ ({ target }) => setRole(target.value) }
-          data-testid="admin_manage__select-role"
-        >
-          <option value="seller">Seller</option>
-          <option value="customer">Customer</option>
-          <option value="administrator">Administrator</option>
-        </select>
-      </label>
+    <form
+      onSubmit={ createNewUser }
+      className="flex flex-wrap md:flex-row overflow-x-auto
+        border-border0 border-[1px] bg-tableBg w-full px-2 pb-2 pt-1
+        shadow-lg drop-shadow-md gap-2"
+    >
+      <div className="flex flex-wrap gap-3 p-2">
+        <label htmlFor="name" className="w-fit flex flex-col">
+          Name
+          <input
+            className="mt-2 border border-gray-400 bg-white
+          py-3 px-4 rounded shadow w-auto"
+            type="text"
+            id="name"
+            data-testid="admin_manage__input-name"
+            value={ name }
+            onChange={ ({ target }) => setName(target.value) }
+          />
+        </label>
+        <label htmlFor="email" className="w-fit flex flex-col">
+          Email
+          <input
+            className="mt-2 border border-gray-400 bg-white
+            py-3 px-4 rounded shadow w-auto"
+            type="email"
+            id="email"
+            data-testid="admin_manage__input-email"
+            value={ email }
+            onChange={ ({ target }) => setEmail(target.value) }
+          />
+        </label>
+        <label htmlFor="password" className="w-fit flex flex-col">
+          Password
+          <input
+            className="mt-2 border border-gray-400 bg-white
+            py-3 px-4 rounded shadow w-auto"
+            type="password"
+            id="password"
+            data-testid="admin_manage__input-password"
+            value={ password }
+            onChange={ ({ target }) => setPassword(target.value) }
+          />
+        </label>
+        <label htmlFor="role" className="w-fit flex flex-col">
+          Type
+          <select
+            className="mt-2 border bg-white border-gray-400
+          py-[14px] px-4 rounded shadow"
+            id="role"
+            value={ role }
+            onChange={ ({ target }) => setRole(target.value) }
+            data-testid="admin_manage__select-role"
+          >
+            <option value="seller">Seller</option>
+            <option value="customer">Customer</option>
+            <option value="administrator">Administrator</option>
+          </select>
+        </label>
+      </div>
       <button
         type="submit"
         disabled={ disabled }
         data-testid="admin_manage__button-register"
+        className="bg-green-dark rounded-lg px-3.5 py-2 m-auto
+          text-xl font-medium text-white
+          disabled:opacity-80 disabled:cursor-not-allowed hover:bg-green-hover1 "
       >
-        Register
+        REGISTER
 
       </button>
     </form>
