@@ -11,7 +11,7 @@ export default function Table({ tableH, tableB, screen }) {
     // CHECK WIDTH TABLE
     <table
       className="table-auto border-separate border-spacing-y-1.5
-      w-full md:text-xl "
+      w-full sm:text-xl "
     >
       <thead className="mx-2">
         <tr>

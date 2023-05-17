@@ -93,11 +93,6 @@ export default function ProductCard(props) {
               onChange={ handleQuantityChange }
             />
             <button
-              NEEED
-              TO
-              ALIGNT
-              BUTTON
-              TEXT
               data-testid={ `customer_products__button-card-add-item-${id}` }
               className="rounded-r-lg bg-green-dark w-7 h-7
                font-extrabold text-xl text-white leading-3"

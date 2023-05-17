@@ -72,7 +72,7 @@ export default function OrdersCard(props) {
                 ? `seller_orders__element-order-date-${id}`
                 : `customer_orders__element-order-date-${id}` }
               className="flex bg-bg1 rounded-lg font-bold h-full items-center
-              justify-center mt-2"
+              justify-center mt-2 px-2 sm:px-4"
             >
               {newDate}
             </span>

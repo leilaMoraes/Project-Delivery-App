@@ -92,7 +92,7 @@ export default function Checkout() {
         // className="w-5/6 h-1/3"
       >
         <div className="w-full flex flex-col md:flex-row gap-2">
-          <label htmlFor="salespersonInput" className="w-fit flex flex-col">
+          <label htmlFor="salespersonInput" className="w-full md:w-fit flex flex-col">
             Seller
             <select
               id="salespersonInput"
@@ -126,7 +126,7 @@ export default function Checkout() {
             label="Number"
             type="text"
             inputName="addressNumberInput"
-            classLabel="mb-2 text-black flex flex-col w-[180px]"
+            classLabel="mb-2 text-black flex flex-col w-full md:w-[180px]"
             id="addressNumberInput"
             value={ addressNumber }
             dataName="customer_checkout__input-address-number"

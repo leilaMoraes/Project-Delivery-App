@@ -21,7 +21,7 @@ export default function OrderDetails() {
   return (
     <div>
       <Header />
-      <div className="mt-12 md:mt-16 w-[95%] m-auto max-w-[1100px]">
+      <div className="mt-12 sm:mt-16 w-[95%] m-auto max-w-[1100px]">
 
         <Title name="Order Details" />
         <div

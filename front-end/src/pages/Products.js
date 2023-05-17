@@ -26,7 +26,7 @@ export default function Products() {
     <div>
       <Header />
       <div
-        className="mt-[52px] md:mt-[70px] mx-3 md:px-9 mb-3 center gap-4
+        className="mt-[52px] sm:mt-[68px] mx-3 md:px-9 mb-3 center gap-4
         justify-items-center
         grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
       >

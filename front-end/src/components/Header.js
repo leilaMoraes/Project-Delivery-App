@@ -39,12 +39,12 @@ export default function Header() {
     <header
       className="bg-green-dark fixed top-0 left-0 w-full
       z-50 shadow-md flex justify-between items-center flex-row
-      sm:text-sm md:text-lg sm:h-[40px] md:h-[55px]"
+      text-md sm:text-lg h-[40px] sm:h-[55px]"
     >
       <div className="h-full min-w-screen flex flex-row whitespace-nowrap">
         {role === 'customer' && (
           <Button
-            btnClass={ `md:px-8 px-2.5 py-2 h-full font-bold ${currentPath === actualPage
+            btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath === actualPage
               ? 'text-black bg-green-light hover:bg-green-hover2'
               : 'text-white bg-green-dark hover:bg-green-hover1'}` }
             dataName="customer_products__element-navbar-link-products"
@@ -53,7 +53,7 @@ export default function Header() {
           />
         )}
         <Button
-          btnClass={ `md:px-8 px-2.5 py-2 h-full font-bold ${currentPath === actualPage
+          btnClass={ `sm:px-8 px-2.5 py-2 h-full font-bold ${currentPath === actualPage
             ? 'text-white bg-green-dark hover:bg-green-hover1'
             : 'text-black bg-green-light hover:bg-green-hover2'}` }
           dataName="customer_products__element-navbar-link-orders"
@@ -61,16 +61,29 @@ export default function Header() {
           btnName={ handleBtnName() }
         />
       </div>
-      <div className=" h-full flex whitespace-nowrap text-clip">
-        {}
-        <Button
-          btnClass="md:px-8 px-2.5 text-white bg-blue-dark py-2 h-full flex flex-shrink
-          hidden md:block"
+      <div className=" h-full flex flex-row">
+
+        {/* <Button
+          btnClass="sm:px-8 px-2.5 text-white bg-blue-dark py-2 h-full flex flex-shrink
+          hidden sm:block"
           dataName="customer_products__element-navbar-link-logout"
           btnName={ name }
-        />
+        /> */}
+        {/* <div
+          className="sm:px-8 px-2.5 text-white bg-blue-dark py-2 h-full
+          hidden sm:block my-auto text-center "
+        >
+          {name}
+        </div> */}
+        <p
+          className="text-white bg-blue-dark px-4 py-3.5 h-full hidden sm:block"
+          data-testid="customer_products__element-navbar-user-full-name"
+        >
+          {name}
+        </p>
+
         <Button
-          btnClass="md:px-8 px-2.5 py-2 h-full text-white bg-blue-light
+          btnClass="sm:px-8 px-2.5 py-2 h-full text-white bg-blue-light
           hover:bg-blue-hoverLgOut "
           dataName="customer_products__element-navbar-link-logout"
           onClick={ handleLogout }
