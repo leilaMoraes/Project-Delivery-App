@@ -54,19 +54,22 @@ export default function TableHeader({ order }) {
   }
 
   return (
-    <div className="flex justify-between py-2 gap-3">
+    <div
+      className="flex justify-around md:justify-between py-2 gap-3 flex-wrap md:flex-row
+    font-bold text-lg md:text-xl "
+    >
       <span
         data-testid={ user.role === 'customer'
           ? 'customer_order_details__element-order-details-label-order-id'
           : 'seller_order_details__element-order-details-label-order-id' }
-        className="font-bold text-xl"
+        // className="font-bold text-xl"
       >
         {`ORDER ${newId}`}
       </span>
       {role === 'customer' && (
         <span
           data-testid="customer_order_details__element-order-details-label-seller-name"
-          className="font-bold text-xl"
+          // className="font-bold text-xl"
         >
           {`Seller: ${sellerName}`}
         </span>
@@ -75,14 +78,14 @@ export default function TableHeader({ order }) {
         data-testid={ user.role === 'customer'
           ? 'customer_order_details__element-order-details-label-order-date'
           : 'seller_order_details__element-order-details-label-order-date' }
-        className="font-bold text-xl"
+        // className="font-bold text-xl"
 
       >
         {date}
       </span>
       <div
         className={ `flex ${getColor()} rounded-lg items-center
-        font-bold text-xl justify-center w-[150px] px-4` }
+        justify-center w-[150px] px-4` }
       >
         <span
           data-testid={ user.role === 'customer'
@@ -105,7 +108,7 @@ export default function TableHeader({ order }) {
       )}
       <Button
         btnClass="bg-green-dark px-4 rounded-lg
-        text-lg font-medium text-white
+        text-lg font-medium text-white m-auto md:m-0
         disabled:opacity-80 disabled:cursor-not-allowed hover:bg-green-hover1 "
         dataName={ user.role === 'seller'
           ? 'seller_order_details__button-dispatch-check'

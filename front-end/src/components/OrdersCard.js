@@ -33,7 +33,7 @@ export default function OrdersCard(props) {
     <Link
       to={ currentPath === orderSeller
         ? `/seller/orders/${id}` : `/customer/orders/${id}` }
-      className={ `flex flex-row border bg-bg0 border-bgLBorder w-full max-w-[400px] 
+      className={ `flex flex-row border bg-bg0 border-bgLBorder w-full max-w-[380px] 
       shadow-lg drop-shadow-md      
       ${currentPath === orderSeller ? 'h-32' : 'h-24'}` }
     >

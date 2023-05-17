@@ -41,7 +41,7 @@ function Customer() {
   return (
     <div>
       <Header />
-      <div className="flex flex-wrap mt-20 gap-4  mx-4 justify-evenly">
+      <div className="flex flex-wrap mt-20 gap-4 mx-4 justify-evenly">
         {loading ? <p>Loading...</p>
           : (sales !== undefined && sales.map((sale) => (
             <OrdersCard

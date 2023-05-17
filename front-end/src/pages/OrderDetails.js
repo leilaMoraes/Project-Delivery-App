@@ -21,12 +21,12 @@ export default function OrderDetails() {
   return (
     <div>
       <Header />
-      <div className="mt-16 w-[95%] m-auto">
+      <div className="mt-12 md:mt-16 w-[95%] m-auto max-w-[1100px]">
 
         <Title name="Order Details" />
         <div
           className="border-border0 border-[1px] bg-tableBg w-full p-2
-        shadow-lg drop-shadow-md"
+        shadow-lg drop-shadow-md min-h-[400px] md:min-h-[550px] flex flex-col "
         >
           <TableHeader order={ order } />
           <Table
@@ -34,6 +34,7 @@ export default function OrderDetails() {
             tableB={ order.products }
             screen="order_details"
           />
+
           <TotalPrice
             testid={ `${user.role}` === 'customer' ? 'customer_order_details'
               : 'seller_order_details' }

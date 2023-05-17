@@ -11,7 +11,7 @@ export default function Table({ tableH, tableB, screen }) {
     // CHECK WIDTH TABLE
     <table
       className="table-auto border-separate border-spacing-y-1.5
-      w-full"
+      w-full md:text-xl "
     >
       <thead className="mx-2">
         <tr>
@@ -112,10 +112,10 @@ export default function Table({ tableH, tableB, screen }) {
               && (
                 <td
                   className="bg-green-light text-white text-center font-medium
-                hover:bg-green-hover2 rounded-r-lg"
+                hover:bg-green-hover2 rounded-r-lg w-[150px]"
                 >
                   <Button
-                    btnClass="w-full text-xl"
+                    btnClass="text-xl"
                     dataName={ `customer_checkout__element-order-table-remove-${i}` }
                     onClick={ () => removeFromCart(id) }
                     btnName="Remove"
