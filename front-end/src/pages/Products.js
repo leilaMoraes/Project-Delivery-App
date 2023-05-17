@@ -4,10 +4,12 @@ import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import requests from '../services/requests';
 import AppContext from '../context/AppContext';
+import LoadAnimation from '../components/LoadAnimation';
 
 export default function Products() {
   const { totalValue, token, cart } = useContext(AppContext);
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +17,7 @@ export default function Products() {
       const headers = { headers: { authorization: token } };
       const response = await requests.getProducts(headers);
       setProducts(response.data);
+      setIsLoading(false);
     };
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,12 +33,13 @@ export default function Products() {
         justify-items-center
         grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
       >
-        {products.map((product) => (
-          <ProductCard
-            key={ product.id }
-            { ...product }
-          />
-        ))}
+        {isLoading ? <LoadAnimation />
+          : products.map((product) => (
+            <ProductCard
+              key={ product.id }
+              { ...product }
+            />
+          ))}
       </div>
       <button
         type="button"

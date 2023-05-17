@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import OrdersCard from '../components/OrdersCard';
 import AppContext from '../context/AppContext';
 import requests from '../services/requests';
+import LoadAnimation from '../components/LoadAnimation';
 
 function Seller() {
   const { token, user } = useContext(AppContext);
@@ -30,7 +31,7 @@ function Seller() {
     <div>
       <Header />
       <div className="flex flex-wrap mt-20 gap-4 mx-4 justify-evenly">
-        {loading ? <p>Loading...</p>
+        {loading ? <LoadAnimation />
           : (sales !== undefined && sales.map((sale) => (
             <OrdersCard
               key={ sale.id }
