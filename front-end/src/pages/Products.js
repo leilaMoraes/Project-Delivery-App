@@ -7,7 +7,7 @@ import AppContext from '../context/AppContext';
 import LoadAnimation from '../components/LoadAnimation';
 
 export default function Products() {
-  const { totalValue, token, cart } = useContext(AppContext);
+  const { totalValue, token, cart, toBRL } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -48,13 +48,14 @@ export default function Products() {
             onClick={ () => navigate('/customer/checkout') }
             disabled={ totalValue === 0 }
           >
-            View Cart: R$
+            View Cart:
             {' '}
             <span
               data-testid="customer_products__checkout-bottom-value"
               className="font-extrabold text-white"
             >
-              {totalValue.toFixed(2).replace('.', ',')}
+              {/* {totalValue.toFixed(2).replace('.', ',')} */}
+              {toBRL(totalValue) }
             </span>
           </button>
         </div>

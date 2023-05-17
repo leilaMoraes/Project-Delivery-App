@@ -4,7 +4,7 @@ import AppContext from '../context/AppContext';
 
 export default function ProductCard(props) {
   const { price, urlImage, name, id } = props;
-  const { cart, addToCart } = useContext(AppContext);
+  const { cart, addToCart, toBRL } = useContext(AppContext);
 
   const [quantity, setQuantity] = useState(cart[id] ? cart[id].quantity : 0);
 
@@ -44,12 +44,11 @@ export default function ProductCard(props) {
           className="absolute top-0 left-0 bg-bg0
            text-black font-bold px-3 py-1 z-10 m-2 rounded-lg"
         >
-          R$
-          {' '}
           <span
             data-testid={ `customer_products__element-card-price-${id}` }
           >
-            {price.toFixed(2).replace('.', ',')}
+            {toBRL(price)}
+            {/* {price.toFixed(2).replace('.', ',')} */}
           </span>
         </div>
         <img

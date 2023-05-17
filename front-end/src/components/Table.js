@@ -4,7 +4,7 @@ import AppContext from '../context/AppContext';
 import Button from './Button';
 
 export default function Table({ tableH, tableB, screen }) {
-  const { removeFromCart, user, deleteUser } = useContext(AppContext);
+  const { removeFromCart, user, deleteUser, toBRL } = useContext(AppContext);
   const ELE1 = '__element-order-table-';
 
   return (
@@ -94,9 +94,7 @@ export default function Table({ tableH, tableB, screen }) {
                 className="bg-blue-dark text-white text-center font-medium w-[100px]"
                 data-testid={ `${user.role}_${screen}${ELE1}unit-price-${i}` }
               >
-                R$
-                {' '}
-                {price.toFixed(2).replace('.', ',')}
+                {toBRL(price)}
               </td>
               <td
                 // className="bg-blue-light text-white text-center font-medium"
@@ -104,9 +102,7 @@ export default function Table({ tableH, tableB, screen }) {
                 className={ `bg-blue-light text-white text-center font-medium w-[100px]
                 ${screen === 'order_details' && 'rounded-r-lg'}` }
               >
-                R$
-                {' '}
-                {(price * quantity).toFixed(2).replace('.', ',')}
+                {toBRL(price * quantity)}
               </td>
               {screen === 'checkout'
               && (

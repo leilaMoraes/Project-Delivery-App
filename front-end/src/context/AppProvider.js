@@ -68,6 +68,14 @@ export default function AppProvider({ children }) {
     }
   };
 
+  const toBRL = (value) => {
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+    return formatter.format(value);
+  };
+
   const values = useMemo(() => ({
     cart,
     setCart,
@@ -88,6 +96,7 @@ export default function AppProvider({ children }) {
     setSales,
     getSales,
     deleteUser,
+    toBRL,
   }), [cart, totalValue, user, message, token, users, sales]);
 
   return (
