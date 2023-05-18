@@ -9,6 +9,8 @@ import saleRoutes from '../routes/sale.route';
 import adminRoutes from '../routes/admin.route';
 import * as path from 'node:path';
 import sellerRoutes from '../routes/seller.route';
+import * as swaggerUi from 'swagger-ui-express';
+import * as swaggerDocument from '../swagger/swagger.json'
 
 const app = express();
 
@@ -23,6 +25,9 @@ app.use('/products', productRoutes);
 app.use('/sales', saleRoutes)
 app.use('/admin', adminRoutes);
 app.use('/sellers', sellerRoutes);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 
 app.use(ErrorHandler.handle);
 
