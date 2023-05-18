@@ -13,10 +13,8 @@ const requests = {
   login: (login) => instance.post('/login', login),
   register: (newUser) => instance.post('/register', newUser),
   getProducts: (headers) => instance.get('/products', headers),
-  // getSales: (id, headers) => instance.get(`/sales/seller/${id}`, headers),
   getSellers: (headers) => instance.get('/sellers', headers),
   getUsers: (headers) => instance.get('/admin', headers),
-  postProduct: (productData) => instance.post('/products', productData),
   postSale: (saleData, headers) => instance.post('/sales', saleData, headers),
   postUser: (data, headers) => instance.post('/admin', data, headers),
   deleteUser: (id, headers) => instance.delete(`/admin/${id}`, headers),
@@ -26,6 +24,8 @@ const requests = {
   patchStatus: (id, status, headers) => {
     instance.patch(`/sales/status/${id}`, { status }, headers);
   },
+  postProduct: (data, headers) => instance.post('/products/register', data, headers),
+  deleteProduct: (id, headers) => instance.delete(`/products/${id}`, headers),
 };
 
 export default requests;

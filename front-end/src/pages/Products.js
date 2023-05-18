@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import socketIo from 'socket.io-client';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import requests from '../services/requests';
@@ -9,15 +10,27 @@ import LoadAnimation from '../components/LoadAnimation';
 export default function Products() {
   const { totalValue, token, cart, toBRL } = useContext(AppContext);
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const socket = socketIo('http://localhost:3001', {
+      transports: ['websocket'],
+    });
+    socket.on('products@new', (product) => {
+      setProducts((prevState) => prevState.concat(product));
+    });
+    socket.on('products@delete', (productName) => {
+      setProducts((prevState) => prevState.filter((item) => item.name !== productName));
+    });
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
       const headers = { headers: { authorization: token } };
       const response = await requests.getProducts(headers);
       setProducts(response.data);
-      setIsLoading(false);
+      setLoading(false);
     };
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +41,7 @@ export default function Products() {
   return (
     <div>
       <Header />
-      {isLoading ? <LoadAnimation /> : (
+      {loading ? <LoadAnimation /> : (
         <div
           className="mt-[52px] sm:mt-[68px] mx-3 md:px-9 mb-10 center gap-4
         justify-items-center

@@ -98,12 +98,15 @@ export default function TableHeader({ order }) {
       </div>
       {user.role === 'seller' && (
         <Button
-          btnClass="bg-green-light  text-white px-4 rounded-lg text-lg
-            hover:bg-green-hover2 disabled:opacity-50 disabled:cursor-not-allowed"
+          // btnClass="bg-green-light  text-white px-4 rounded-lg text-lg
+          //   hover:bg-green-hover2 disabled:opacity-50 disabled:cursor-not-allowed"
+          btnClass="bg-green-light px-4 rounded-lg
+        text-lg font-medium text-white py-0.5
+        disabled:opacity-80 disabled:cursor-not-allowed hover:bg-green-hover2 "
           dataName="seller_order_details__button-preparing-check"
-          disabled={ orderStatus !== 'pending' }
+          disabled={ orderStatus !== 'Pending' }
           btnName="START PREPARING"
-          onClick={ () => handleStatus('preparing') }
+          onClick={ () => handleStatus('Preparing') }
         />
       )}
       <Button
@@ -114,10 +117,10 @@ export default function TableHeader({ order }) {
           ? 'seller_order_details__button-dispatch-check'
           : 'customer_order_details__button-delivery-check' }
         disabled={ user.role === 'seller'
-          ? orderStatus !== 'preparing' : orderStatus !== 'in transit' }
+          ? orderStatus !== 'Preparing' : orderStatus !== 'In Transit' }
         btnName={ user.role === 'seller' ? 'OUT FOR DELIVERY' : 'MARK AS RECEIVED' }
         onClick={ user.role === 'seller'
-          ? () => handleStatus('in transit') : () => handleStatus('delivered') }
+          ? () => handleStatus('In Transit') : () => handleStatus('Delivered') }
       />
     </div>
   );

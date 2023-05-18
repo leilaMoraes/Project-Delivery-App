@@ -4,7 +4,8 @@ import Header from '../components/Header';
 import requests from '../services/requests';
 import AppContext from '../context/AppContext';
 import placeholderImg from '../images/placeholder_600x.webp';
-// import ProductTable from '../components/ProductTable';
+import ProductTable from '../components/ProductTable';
+import Title from '../components/Title';
 
 export default function AdminProducts() {
   const { token } = useContext(AppContext);
@@ -70,47 +71,12 @@ export default function AdminProducts() {
   return (
     <div className="flex flex-wrap items-center justify-center">
       <Header />
-
-      <div className="flex flex-wrap mt-16 justify-center">
-        {/* <form
-          action=""
-          className="flex flex-col justify-center"
-          onSubmit={ handleSubmit }
-        >
-          <label htmlFor="name">
-            Name
-            <input
-              type="text"
-              id="name"
-              value={ name }
-              onChange={ ({ target }) => setName(target.value) }
-            />
-          </label>
-          <label htmlFor="price">
-            Price
-            <input
-              type="number"
-              id="price"
-              value={ price }
-              onChange={ ({ target }) => setPrice(target.value) }
-            />
-          </label>
-          <label htmlFor="image">
-            Image
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={ ({ target }) => handleImage(target.files[0]) }
-            />
-          </label>
-          <button type="submit">Add Product</button>
-        </form> */}
-
+      <div className="flex flex-wrap mt-7 sm:mt-16 mb-3 w-[95%] sm:w-5/6 justify-center">
+        <Title name="Register New Product" />
         <form
           action=""
           className="flex flex-col justify-center border
-          border-gray-300 bg-gray-100 px-2 py-1 shadow-lg gap-2 m-2"
+          border-gray-300 bg-bg1 px-3 py-2.5 pb-3 shadow-lg gap-2 mx-2"
           onSubmit={ handleSubmit }
         >
           <label htmlFor="name" className="flex flex-col">
@@ -152,17 +118,20 @@ export default function AdminProducts() {
             Add Product
           </button>
         </form>
-        {/* <div className="w-[180px]"> */}
-
         <img
           src={ preview }
           alt="File preview"
           width={ 180 }
           className="m-2"
         />
-        {/* </div> */}
+        <div
+          className="flex flex-col  h-5/6 overflow-x-auto
+                  border-border0 border-[1px] bg-tableBg w-full px-2 pb-2 pt-1
+                  shadow-lg drop-shadow-md"
+        >
+          <ProductTable products={ products } deleteProduct={ deleteProduct } />
+        </div>
       </div>
-      {/* <ProductTable products={ products } deleteProduct={ deleteProduct } /> */}
     </div>
   );
 }

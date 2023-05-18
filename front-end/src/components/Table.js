@@ -45,7 +45,7 @@ export default function Table({ tableH, tableB, screen }) {
                 {name}
               </td>
               <td
-                className="bg-green-dark text-white text-center font-medium w-1/3"
+                className="bg-green-dark text-white text-center font-medium px-1 w-1/3"
                 data-testid={ `admin_manage__element-user-table-email-${index}` }
               >
                 {email}
@@ -61,7 +61,7 @@ export default function Table({ tableH, tableB, screen }) {
                 hover:bg-blue-hoverLgOut rounded-r-lg"
               >
                 <Button
-                  btnClass="w-full text-xl"
+                  btnClass="w-full sm:text-xl"
                   dataName={ `admin_manage__element-user-table-remove-${index}` }
                   onClick={ () => deleteUser(id) }
                   btnName="Delete"
@@ -111,7 +111,7 @@ export default function Table({ tableH, tableB, screen }) {
                 hover:bg-green-hover2 rounded-r-lg w-[150px]"
                 >
                   <Button
-                    btnClass="text-xl"
+                    btnClass="sm:text-xl"
                     dataName={ `customer_checkout__element-order-table-remove-${i}` }
                     onClick={ () => removeFromCart(id) }
                     btnName="Remove"

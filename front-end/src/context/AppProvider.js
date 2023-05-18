@@ -9,8 +9,8 @@ export default function AppProvider({ children }) {
   const storedCart = localStorage.getItem('cart');
   const initialCart = storedCart ? JSON.parse(storedCart) : {};
   const [cart, setCart] = useState(initialCart);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
-  const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || '');
+  const [user, setUser] = useState({});
+  const [token, setToken] = useState('');
   const [role, setRole] = useState('');
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
@@ -35,6 +35,14 @@ export default function AppProvider({ children }) {
       },
     }));
   };
+
+  // useEffect(() => {
+  //   const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+  //   const tokenFromLocalStorage = JSON.parse(localStorage.getItem('token'));
+  //   setUser(userFromLocalStorage);
+  //   setToken(tokenFromLocalStorage);
+  //   setRole(userFromLocalStorage.role);
+  // }, []);
 
   const removeFromCart = (id) => {
     setCart((prevCart) => {
