@@ -36,13 +36,13 @@ export default function AppProvider({ children }) {
     }));
   };
 
-  // useEffect(() => {
-  //   const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-  //   const tokenFromLocalStorage = JSON.parse(localStorage.getItem('token'));
-  //   setUser(userFromLocalStorage);
-  //   setToken(tokenFromLocalStorage);
-  //   setRole(userFromLocalStorage.role);
-  // }, []);
+  useEffect(() => {
+    const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+    const tokenFromLocalStorage = JSON.parse(localStorage.getItem('token'));
+    setUser(userFromLocalStorage);
+    setToken(tokenFromLocalStorage);
+    setRole(userFromLocalStorage.role);
+  }, []);
 
   const removeFromCart = (id) => {
     setCart((prevCart) => {
