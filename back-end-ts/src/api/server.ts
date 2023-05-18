@@ -9,7 +9,7 @@ const server = http.createServer(app);
 export const io = new Server(server);
 
 io.on('connection', () => {
-  console.log('çonectado');
+  console.log('connected');
 });
 
 server.listen(port);

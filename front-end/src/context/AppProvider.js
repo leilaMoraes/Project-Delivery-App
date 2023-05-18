@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
+import socketIo from 'socket.io-client';
 import AppContext from './AppContext';
 import requests from '../services/requests';
 
@@ -41,7 +42,9 @@ export default function AppProvider({ children }) {
     const tokenFromLocalStorage = JSON.parse(localStorage.getItem('token'));
     setUser(userFromLocalStorage);
     setToken(tokenFromLocalStorage);
-    setRole(userFromLocalStorage.role);
+    if (userFromLocalStorage) {
+      setRole(userFromLocalStorage.role);
+    }
   }, []);
 
   const removeFromCart = (id) => {
@@ -83,6 +86,33 @@ export default function AppProvider({ children }) {
     });
     return formatter.format(value);
   };
+
+  // SOCKET.IO
+  useEffect(() => {
+    const socket = socketIo('http://localhost:3001', {
+      transports: ['websocket'],
+    });
+    socket.on('sales@new', (sale) => {
+      setSales((prevState) => prevState.concat(sale));
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   const socket = socketIo('http://localhost:3001', {
+  //     transports: ['websocket'],
+  //   });
+  //   socket.on('sales@update', ({ id, status }) => {
+  //     console.log('SALES', sales);
+  //     const updatedSales = sales.map((sale) => {
+  //       if (Number(sale.id) === Number(id)) {
+  //         return { ...sale, status };
+  //       }
+  //       return sale;
+  //     });
+  //     console.log('UPDATE SALES', updatedSales);
+  //     setSales(updatedSales);
+  //   });
+  // }, []);
 
   const values = useMemo(() => ({
     cart,

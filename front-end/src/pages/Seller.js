@@ -2,28 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import OrdersCard from '../components/OrdersCard';
 import AppContext from '../context/AppContext';
-import requests from '../services/requests';
 import LoadAnimation from '../components/LoadAnimation';
 
-function Seller() {
-  const { token, user } = useContext(AppContext);
+export default function Seller() {
+  const { sales, getSales } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
-  const [sales, setSales] = useState([]);
 
   useEffect(() => {
-    const getSales = async () => {
+    const fetchSales = async () => {
       try {
-        const headers = { headers: { authorization: token } };
-        const response = await requests.salesSeller(user.id, headers);
-        if (response && response.data) {
-          setSales(response.data);
-        }
+        await getSales();
         setLoading(false);
       } catch (error) {
-        console.log(error.response.data.message);
+        console.log(error);
       }
     };
-    getSales();
+    fetchSales();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -31,7 +25,7 @@ function Seller() {
     <div>
       <Header />
 
-      <div className="flex flex-wrap mt-20 gap-4 mx-4 justify-evenly">
+      <div className="flex flex-wrap mt-20 mb-3 mx-4 gap-4 justify-evenly">
         {loading ? <LoadAnimation />
           : (sales !== undefined && sales.map((sale) => (
             <OrdersCard
@@ -43,5 +37,3 @@ function Seller() {
     </div>
   );
 }
-
-export default Seller;

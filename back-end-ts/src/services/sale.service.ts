@@ -9,6 +9,8 @@ import ConflictException from "../errors/ConflictExeception";
 import BadRequestException from "../errors/BadRequestException";
 import NotFoundException from "../errors/NotFoundException";
 import UnprocessableContentExeception from "../errors/UnprocessableContentExeception";
+import { io } from '../api/server';
+import { log } from "console";
 
 export default class SaleService implements IServiceSale {
   #model: ModelStatic<Sale>;
@@ -67,6 +69,7 @@ export default class SaleService implements IServiceSale {
           });
         return salebyId;
       });
+      io.emit('sales@new', result);
       return result;
     } catch (error: unknown) {
       throw new Error((error as Error).message);
@@ -78,6 +81,7 @@ export default class SaleService implements IServiceSale {
     if (!sale) throw new NotFoundException('Sale not found');
     if (sale.status === 'Delivered') throw new UnprocessableContentExeception('Sale already delivered');
     if (!['In Transit', 'Preparing', 'Delivered'].includes(status)) throw new BadRequestException('Invalid status, status should be "In Transit", "Preparing" or "Delivered"');
-    await this.#model.update({ status }, { where: { id } });
+    await this.#model.update({ status }, { where: { id } } );
+    io.emit('sales@update', { id, status });
   }
 }

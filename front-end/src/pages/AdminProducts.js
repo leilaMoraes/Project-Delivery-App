@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import socketIo from 'socket.io-client';
@@ -89,60 +90,68 @@ export default function AdminProducts() {
     <div className="flex flex-wrap items-center justify-center">
       <Header />
       <div className="flex flex-wrap mt-7 sm:mt-16 mb-3 w-[95%] sm:w-5/6 justify-center">
-        <Title name="Register New Product" />
-        <form
-          action=""
-          className="flex flex-col justify-center border
-          border-gray-300 bg-bg1 px-3 py-2.5 pb-3 shadow-lg gap-2 mx-2"
-          onSubmit={ handleSubmit }
-        >
-          <label htmlFor="name" className="flex flex-col">
-            Name
-            <input
-              type="text"
-              id="name"
-              placeholder="Coca-Cola"
-              value={ name }
-              onChange={ ({ target }) => setName(target.value) }
-              className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
-            />
-          </label>
-          <label htmlFor="price" className="flex flex-col">
-            Price
-            <input
-              type="number"
-              id="price"
-              value={ price }
-              placeholder="0.00"
-              onChange={ ({ target }) => setPrice(target.value) }
-              className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
-            />
-          </label>
-          <label htmlFor="image" className="flex flex-col">
-            Image
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={ ({ target }) => handleImage(target.files[0]) }
-              className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
-            />
-          </label>
-          <button
-            type="submit"
-            className="bg-green-dark rounded-lg px-3.5 py-2
+        <div className="mb-5">
+          <Title name="Register New Product" />
+          <form
+            action=""
+            className="flex flex-wrap justify-center border
+          border-gray-300 bg-bg1 px-3 shadow-lg gap-2"
+            onSubmit={ handleSubmit }
+          >
+            <div className="flex flex-col">
+              <label htmlFor="name" className="flex flex-col my-1">
+                Name
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Item Name"
+                  value={ name }
+                  onChange={ ({ target }) => setName(target.value) }
+                  className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
+                />
+              </label>
+              <label htmlFor="price" className="flex flex-col my-1">
+                Price
+                <input
+                  type="number"
+                  id="price"
+                  value={ price }
+                  placeholder="0.00"
+                  onChange={ ({ target }) => setPrice(target.value) }
+                  className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
+                />
+              </label>
+              <label htmlFor="image" className="flex flex-col my-1">
+                Image
+                <input
+                  type="file"
+                  id="image"
+                  accept="image/*"
+                  onChange={ ({ target }) => handleImage(target.files[0]) }
+                  className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
+                />
+              </label>
+              <button
+                type="submit"
+                className="bg-green-dark rounded-lg
+                px-3.5 py-2 my-3
             text-xl font-medium text-white disabled:opacity-80
             disabled:cursor-not-allowed hover:bg-green-hover1"
-          >
-            Add Product
-          </button>
-        </form>
-        <img
-          src={ preview }
-          alt="File preview"
-          width={ 180 }
-          className="m-2"
-        />
+              >
+                Add Product
+              </button>
+            </div>
+
+            <img
+              src={ preview }
+              alt="File preview"
+              className="border-border0 border-[1px]
+              my-3 ml-1.5 min-w-[180px] max-w-[250px] "
+            />
+
+          </form>
+        </div>
+
         <div
           className="flex flex-col  h-5/6 overflow-x-auto
                   border-border0 border-[1px] bg-tableBg w-full px-2 pb-2 pt-1
