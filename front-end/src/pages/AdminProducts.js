@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import socketIo from 'socket.io-client';
 import Header from '../components/Header';
 import requests from '../services/requests';
 import AppContext from '../context/AppContext';
@@ -10,10 +11,21 @@ import Title from '../components/Title';
 export default function AdminProducts() {
   const { token } = useContext(AppContext);
   const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState(placeholderImg);
   const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const socket = socketIo('http://localhost:3001', {
+      transports: ['websocket'],
+    });
+    socket.on('products@new', (product) => {
+      setProducts((prevState) => prevState.concat(product));
+    });
+    socket.on('products@delete', (productName) => {
+      setProducts((prevState) => prevState.filter((item) => item.name !== productName));
+    });
+  }, []);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -56,13 +68,18 @@ export default function AdminProducts() {
       toast.success('Product successfully registered!');
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setName('');
+      setPrice(0);
+      setImage('');
+      setPreview(placeholderImg);
     }
   };
   const deleteProduct = async (id) => {
     try {
       const headers = { headers: { authorization: token } };
       await requests.deleteProduct(id, headers);
-      setProducts(products.filter((product) => product.id !== id));
+      // setProducts(products.filter((product) => product.id !== id));
       toast.success('Product deleted successfully');
     } catch (error) {
       toast.error(error.response.data.message);
@@ -84,6 +101,7 @@ export default function AdminProducts() {
             <input
               type="text"
               id="name"
+              placeholder="Coca-Cola"
               value={ name }
               onChange={ ({ target }) => setName(target.value) }
               className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
@@ -95,6 +113,7 @@ export default function AdminProducts() {
               type="number"
               id="price"
               value={ price }
+              placeholder="0.00"
               onChange={ ({ target }) => setPrice(target.value) }
               className="border border-gray-400 bg-white py-3 px-4 rounded shadow"
             />
